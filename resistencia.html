@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.340">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>resistencia</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="resistencia_files/libs/clipboard/clipboard.min.js"></script>
+<script src="resistencia_files/libs/quarto-html/quarto.js"></script>
+<script src="resistencia_files/libs/quarto-html/popper.min.js"></script>
+<script src="resistencia_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="resistencia_files/libs/quarto-html/anchor.min.js"></script>
+<link href="resistencia_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="resistencia_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="resistencia_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="resistencia_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="resistencia_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+<section id="resistência-do-uso-e-ocupação-do-solo" class="level1">
+<h1>Resistência do uso e ocupação do solo</h1>
+<p>As áreas resilientes às mudanças climáticas são classificadas por dois eixos, (1) a heterogeneidade da paisagem e (2) conectividade local. A conectividade local é calculada sobre uma superfície de resistência ao movimento dos organismos na paisagem. Essa superfície representa pesos aos usos e coberturas do solo, sendo as coberturas naturais aquelas com menor resistência e as superfícies antropizadas, com maior diferença estrutural para as coberturas nativas (ex. áreas urbanas), as de maior resistência.</p>
+<section id="base-de-dados" class="level2">
+<h2 class="anchored" data-anchor-id="base-de-dados">Base de Dados</h2>
+<p>A superfície de resistência foi calculada usando como base os dados de cobertura do solo fornecida pelo MapBiomas coleção 7.0 para o ano de 2020 <span class="citation" data-cites="mapbiomas_project_collection_2020">[@mapbiomas_project_collection_2020]</span>. Sobre essa camada adicionamos informações sobre presença de infraestruturas de transporte e de energia. Utilizamos a base de estradas pavimentadas e não pavimentadas, ferrovias e linhas de transmissão de energia fornecida pelo Instituto Brasileiro de Geografia e Estatística (IBGE) [BCIM250, 2021]<!-- seria legal o link da base do IBGE aqui -->. As bases de aerogeradores, centrais geradoras de energia fotovoltaicas, linhas de transmissão de energia eólica e usinas termelétricas foram adquiridas da Agência Nacional de Energia Elétrica (ANEEL) (<a href="https://gisepeprd2.epe.gov.br/WebMapEPE/" class="uri">https://gisepeprd2.epe.gov.br/WebMapEPE/</a>).</p>
+</section>
+<section id="software" class="level2">
+<h2 class="anchored" data-anchor-id="software">Software</h2>
+<p>A bases de dados de uso e cobertura do solo, transporte e energia foram harmonizadas, atribuídos pesos e combinadas para formarem a superfície de resistência. Essas análises e processamentos foram realizados no ArcGis 10.5 (<strong>citar arcgis</strong>). Em seguida descreveremos a implementação da metodologia para a sua reprodutividade.</p>
+</section>
+<section id="reamostragem-do-mapbiomas" class="level2">
+<h2 class="anchored" data-anchor-id="reamostragem-do-mapbiomas">Reamostragem do MapBiomas</h2>
+<p>As análises de mapeamento das áreas resilientes às mudanças climáticas estão na resolução espacial de 90 metros. Desta forma, reamostramos os dados do MapBiomas, que estão na resolução de 30 metros, para uma resolução de 90 metros. A reamostragem foi realizada pelo <strong>método de vizinho mais próximo</strong> (<em>nearest neighbor</em>) já que essa superfície é composta por 27 valores categóricos do uso e cobertura do solo. O método de reamostragem foi realizado pelo seguinte caminho <code>ToolsBox &gt; Raster &gt; ...</code>. Em <code>Resample</code>, entramos o <em>raster</em> original do MapBiomas em <code>Input Raster</code>, atribuímos um nome para <code>Output Raster Dataset</code> e a nova resolução em <code>Output Cell Size (optional)</code> (0.00083333333). A resolução foi calculada … Escolhemos o método <code>NEAREST</code> em <code>Resampling technique (optional)</code> (<a href="#fig-1">Figure&nbsp;1</a>).</p>
+<div id="fig-1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="figs/fig1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption class="figure-caption">Figure&nbsp;1: Método da reamostragem da superfície de uso e cobertura do solo (MapBiomas coleção 7.2 de 2020), de 30 para 90 m, por meio da técnica NEAREST, no ArcGis10.5.</figcaption>
+</figure>
+</div>
+</section>
+<section id="dados-vetoriais-em-raster" class="level2">
+<h2 class="anchored" data-anchor-id="dados-vetoriais-em-raster">Dados vetoriais em <em>raster</em></h2>
+<p>Os dados vetoriais de infraestrutura foram convertidos para <em>raster</em>, com pixels de tamanho aproximado de 90 m (<a href="#fig-2">Figure&nbsp;2</a>) e, posteriormente, agrupados em um único arquivo matricial. A conversão foi realizada para cada arquivo usando a ferramenta <code>Polyline to Raster</code>, no seguinte caminho <code>Tools &gt; XX &gt; XX &gt; XX</code>. Introduzimos o arquivo de entrada em <code>Input Features</code>, atribuímos o nome do <em>output</em> em <code>Value field</code>, a resolução espacial (0.00083333333) em <code>Output Raster Dataset</code>. Em <code>Cell assignment type (optional)</code> selecionamos <code>MAXIMUM_LENGTH</code> para o valor da maior estrutura ser o atribuído ao <em>pixel</em>, quando houver mais de uma estrutura por <em>pixel</em>.</p>
+<div id="fig-2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="figs/fig2.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption class="figure-caption">Figure&nbsp;2: Método de conversão de arquivos vetoriais para arquivos matriciais (raster) já definindo os pixels com tamanho aproximado de 90 m, no ArcGis 10.5.</figcaption>
+</figure>
+</div>
+<p>Nas situações em que havia sobreposição entre pixels de infraestrutura, sempre prevalecia o valor do pixel com resistência mais alta (superfície com valores de resistência máximos – Figura 3), conforme descrito abaixo.</p>
+<div id="fig-3" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="figs/fig3.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption class="figure-caption">Figure&nbsp;3: Uso da ferramenta “Cel Statistics”, no ArcGis 10.5, para agrupar as bases de infraestrutura em uma única superfície, onde prevalecem os valores máximos de resistência atribuídos a cada classe (ver descrição dos valores de resistência, abaixo).</figcaption>
+</figure>
+</div>
+<p>Conjugamos, por álgebra de mapas, as bases matriciais do MapBiomas e de infraestrutura do IBGE e ANEEL, de tal maneira que, nas sobreposições entre a base do MapBiomas e a de infraestrutura, sempre prevaleceu o pixel com o maior valor de resistência (Figura 4).</p>
+<div id="fig-4" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="figs/fig4.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption class="figure-caption">Figure&nbsp;4: Uso da ferramenta “Cel Statistics”, no ArcGis 10.5, para agrupar as bases de infraestrutura e de coberturaem uma única superfície, onde prevalecem os valores máximos de resistência atribuídos a cada classe (ver descrição dos valores de resistência, abaixo).</figcaption>
+</figure>
+</div>
+<p>Feita esta operação, obtivemos uma nova superfície de cobertura do solo composta pelas classes originais do MapBiomas mais as classes de infraestrutura, somando 34 classes distintas (Tabela xx). Em um primeiro momento, consideramos os corpos d’água (ou águas abertas) como uma única classe, sem distinção de largura. Essa informação foi inserida nos passos que seguem, conforme será visto abaixo. [INSERIR TABELA COM AS CLASSES OBTIDAS ATÉ O MOMENTO]</p>
+</section>
+<section id="indicação-de-valores-de-resistência-por-classe" class="level2">
+<h2 class="anchored" data-anchor-id="indicação-de-valores-de-resistência-por-classe">Indicação de valores de resistência por classe</h2>
+<p>As 34 classes do mapa consolidado de cobertura do solo, já incluindo os dados de infraestrutura como novas classes (Tabela xx), receberam, separadamente por bioma, valores de resistência que buscaram traduzir, comparativamente entre as classes, o grau de dificuldade de movimentação da biodiversidade numa dada classe de cobertura do solo. A premissa assumida foi que quanto maior for a diferença estrutural da classe de cobertura do solo para o hábitat original do bioma, maior será a dificuldade à movimentação que a classe oferece. Os valores de resistência das classes foram atribuídos, por bioma, pela equipe do projeto e por um grupo de especialistas. Esses valores variaram de 1 a 20 em números inteiros, sendo 1 o valor menos resistente e 20 o mais resistente (Tabela 1).</p>
+</section>
+<section id="gerando-a-camada-de-resistência-da-paisagem" class="level2">
+<h2 class="anchored" data-anchor-id="gerando-a-camada-de-resistência-da-paisagem">Gerando a camada de resistência da paisagem</h2>
+<p>A superfície com os valores de resistência pode ser observada na Figura 5.</p>
+<div id="fig-5" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="figs/fig5.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption class="figure-caption">Figure&nbsp;5: Superfície de resistência gerada a partir do mapa com 34 classes de cobertura do solo - resultante da junção das superfícies do MapBiomas e de infraestrutura. Nesta superfície a resistência das águas abertas (rios, lagos e oceanos) não foi diferenciada em função da largura dos corpos d’água.</figcaption>
+</figure>
+</div>
+</section>
+<section id="classificação-das-larguras-dos-rios" class="level2">
+<h2 class="anchored" data-anchor-id="classificação-das-larguras-dos-rios">Classificação das larguras dos rios</h2>
+<p>A classe de cobertura do solo equivalente a águas abertas (rios, lagos e oceanos) recebeu valores de resistência diferenciados em função da largura desses corpos d’água. Para que isso fosse possível, tivemos que dividir os corpos d’água em pedaços menores, regionalizando suas larguras por trechos. Nesta divisão usamos as bacias hidrográficas no nível 8 produzidas por Venticinque e colaboradores (2021). Os trechos de corpos d’água foram utilizados para segmentar a largura efetiva dos corpos d’água, de margem a margem, ao longo de todo o canal da base disponibilizada por Yamashida e colaboradores (2014). Para cada trecho da máscara de corpos d’água por bacias, com base nos dados de largura efetiva de margem a margem, extraímos o valor máximo de largura, sendo esse valor utilizado como medida de largura de cada trecho de águas abertas. Uma vez identificada a largura máxima de cada trecho de corpo d’água, agrupamos os rios nas seguintes classes de largura: i. 1 a 250 metros, ii. 250 a 1000 metros, iii. 1000 a 4000 metros e iv. maiores de 4000 metros. A inclusão dessas quatro classes de largura de corpos d’água, elevou de 34 para 37 o número de classes de cobertura do solo. Os valores de resistência atribuído para cada uma dessas classes variou e podem ser vistos na Tabela 1. Com a nova camada de resistência, já incluindo valores distintos para as larguras dos corpos d’água, aplicamos à superfície gerada a função kernell de decaimento linear. Esta análise considerou - numa janela móvel definida por um raio de 23 pixels (~2070 m) - o contexto espacial em que cada pixel está inserido, reconhecendo que pixels mais próximos possuem uma influência maior que os mais distantes. Desta maneira, a função kernel nos auxilia na tarefa de encontrar os melhores caminhos de deslocamento na paisagem, ou seja, aqueles caminhos que oferecem menor resistência. Essa função gera uma superfície mais suavizada, gerando um valor para cada pixel que leva em conta a vizinhança. Assim, quando consideramos, por exemplo, pequenos corpos d’água inseridos em uma grande área de floresta contínua, há uma “contaminação” do contexto preservado do entorno nestes corpos d’água, que acabam não se configurando como barreiras importantes para o deslocamento dos organismos. Porém, se por um lado consideramos que um corpo d’água pode ser relativamente mais ou menos resistente aos deslocamentos dos organismos em função de onde está inserido, o raciocínio contrário não se aplica. Ou seja, não esperamos que um organismo irá evitar a borda de um grande rio, simplesmente porque o rio oferece uma grande resistência para ser transposto. Com esse princípio em mente, depois de aplicado o Kernell em toda a superfície, conforme descrito acima, recortamos os valores obtidos para os corpos d’água, substituindo essa classe no mapa (independente do tambanho) por “NoData”. Aplicamos, então, novamente o filtro kernell, mas agora sem considerar a influência dos corpos d’água nas classes terrestres. Esse resultado foi agrupado com os valores de kernel obtidos para os corpos d’água, gerando uma nova superfície que admite a influência dos pixels de ambientes terrestres sobre os corpos d’água, mas não admite a influência contrária.</p>
+<p>Depois de atribuídos os valores de resistência, aplicamos à superfície gerada a função <em>kernel</em> de decaimento linear. Esta análise considerou, numa janela móvel de 23 pixels (~2070 m), o contexto espacial em que cada pixel está inserido, reconhecendo que pixels mais próximos possuem uma influência maior que os mais distantes. Desta maneira, a função <em>kernel</em> nos auxilia na tarefa de encontrar os melhores caminhos de deslocamento na paisagem, ou seja, aqueles caminhos que oferecem menor resistência.</p>
+<p>Por fim, calculamos os valores de Z para cada pixel (<span class="math inline">\(Z_{pixel}\)</span>) ao subtrair o valor da média (<span class="math inline">\(\mu\)</span>) e dividindo o resultado pelo desvio padrão (<span class="math inline">\(\sigma\)</span>) e multiplicando tudo por -1, como mostrado na fórmula a seguir: <span class="math display">\[
+Z_{pixel}= \left(\frac {X_{pixel}-\mu} {\sigma}\right) \times -1
+\]</span> Os cálculos de <span class="math inline">\(Z\)</span> foram feitos dentro de cada classificação de regiões eco-geológicas usando as médias e desvios padrão dentro de cada uma das classes. Multiplicamos o valores por -1 por considerarmos que a conectividade local é o inverso dos valores de resistência suavizados pelo <em>kernel</em>.</p>
+<!-- Os dados espaciais primários para calcular a superfície de resistência foram a camada de cobertura do solo fornecida pelo MapBiomas [@mapbiomas_project_collection_2020] e a base de estradas fornecida pelo IBGE (BCIM250 de 2021). Os seguintes passos foram realizados:
+1.  Os pixels da camada do MapBiomas foram reamostrados de 30 metros par 90 metros, usando a ferramenta “Ressample” do software ArcGis 10.5
+2.  O shapefile de estradas do IBGE foi convertido para o formato raster, com pixels de aproximadamente 90 metros de tamanho. Os pixels correspondentes a estradas pavimentadas receberam o valor de 2000, os pixels de estradas não pavimentadas receberam o valor de 1000 e os demais pixels (que não correspondem a nenhuma estrada) receberam o valor de 0 (zero)
+3.  No ArcGis 10.5, usando a ferramenta “Map Calculator” as camadas de cobertura do solo e de estradas foram somadas. Na superfície gerada, foram mantidos os valores dos pixels, originalmente atribuídos pelo MapBiomas, quando um pixel de cobertura do solo se sobrepusesse a algum pixel da camada de estradas com valor igual a zero. Nos casos onde os pixels de cobertura do solo se sobrepuseram a um pixel de estrada pavimentadas o valor final desses pixels foi reclassificado para 98 e quando a sobreposição ocorreu com algum pixel de estrada não pavimentada, o valor final foi reclassificado para 99
+4.  Na superfície gerada, os pixels de cada uma das classes receberam valores de resistência, inferidos separadamente para cada bioma (obs: neste arquivo os valores de resistência foram inferidos pela equipe de bolsistas de pós-doutorado do Projeto e seus supervisores, com auxílio da equipe da TNC). Os valores de resistência para cada classe de uso e cobertura do solo, por bioma, encontram-se na tabela 1 (abaixo). Os valores de resistência buscaram traduzir, comparativamente entre as classes, o grau de dificuldade de movimentação de um dado animal ou propágulo naquela classe de cobertura do solo. A premissa assumida aqui, para todos os biomas, é que quanto maior fora a diferença estrutural daquela classe para o hábitat original do bioma, maior será a dificuldade de movimentação por um dado pixel
+5.  Depois de atribuídos os valores de resistência, usando a ferramenta “Focal Statistics” do ArcGis 10.5, foi calculada o valor médio do pixel focal, em um raio de 23 pixels, aplicando a função de _Kernel_, com decaimento linear. Esta análise considera o contexto espacial em que cada pixel está inserido, reconhecendo que pixels mais próximos possuem uma influência maior um sobre o outro do que pixels mais distantes -->
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
