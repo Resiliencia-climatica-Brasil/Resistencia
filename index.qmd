@@ -182,19 +182,18 @@ Para cada trecho da máscara de corpos d’água por bacias, com base nos dados 
 
 Com a nova camada de resistência, já incluindo valores distintos para as larguras dos corpos d’água, aplicamos à superfície gerada a função _kernel_ de decaimento linear. Esta análise considerou - numa janela móvel definida por um raio de 23 pixels (~2070 m) - o contexto espacial em que cada pixel está inserido, reconhecendo que pixels mais próximos possuem uma influência maior que os mais distantes. Desta maneira, a função _kernel_ nos auxilia na tarefa de encontrar os melhores caminhos de deslocamento na paisagem, ou seja, aqueles caminhos que oferecem menor resistência. Essa função gera uma superfície mais suavizada, gerando um valor para cada pixel que leva em conta a vizinhança. 
 
-Assim, quando consideramos, por exemplo, pequenos corpos d’água inseridos em uma grande área de floresta contínua, há uma “contaminação” do contexto preservado do entorno nestes corpos d’água, que acabam não se configurando como barreiras importantes para o deslocamento dos organismos. Porém, se por um lado consideramos que um corpo d’água pode ser relativamente mais ou menos resistente aos deslocamentos dos organismos em função de onde está inserido, o raciocínio contrário não se aplica. Ou seja, não esperamos que um organismo irá evitar a borda de um grande rio, simplesmente porque o rio oferece uma grande resistência para ser transposto. Com esse princípio em mente, depois de aplicado o Kernell em toda a superfície, conforme descrito acima, recortamos os valores obtidos para os corpos d’água, substituindo essa classe no mapa (independente do tamanho) por *NoData*. 
+Assim, quando consideramos, por exemplo, pequenos corpos d’água inseridos em uma grande área de floresta contínua, há uma “contaminação” do contexto preservado do entorno nestes corpos d’água, que acabam não se configurando como barreiras importantes para o deslocamento dos organismos. Porém, se por um lado consideramos que um corpo d’água pode ser relativamente mais ou menos resistente aos deslocamentos dos organismos em função de onde está inserido, o raciocínio contrário não se aplica. Ou seja, não esperamos que um organismo irá evitar a borda de um grande rio, simplesmente porque o rio oferece uma grande resistência para ser transposto. Com esse princípio em mente, depois de aplicado o Kernell em toda a superfície, conforme descrito acima, recortamos os valores obtidos para os corpos d’água, substituindo essa classe no mapa (independente do tamanho) por *NoData* @fig-6. 
+
+![Superfície de resistência gerada a partir do mapa com 37 classes de cobertura do solo - resultante da junção das superfícies do MapBiomas, de infraestrutura e de largura dos rios.](figs/fig6){width=100% #fig-6}
 
 <!--
 Depois de atribuídos os valores de resistência, aplicamos à superfície gerada a função _kernel_ de decaimento linear. Esta análise considerou, numa janela móvel de 23 pixels (~2070 m), o contexto espacial em que cada pixel está inserido, reconhecendo que pixels mais próximos possuem uma influência maior que os mais distantes. Desta maneira, a função _kernel_ nos auxilia na tarefa de encontrar os melhores caminhos de deslocamento na paisagem, ou seja, aqueles caminhos que oferecem menor resistência. -->
 <!-- **Acho que toda esse parágrafo está aqui como legado da análise anterior. No parágrafo de cima já explicamos para que serve o kernel e como atingimos os valores finais de resistência**-->
 
-<!--
-![Superfície de resistência gerada a partir do mapa com 37 classes de cobertura do solo - resultante da junção das superfícies do MapBiomas, de infraestrutura e de largura dos rios.](figs/fi){width=100% #fig-6}
--->
 
-Por fim, para calcularmos os valores finais de **conectividade local** multiplicamos os valores de resistência por -1 por considerarmos que a conectividade é o inverso dos valores de resistência suavizados pelo _kernel_ @fig-6.
+Por fim, para calcularmos os valores finais de **conectividade local** multiplicamos os valores de resistência por -1 por considerarmos que a conectividade é o inverso dos valores de resistência suavizados pelo _kernel_ @fig-7.
 
-![Mapa final da **Conectividade Local**, definida como o inverso da resistência dos diferentes uso e coberturas do solo à movimentação da biodiversidade.](figs/fig7.png){width=100% #fig-6}
+![Mapa final da **Conectividade Local**, definida como o inverso da resistência dos diferentes uso e coberturas do solo à movimentação da biodiversidade.](figs/fig7.png){width=100% #fig-7}
 
 <!--
 Por fim, calculamos os valores de Z para cada pixel ($Z_{pixel}$) ao subtrair o valor da média ($\mu$) e dividindo o resultado pelo desvio padrão ($\sigma$) e multiplicando tudo por -1, como mostrado na fórmula a seguir:
