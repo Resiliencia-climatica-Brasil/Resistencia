@@ -66,12 +66,12 @@ de uma estrutura por *pixel*.
 ![Método de conversão de arquivos vetoriais para arquivos matriciais (raster) já definindo os pixels com tamanho aproximado de 90 m, no ArcGis 10.5.](figs/fig2.png){width=100% #fig-2}
 
 
-Nas situações em que havia sobreposição entre pixels de infraestrutura, sempre prevalecia o valor do pixel com resistência mais alta (superfície com valores de resistência máximos – Figura 3), conforme descrito abaixo.
+Nas situações em que havia sobreposição entre pixels de infraestrutura, sempre prevalecia o valor do pixel com resistência mais alta (superfície com valores de resistência máximos – @fig-3), conforme descrito abaixo.
 
-![Uso da ferramenta “Cel Statistics”, no ArcGis 10.5, para agrupar as bases de infraestrutura em uma única superfície, onde prevalecem os valores máximos de resistência atribuídos a cada classe (ver descrição dos valores de resistência, abaixo).](figs/fig3.png){width=100% #fig-3}
+![Uso da ferramenta “Cell Statistics”, no ArcGis 10.5, para agrupar as bases de infraestrutura em uma única superfície, onde prevalecem os valores máximos de resistência atribuídos a cada classe (ver descrição dos valores de resistência, abaixo).](figs/fig3.png){width=100% #fig-3}
 
 
-Conjugamos, por álgebra de mapas, as bases matriciais do MapBiomas e de infraestrutura do IBGE e ANEEL, de tal maneira que, nas sobreposições entre a base do MapBiomas e a de infraestrutura, sempre prevaleceu o pixel com o maior valor de resistência (Figura 4).
+Conjugamos, por álgebra de mapas, as bases matriciais do MapBiomas e de infraestrutura do IBGE e ANEEL, de tal maneira que, nas sobreposições entre a base do MapBiomas e a de infraestrutura, sempre prevaleceu o pixel com o maior valor de resistência (@fig-4).
 
 ![Uso da ferramenta “Cel Statistics”, no ArcGis 10.5, para agrupar as bases de infraestrutura e de coberturaem uma única superfície, onde prevalecem os valores máximos de resistência atribuídos a cada classe (ver descrição dos valores de resistência, abaixo).](figs/fig4.png){width=100% #fig-4}
 
@@ -79,11 +79,12 @@ Feita esta operação, obtivemos uma nova superfície de cobertura do solo compo
 [INSERIR TABELA COM AS CLASSES OBTIDAS ATÉ O MOMENTO]
 
 ## Indicação de valores de resistência por classe
+
 As 34 classes do mapa consolidado de cobertura do solo, já incluindo os dados de infraestrutura como novas classes (Tabela xx), receberam, separadamente por bioma, valores de resistência que buscaram traduzir, comparativamente entre as classes, o grau de dificuldade de movimentação da biodiversidade numa dada classe de cobertura do solo. A premissa assumida foi que quanto maior for a diferença estrutural da classe de cobertura do solo para o hábitat original do bioma, maior será a dificuldade à movimentação que a classe oferece. Os valores de resistência das classes foram atribuídos, por bioma, pela equipe do projeto e por um grupo de especialistas. Esses valores variaram de 1 a 20 em números inteiros, sendo 1 o valor menos resistente e 20 o mais resistente (Tabela 1).
 
 ## Gerando a camada de resistência da paisagem
 
-A superfície com os valores de resistência pode ser observada na Figura 5.
+A superfície com os valores de resistência pode ser observada na @fig-5.
 
 ![Superfície de resistência gerada a partir do mapa com 34 classes de cobertura do solo - resultante da junção das superfícies do MapBiomas e de infraestrutura. Nesta superfície a resistência das águas abertas (rios, lagos e oceanos) não foi diferenciada em função da largura dos corpos d’água.](figs/fig5.png){width=100% #fig-5}
 

@@ -1,0 +1,34 @@
+project:
+  type: website
+  
+  render:
+    - index.qmd
+  
+website: 
+  navbar:
+    left:
+      - text: Tutoriais
+        menu:
+         - text: Heterogeneidade da paisagem
+         - text: Conectividade local 
+         - text: Resiliência da paisagem  
+      - text: Downloads
+        href: https://projeto-resiliencia-tnc.hub.arcgis.com   
+      - text: Relatório Técnico
+        href: https://resiliencia-climatica-brasil.github.io/Relatorio_final/     
+  sidebar: 
+    title: "Mapeamento de áreas resilientes a mudanças climáticas nos biomas brasileiros" 
+    logo: figs/1667403883848_theme_logo.png     
+    style: "docked"
+    
+               
+  page-navigation: true
+  favicon: figs/1667403883848_theme_logo.png
+bibliography: bibliografia.bib
+csl: citation_style.csl
+lang: pt-br
+format:
+  html:
+    theme: default
+    css: styles.css   
+
