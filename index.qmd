@@ -1,22 +1,13 @@
 # Resistência do uso e ocupação do solo
 
-As áreas resilientes às mudanças climáticas são classificadas por dois
-eixos, (1) a **heterogeneidade da paisagem** e (2) **conectividade local**. A
-conectividade local é calculada sobre uma superfície de resistência ao
-movimento dos organismos na paisagem. Essa superfície representa pesos
-aos usos e coberturas do solo, sendo as coberturas naturais aquelas com
-menor resistência e as superfícies antropizadas, com maior diferença
-estrutural para as coberturas nativas (ex. áreas urbanas), as de maior
-resistência.
+As áreas resilientes às mudanças climáticas são classificadas por dois eixos, (1) a **heterogeneidade da paisagem** e (2) **conectividade local**. A conectividade local é calculada sobre uma superfície de resistência ao movimento dos organismos na paisagem. Essa superfície representa pesos aos usos e coberturas do solo, sendo as coberturas naturais aquelas com menor resistência e as superfícies antropizadas, com maior diferença estrutural para as coberturas nativas (ex. áreas urbanas), as de maior resistência.
 
 ## Base de Dados
 <!--
 Precisamos atualizar a bibliografia e mudar as citações que a Marina usou no arquido .docx
 -->
 
-A superfície de resistência foi calculada usando como base os dados de
-cobertura do solo fornecida pelo MapBiomas coleção 8.0 para o ano de
-2021 [@mapbiomas_project_collection_2020]. Complementamos essa camada do uso do solo com informações sobre: 
+A superfície de resistência foi calculada usando como base os dados de cobertura do solo fornecida pelo MapBiomas coleção 8.0 para o ano de 2021 [@mapbiomas_project_collection_2020]. Complementamos essa camada do uso do solo com informações sobre: 
 ::: {}1.Tamanho dos rios, 2.presença de infraestruturas de transporte e 3.infraestruturas de energia. :::
 As informações sobre tamanho dos rios vem das camadas de águas do abertas do MapBiomas [@mapbiomas_project_collection_2020], a camada de bacias hidrográficas no nível 8 [Lehner &Grill (2013)]<!--COLOCAR NO ZOTERO--> e a camada de largura efetiva dos corpos d'água [Yamashida et al. 2014].
 
