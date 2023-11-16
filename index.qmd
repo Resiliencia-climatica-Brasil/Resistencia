@@ -1,23 +1,23 @@
 # Resistência do uso e ocupação do solo
 
-As áreas resilientes às mudanças climáticas são classificadas por dois eixos, (1) a **heterogeneidade da paisagem** e (2) **conectividade local**. A conectividade local é calculada sobre uma superfície de resistência ao movimento dos organismos na paisagem. Essa superfície representa pesos aos usos e coberturas do solo, sendo as coberturas naturais aquelas com menor resistência e as superfícies antropizadas, com maior diferença estrutural para as coberturas nativas (ex. áreas urbanas), as de maior resistência.
+As áreas resilientes às mudanças climáticas são classificadas por dois eixos, (1) a **heterogeneidade da paisagem** e (2) **conectividade local**. A conectividade local é calculada sobre uma superfície de resistência ao movimento dos organismos na paisagem. Essa superfície representa, por meio da atribuição de pesos, o grau de dificuldade que os diferentes tipos de usos e coberturas do solo oferecem à movimentação dos organismos, sendo as coberturas naturais aquelas com menor resistência e as superfícies mais antropizadas, com maior resistência (ex. áreas urbanas).
 
 ## Base de Dados
 <!--
 Precisamos atualizar a bibliografia e mudar as citações que a Marina usou no arquido .docx
 -->
 
-A superfície de resistência foi calculada usando como base os dados de cobertura do solo fornecida pelo MapBiomas coleção 8.0 para o ano de 2021 [@mapbiomas_project_collection_2020]. Complementamos essa camada do uso do solo com informações sobre: 
+A superfície de resistência foi calculada usando como base os dados de uso e cobertura do solo fornecida pelo MapBiomas coleção 8.0 para o ano de 2021 [@mapbiomas_project_collection_2020]. Complementamos essa camada do uso do solo com informações sobre: 
 ::: {}
-1.Tamanho dos rios;
+1.Largura dos rios;
 2.Presença de infraestruturas de transporte;
 3.Infraestruturas de energia. :::
 
-As informações sobre tamanho dos rios vem das camadas de águas do abertas do MapBiomas [@mapbiomas_project_collection_2020], a camada de bacias hidrográficas no nível 8 [Lehner &Grill (2013)]<!--COLOCAR NO ZOTERO--> e a camada de largura efetiva dos corpos d'água [Yamashida et al. 2014].
+As informações sobre largura dos rios foram derivadas a partir das camadas de águas do abertas do MapBiomas [@mapbiomas_project_collection_2020], a camada de bacias hidrográficas no nível 8 [Lehner &Grill (2013)]<!--COLOCAR NO ZOTERO--> e a camada de largura efetiva dos corpos d'água [Yamashida et al. 2014].
 
-As informações sobre infraestrutura de transporte vieram das camadas de estradas pavimentadas, estradas não-pavimentadas e ferrovias fornecidas pelo Instituto Brasileiro de Geografia e Estatística (IBGE) (\[BCIM250, 2021\]) <!-- Isso é uma citação? --> (<https://www.ibge.gov.br/geociencias/cartas-e-mapas/bases-cartograficas-continuas/15759-brasil.html?=&t=downloads>).
+As informações sobre infraestrutura de transporte foram originadas a partir das camadas de estradas pavimentadas, estradas não-pavimentadas e ferrovias fornecidas pelo Instituto Brasileiro de Geografia e Estatística (IBGE) (\[BCIM250, 2021\]) <!-- Isso é uma citação? --> (<https://www.ibge.gov.br/geociencias/cartas-e-mapas/bases-cartograficas-continuas/15759-brasil.html?=&t=downloads>).
 
-As bases de infraestrutura de energia foram as camadas de aerogeradores, centrais geradoras de energia fotovoltaicas, linhas de transmissão de energia eólica e usinas termelétricas fornecidas pela Agência Nacional de Energia Elétrica (ANEEL) (<https://gisepeprd2.epe.gov.br/WebMapEPE/>) e a camada de linhas de transmissão de energia fornecida pelo IBGE (\[BCIM250, 2021\]).
+As bases de infraestrutura de energia correspondem às camadas de aerogeradores, centrais geradoras de energia fotovoltaicas, linhas de transmissão de energia eólica e usinas termelétricas fornecidas pela Agência Nacional de Energia Elétrica (ANEEL) (<https://gisepeprd2.epe.gov.br/WebMapEPE/>) e a camada de linhas de transmissão de energia fornecida pelo IBGE (\[BCIM250, 2021\]).
 
 <!--
 precisamos citar:
@@ -31,11 +31,13 @@ MAPBIOMAS NOVA
 
 ## Software
 
-A bases de dados de uso e cobertura do solo, transporte e energia foram harmonizadas, atribuídos pesos e combinadas para formarem a superfície de resistência. Essas análises e processamentos foram realizados no ArcGis 10.5 (**citar arcgis**). Em seguida descreveremos a implementação da metodologia para a sua reprodutividade.
+As classes de uso e cobertura do solo do MapBiomas foram acrescidas das classes de infraestrutura de transporte e energia, com pesos específicos para cada classe, para formarem a superfície de resistência. Essas análises e processamentos foram realizados no ArcGis 10.5 (**citar arcgis**). Em seguida descreveremos a implementação da metodologia para a sua reprodutividade.
 
 ## Reamostragem  do MapBiomas
 
 As análises de mapeamento das áreas resilientes às mudanças climáticas estão na resolução espacial de 90 metros. Desta forma, reamostramos os dados do MapBiomas <!--CITAR MAPBIOMAS -->, que estão na resolução de 30 metros, para uma resolução de 90 metros. A reamostragem foi realizada pelo **método de vizinho mais próximo** (*nearest neighbor*) já que essa superfície é composta por 27 valores categóricos do uso e cobertura do solo. O método de reamostragem foi realizado pelo seguinte caminho `ToolsBox > Raster > ...`. Em `Resample`, entramos o *raster* original do MapBiomas em `Input Raster`, atribuímos um nome para `Output Raster Dataset` e a nova resolução em `Output Cell Size (optional)` (0.00083333333). A resolução foi calculada… Escolhemos o método `NEAREST` em `Resampling technique (optional)` (@fig-1). No final do processo de reamostragem seguimos a mesma classificação proposta pelo MapBiomas para colorir os usos do solo (@map1-mapbiomas).
+
+#Marina: Não entendi essa frase: "A reamostragem foi realizada pelo **método de vizinho mais próximo** (*nearest neighbor*) já que essa superfície é composta por 27 valores categóricos do uso e cobertura do solo", uma vez que a reamostragem dos pixels de 30 para 90 metros independem do número de classes que temos no MapBiomas#
 
 ![Método da reamostragem da superfície de uso e cobertura do solo (MapBiomas coleção 8 de 2023), de 30 para 90 m, por meio da técnica NEAREST, no ArcGis10.5.](figs/fig_1.png){width=100% #fig-1}
 
@@ -43,7 +45,7 @@ As análises de mapeamento das áreas resilientes às mudanças climáticas est�
 ![Mapa da classificação do uso e cobertura do solo feita por MapBiomas, coleção 8 de 2023, convertida de uma resolução de 30m para 90m. ](figs/map1_mapbiomas.png){width=100% #map1-mapbiomas}
 
 ## Largura dos Corpos d'água
-A classe do MapBiomas de cobertura do solo na escala de 90m que é equivalente a águas abertas (rios, lagos e oceanos; @map2_aguas) foi subdividida em quatro classes distintas de acordo com a largura dos corpos d’água já que rios mais largos agem como bareiras mais fortes à movimentação das espécies. 
+A classe do MapBiomas de cobertura do solo na escala de 90m equivalente a águas abertas (rios, lagos e oceanos; @map2_aguas) foi subdividida em quatro classes distintas de acordo com a largura dos corpos d’água já que rios mais largos tendem a ser barreiras mais resistêntes à movimentação das espécies. 
 
 ![Camada de águas abertas do MapBiomas, usada como base para classificação dos tamanhos dos rios. ](figs/map2_aguas.png){width=100% #map2-aguas}
 
@@ -59,9 +61,9 @@ Os trechos de corpos d’água originados desta operação foram utilizados como
 
 ![Divisão da camada de águas abertas do MapBiomas recortada pelas bacias hidrográficas de nivel 8 de **Lehner &Grill (2013)**.](figs/map4_aguasPORbacias.png){width=100% #map4-aguasporbacias}
 
-A largura máxima foi utilizada para gerar agrupamentos dos rios em quatro classes de largura: i. 1 a 250 metros, ii. 250 a 1000 metros, iii. 1000 a 4000 metros e iv. maiores de 4000 metros. Por meio da ferramenta “Append” (@fig-4), realizamos uma mosaicagem entre a camada contendo essas quatro classes e a camada do MapBiomas (já subtraída da classe de águas abertas), elevando de 29 para 32 o número de classes de uso e cobertura do solo.
+A largura máxima foi utilizada para gerar agrupamentos dos rios em quatro classes de largura: i. 1 a 250 metros, ii. 250 a 1000 metros, iii. 1000 a 4000 metros e iv. maiores de 4000 metros. Por meio da ferramenta “Mosaic to New Raster” (@fig-4), realizamos uma mosaicagem entre a camada contendo essas quatro classes e a camada do MapBiomas (já subtraída da classe de águas abertas), elevando de 29 para 32 o número de classes de uso e cobertura do solo.
 
-![Ferramenta “Append”, do programa ArcGis 10.5, utilizada para fazer a mosaicagem entre a superfície contendo as quatro classes de corpos d’água com larguras distintas e a superfície do MapBiomas 2020 com pixels de 90 metros (excetuando a classe de águas abertas a ser substituída pelas quatro novas classes de corpos d’água).](figs/fig_4.png){width=100% #fig-4}
+![Ferramenta “Mosaic to New Raster”, do programa ArcGis 10.5, utilizada para fazer a mosaicagem entre a superfície contendo as quatro classes de corpos d’água com larguras distintas e a superfície do MapBiomas 2021 com pixels de 90 metros (excetuando a classe de águas abertas a ser substituída pelas quatro novas classes de corpos d’água).](figs/fig_4.png){width=100% #fig-4}
 
 
 ## Conversão das camadas de Infraestrutura
