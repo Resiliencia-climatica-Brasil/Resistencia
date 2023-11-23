@@ -9,9 +9,10 @@ Precisamos atualizar a bibliografia e mudar as citações que a Marina usou no a
 
 A superfície de resistência foi calculada usando como base os dados de uso e cobertura do solo fornecida pelo MapBiomas coleção 8.0 para o ano de 2021 [@mapbiomas_project_collection_2020]. Complementamos essa camada do uso do solo com informações sobre: 
 ::: {}
-1.Largura dos rios;
-2.Presença de infraestruturas de transporte;
-3.Infraestruturas de energia. :::
+1. Largura dos rios;
+2. Presença de infraestruturas de transporte;
+3. Infraestruturas de energia. 
+:::
 
 As informações sobre largura dos rios foram derivadas a partir das camadas de águas do abertas do MapBiomas [@mapbiomas_project_collection_2020], a camada de bacias hidrográficas no nível 8 [Lehner &Grill (2013)]<!--COLOCAR NO ZOTERO--> e a camada de largura efetiva dos corpos d'água [Yamashida et al. 2014].
 
