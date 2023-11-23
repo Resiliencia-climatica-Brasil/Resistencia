@@ -46,7 +46,7 @@ As análises de mapeamento das áreas resilientes às mudanças climáticas est�
 ![Mapa da classificação do uso e cobertura do solo feita por MapBiomas, coleção 8 de 2023, convertida de uma resolução de 30m para 90m. ](figs/map1_mapbiomas.png){width=100% #map1-mapbiomas}
 
 ## Largura dos Corpos d'água
-A classe do MapBiomas de cobertura do solo na escala de 90m equivalente a águas abertas (rios, lagos e oceanos; @map2_aguas) foi subdividida em quatro classes distintas de acordo com a largura dos corpos d’água já que rios mais largos tendem a ser barreiras mais resistêntes à movimentação das espécies. 
+A classe do MapBiomas de cobertura do solo na escala de 90m equivalente a águas abertas (rios, lagos e oceanos; @map2_aguas) foi subdividida em quatro classes distintas de acordo com a largura dos corpos d’água já que rios mais largos tendem a ser barreiras mais resistêntes à movimentação das espécies.
 
 ![Camada de águas abertas do MapBiomas, usada como base para classificação dos tamanhos dos rios. ](figs/map2_aguas.png){width=100% #map2-aguas}
 
@@ -62,7 +62,7 @@ Os trechos de corpos d’água originados desta operação foram utilizados como
 
 ![Divisão da camada de águas abertas do MapBiomas recortada pelas bacias hidrográficas de nivel 8 de **Lehner &Grill (2013)**.](figs/map4_aguasPORbacias.png){width=100% #map4-aguasporbacias}
 
-A largura máxima foi utilizada para gerar agrupamentos dos rios em quatro classes de largura: i. 1 a 250 metros, ii. 250 a 1000 metros, iii. 1000 a 4000 metros e iv. maiores de 4000 metros. Por meio da ferramenta “Mosaic to New Raster” (@fig-4), realizamos uma mosaicagem entre a camada contendo essas quatro classes e a camada do MapBiomas (já subtraída da classe de águas abertas), elevando de 29 para 32 o número de classes de uso e cobertura do solo.
+A largura máxima foi utilizada para gerar agrupamentos dos rios em quatro classes de largura: :::{} i. 1 a 250 metros, ii. 250 a 1000 metros, iii. 1000 a 4000 metros e iv. maiores de 4000 metros :::. Por meio da ferramenta “Mosaic to New Raster” (@fig-4), realizamos uma mosaicagem entre a camada contendo essas quatro classes e a camada do MapBiomas (já subtraída da classe de águas abertas), elevando de 29 para 32 o número de classes de uso e cobertura do solo.
 
 ![Ferramenta “Mosaic to New Raster”, do programa ArcGis 10.5, utilizada para fazer a mosaicagem entre a superfície contendo as quatro classes de corpos d’água com larguras distintas e a superfície do MapBiomas 2021 com pixels de 90 metros (excetuando a classe de águas abertas a ser substituída pelas quatro novas classes de corpos d’água).](figs/fig_4.png){width=100% #fig-4}
 
