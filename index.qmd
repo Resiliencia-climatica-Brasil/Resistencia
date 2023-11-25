@@ -7,7 +7,7 @@ As áreas resilientes às mudanças climáticas são classificadas por dois eixo
 Precisamos atualizar a bibliografia e mudar as citações que a Marina usou no arquido .docx
 -->
 
-A superfície de resistência foi calculada usando como base os dados de uso e cobertura do solo fornecida pelo MapBiomas coleção 8.0 para o ano de 2021 [@mapbiomas_project_collection_2020]. Complementamos essa camada do uso do solo com informações sobre: 
+A superfície de resistência foi calculada usando como base os dados de uso e cobertura do solo fornecida pelo MapBiomas ((Projeto MapBiomas – Coleção 8 da Série Anual de Mapas de Cobertura e Uso da Terra do Brasil, acessado em outubro de 2023 através do link: https://storage.googleapis.com/mapbiomas-public/initiatives/brasil/collection_8/lclu/coverage/brasil_coverage_2022.tif) para o ano de 2021 [@mapbiomas_project_collection_2020]. Complementamos essa camada do uso do solo com informações sobre: 
 ::: {}
 1. Largura dos rios;
 2. Presença de infraestruturas de transporte;
@@ -32,15 +32,13 @@ MAPBIOMAS NOVA
 
 ## Software
 
-As classes de uso e cobertura do solo do MapBiomas foram acrescidas das classes de infraestrutura de transporte e energia, com pesos específicos para cada classe, para formarem a superfície de resistência. Essas análises e processamentos foram realizados no ArcGis 10.5 (**citar arcgis**). Em seguida descreveremos a implementação da metodologia para a sua reprodutividade.
+As classes de uso e cobertura do solo do MapBiomas foram acrescidas das classes de infraestrutura de transporte e energia, com pesos específicos para cada classe, para formarem a superfície de resistência. Essas análises foram realizadas no ArcGis 10.5 (**citar arcgis**). Todas as ferramentas do ArcGis 10.5 descritas abaixo podem ser acessadas no ícone de busca, conforme evidenciado na figura XX abaixo. Em seguida descreveremos a metodologia de maneira detalhada para que possa ser reproduzida.
 
 ## Reamostragem  do MapBiomas
 
-As análises de mapeamento das áreas resilientes às mudanças climáticas estão na resolução espacial de 90 metros. Desta forma, reamostramos os dados do MapBiomas <!--CITAR MAPBIOMAS -->, que estão na resolução de 30 metros, para uma resolução de 90 metros. A reamostragem foi realizada pelo **método de vizinho mais próximo** (*nearest neighbor*) já que essa superfície é composta por 27 valores categóricos do uso e cobertura do solo. O método de reamostragem foi realizado pelo seguinte caminho `ToolsBox > Raster > ...`. Em `Resample`, entramos o *raster* original do MapBiomas em `Input Raster`, atribuímos um nome para `Output Raster Dataset` e a nova resolução em `Output Cell Size (optional)` (0.00083333333). A resolução foi calculada… Escolhemos o método `NEAREST` em `Resampling technique (optional)` (@fig-1). No final do processo de reamostragem seguimos a mesma classificação proposta pelo MapBiomas para colorir os usos do solo (@map1-mapbiomas).
+As análises conduzidas para o mapeamento das áreas resilientes às mudanças climáticas foram realizadas na resolução espacial de 90 metros. Desta forma, reamostramos os dados do MapBiomas, que estão na resolução de 30 metros, para uma resolução de 90 metros. A reamostragem foi realizada com o uso da ferramenta "Resample" pelo **método de vizinho mais próximo** (*nearest*). O arquivo de entrada "input raster" correspondeu a camada original do MapBiomas, e para o arquivo de saída "output raster" atribuímos um novo nome. A resolução de aproximadamente 90 metros (ou seja 0.00083333333) para o pixel do novo arquivo gerado foi estabelecida no campo `Output Cell Size (optional)`. A escolha do método `Nearest` foi definida no campo `Resampling technique (optional)` (@fig-1). No final do processo de reamostragem seguimos a mesma classificação proposta pelo MapBiomas (com 27 classes) para colorir os usos do solo (@map1-mapbiomas).
 
-#Marina: Não entendi essa frase: "A reamostragem foi realizada pelo **método de vizinho mais próximo** (*nearest neighbor*) já que essa superfície é composta por 27 valores categóricos do uso e cobertura do solo", uma vez que a reamostragem dos pixels de 30 para 90 metros independem do número de classes que temos no MapBiomas#
-
-![Método da reamostragem da superfície de uso e cobertura do solo (MapBiomas coleção 8 de 2023), de 30 para 90 m, por meio da técnica NEAREST, no ArcGis10.5.](figs/fig_1.png){width=100% #fig-1}
+![Método da reamostragem da superfície de uso e cobertura do solo (MapBiomas coleção 8 de 2021), de 30 para 90 m, por meio da técnica NEAREST, no ArcGis10.5.](figs/fig_1.png){width=100% #fig-1}
 
 
 ![Mapa da classificação do uso e cobertura do solo feita por MapBiomas, coleção 8 de 2023, convertida de uma resolução de 30m para 90m. ](figs/map1_mapbiomas.png){width=100% #map1-mapbiomas}
@@ -50,7 +48,7 @@ A classe do MapBiomas de cobertura do solo na escala de 90m equivalente a águas
 
 ![Camada de águas abertas do MapBiomas, usada como base para classificação dos tamanhos dos rios. ](figs/map2_aguas.png){width=100% #map2-aguas}
 
-Para fazer a divisao, extraímos a máscara de corpos d’água e dividimos essa classe única em pedaços menores, regionalizando suas larguras por trechos. Esta divisão ocorreu com o uso da ferramenta “Raster Calculator” (@fig-2), por meio da intersecção entre as camadas matriciais de águas abertas e de bacias hidrográficas no nível 8, produzidas por **Lehner &Grill (2013)**(@map3-bacias).
+Para fazer a divisao, extraímos a máscara de corpos de águas abertas e dividimos essa classe única em pedaços menores, regionalizando suas larguras por trechos. Esta divisão ocorreu com o uso da ferramenta “Raster Calculator” (@fig-2), por meio da intersecção entre as camadas matriciais de águas abertas e de bacias hidrográficas no nível 8, produzidas por **Lehner &Grill (2013)**(@map3-bacias).
 
 ![Ferramenta “Raster Calculator”, do programa ArcGis 10.5, utilizada para a intersecção entre as camadas de águas abertas e bacias hidrográficas, gerando trechos de corpos d’água utilizados para consulta da largura dos mesmos.](figs/fig_2.png){width=100% #fig-2}
 
