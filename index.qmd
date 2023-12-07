@@ -1,215 +1,194 @@
 # Resistência do uso e ocupação do solo
 
-As áreas resilientes às mudanças climáticas são classificadas por dois
-eixos, (1) a heterogeneidade da paisagem e (2) conectividade local. A
-conectividade local é calculada sobre uma superfície de resistência ao
-movimento dos organismos na paisagem. Essa superfície representa pesos
-aos usos e coberturas do solo, sendo as coberturas naturais aquelas com
-menor resistência e as superfícies antropizadas, com maior diferença
-estrutural para as coberturas nativas (ex. áreas urbanas), as de maior
-resistência.
+As áreas resilientes às mudanças climáticas são classificadas por dois eixos, (1) a **heterogeneidade da paisagem** e (2) **conectividade local**. A conectividade local é calculada sobre uma superfície de resistência ao movimento dos organismos na paisagem. Essa superfície representa, por meio da atribuição de pesos, o grau de dificuldade que os diferentes tipos de usos e coberturas do solo oferecem à movimentação dos organismos, sendo as coberturas naturais aquelas com menor resistência e as superfícies mais antropizadas, com maior resistência (ex. áreas urbanas).
 
 ## Base de Dados
+<!--
+Precisamos atualizar a bibliografia e mudar as citações que a Marina usou no arquido .docx
+-->
 
-A superfície de resistência foi calculada usando como base os dados de
-cobertura do solo fornecida pelo MapBiomas coleção 7.0 para o ano de
-2020 [@mapbiomas_project_collection_2020]. Sobre essa camada
-adicionamos informações sobre presença de infraestruturas de transporte
-e de energia. Utilizamos a base de estradas pavimentadas e não
-pavimentadas, ferrovias e linhas de transmissão de energia fornecida
-pelo Instituto Brasileiro de Geografia e Estatística (IBGE) \[BCIM250,
-2021\]<!-- seria legal o link da base do IBGE aqui -->. As bases de
-aerogeradores, centrais geradoras de energia fotovoltaicas, linhas de
-transmissão de energia eólica e usinas termelétricas foram adquiridas da
-Agência Nacional de Energia Elétrica (ANEEL)
-(<https://gisepeprd2.epe.gov.br/WebMapEPE/>).
+A superfície de resistência foi calculada usando como base os dados de uso e cobertura do solo fornecida pelo MapBiomas ((Projeto MapBiomas – Coleção 8 da Série Anual de Mapas de Cobertura e Uso da Terra do Brasil, acessado em outubro de 2023 através do link: https://storage.googleapis.com/mapbiomas-public/initiatives/brasil/collection_8/lclu/coverage/brasil_coverage_2022.tif) para o ano de 2021 [@mapbiomas_project_collection_2020]. Complementamos essa camada do uso do solo com informações sobre: 
+::: {}
+1. Largura dos rios;
+2. Presença de infraestruturas de transporte;
+3. Infraestruturas de energia. 
+:::
+
+As informações sobre largura dos rios foram derivadas a partir das camadas de águas do abertas do MapBiomas [@mapbiomas_project_collection_2020], a camada de bacias hidrográficas no nível 8 [Lehner &Grill (2013)]<!--COLOCAR NO ZOTERO--> e a camada de largura efetiva dos corpos d'água [Yamashida et al. 2014].
+
+As informações sobre infraestrutura de transporte foram originadas a partir das camadas de estradas pavimentadas, estradas não-pavimentadas e ferrovias fornecidas pelo Instituto Brasileiro de Geografia e Estatística (IBGE) (\[BCIM250, 2021\]) <!-- Isso é uma citação? --> (<https://www.ibge.gov.br/geociencias/cartas-e-mapas/bases-cartograficas-continuas/15759-brasil.html?=&t=downloads>).
+
+As bases de infraestrutura de energia correspondem às camadas de aerogeradores, centrais geradoras de energia fotovoltaicas, linhas de transmissão de energia eólica e usinas termelétricas fornecidas pela Agência Nacional de Energia Elétrica (ANEEL) (<https://gisepeprd2.epe.gov.br/WebMapEPE/>) e a camada de linhas de transmissão de energia fornecida pelo IBGE (\[BCIM250, 2021\]).
+
+<!--
+precisamos citar:
+IBGE
+ANEEL
+YAMASHIDA 2014
+LEHNER & GRILL
+MAPBIOMAS NOVA  
+ -->
+
 
 ## Software
 
-A bases de dados de uso e cobertura do solo, transporte e energia foram
-harmonizadas, atribuídos pesos e combinadas para formarem a superfície
-de resistência. Essas análises e processamentos foram realizados no
-ArcGis 10.5 (**citar arcgis**). Em seguida descreveremos a implementação
-da metodologia para a sua reprodutividade.
+As classes de uso e cobertura do solo do MapBiomas foram acrescidas das classes de infraestrutura de transporte e energia, com pesos específicos para cada classe, para formarem a superfície de resistência. Essas análises foram realizadas no ArcGis 10.5 (**citar arcgis**). Todas as ferramentas do ArcGis 10.5 descritas abaixo podem ser acessadas no ícone de busca, conforme evidenciado na figura XX abaixo. Em seguida descreveremos a metodologia de maneira detalhada para que possa ser reproduzida.
 
-## Reamostragem do MapBiomas
+## Reamostragem  do MapBiomas
 
-As análises de mapeamento das áreas resilientes às mudanças climáticas
-estão na resolução espacial de 90 metros. Desta forma, reamostramos os
-dados do MapBiomas, que estão na resolução de 30 metros, para uma
-resolução de 90 metros. A reamostragem foi realizada pelo **método de
-vizinho mais próximo** (*nearest neighbor*) já que essa superfície é
-composta por 27 valores categóricos do uso e cobertura do solo. O método
-de reamostragem foi realizado pelo seguinte caminho
-`ToolsBox > Raster > ...`. Em `Resample`, entramos o *raster* original
-do MapBiomas em `Input Raster`, atribuímos um nome para
-`Output Raster Dataset` e a nova resolução em
-`Output Cell Size (optional)` (0.00083333333). A resolução foi calculada
-… Escolhemos o método `NEAREST` em `Resampling technique (optional)`
-(@fig-1).
+As análises conduzidas para o mapeamento das áreas resilientes às mudanças climáticas foram realizadas na resolução espacial de 90 metros. Desta forma, reamostramos os dados do MapBiomas, que estão na resolução de 30 metros, para uma resolução de 90 metros. A reamostragem foi realizada com o uso da ferramenta "Resample" pelo **método de vizinho mais próximo** (*nearest*). O arquivo de entrada "input raster" correspondeu a camada original do MapBiomas, e para o arquivo de saída "output raster" atribuímos um novo nome. A resolução de aproximadamente 90 metros (ou seja 0.00083333333) para o pixel do novo arquivo gerado foi estabelecida no campo `Output Cell Size (optional)`. A escolha do método `Nearest` foi definida no campo `Resampling technique (optional)` (@fig-1). No final do processo de reamostragem seguimos a mesma classificação proposta pelo MapBiomas (com 27 classes) para colorir os usos do solo (@map1-mapbiomas).
 
-![Método da reamostragem da superfície de uso e cobertura do solo (MapBiomas coleção 7.2 de 2020), de 30 para 90 m, por meio da técnica NEAREST, no ArcGis10.5.](figs/fig1.png){width=100% #fig-1}
+![Método da reamostragem da superfície de uso e cobertura do solo (MapBiomas coleção 8 de 2021), de 30 para 90 m, por meio da técnica NEAREST, no ArcGis10.5.](figs/fig_1.png){width=100% #fig-1}
 
-## Dados vetoriais em *raster*
 
-Os dados vetoriais de infraestrutura foram convertidos para *raster*,
-com pixels de tamanho aproximado de 90 m (@fig-2) e, posteriormente,
-agrupados em um único arquivo matricial. A conversão foi realizada para
-cada arquivo usando a ferramenta `Polyline to Raster`, no seguinte
-caminho `Tools > XX > XX > XX`. Introduzimos o arquivo de entrada em
-`Input Features`, atribuímos o nome do *output* em `Value field`, a
-resolução espacial (0.00083333333) em `Output Raster Dataset`. Em
-`Cell assignment type (optional)` selecionamos `MAXIMUM_LENGTH` para o
-valor da maior estrutura ser o atribuído ao *pixel*, quando houver mais
-de uma estrutura por *pixel*.
+![Mapa da classificação do uso e cobertura do solo feita por MapBiomas, coleção 8 de 2023, convertida de uma resolução de 30m para 90m. ](figs/map1_mapbiomas.png){width=100% #map1-mapbiomas}
 
-![Método de conversão de arquivos vetoriais para arquivos matriciais (raster) já definindo os pixels com tamanho aproximado de 90 m, no ArcGis 10.5.](figs/fig2.png){width=100% #fig-2}
+## Largura dos Corpos d'água
+A classe do MapBiomas de cobertura do solo na escala de 90m equivalente a águas abertas (rios, lagos e oceanos; @map2_aguas) foi subdividida em quatro classes distintas de acordo com a largura dos corpos d’água já que rios mais largos tendem a ser barreiras mais resistêntes à movimentação das espécies.
 
+![Camada de águas abertas do MapBiomas, usada como base para classificação dos tamanhos dos rios. ](figs/map2_aguas.png){width=100% #map2-aguas}
+
+Para fazer a divisao, extraímos a máscara de corpos de águas abertas e dividimos essa classe única em pedaços menores, regionalizando suas larguras por trechos. Esta divisão ocorreu com o uso da ferramenta “Raster Calculator” (@fig-2), por meio da intersecção entre as camadas matriciais de águas abertas e de bacias hidrográficas no nível 8, produzidas por **Lehner &Grill (2013)**(@map3-bacias).
+
+![Ferramenta “Raster Calculator”, do programa ArcGis 10.5, utilizada para a intersecção entre as camadas de águas abertas e bacias hidrográficas, gerando trechos de corpos d’água utilizados para consulta da largura dos mesmos.](figs/fig_2.png){width=100% #fig-2}
+
+![Bacias hidrográficas de nivel 8 de **Lehner &Grill (2013)**.](figs/map3_bacias.png){width=100% #map3-bacias}
+
+Os trechos de corpos d’água originados desta operação foram utilizados como unidades espaciais de consulta da base de largura efetiva dos corpos d’água, de margem a margem (base GWD – LR de **Yamashida et al. 2014)** (@map4-aguasporbacias).  Para cada uma destas unidades, extraímos da base GWD -LR, por meio de estatística zonal, o valor máximo de largura de cada trecho de águas abertas (@fig-3).
+
+![Uso da ferramenta “Zonal Statistics”, do programa ArcGis 10.5, para calcular a largura máxima de cada trecho de corpos d’água por unidade de consulta.](figs/fig_3.png){width=100% #fig-3}
+
+![Divisão da camada de águas abertas do MapBiomas recortada pelas bacias hidrográficas de nivel 8 de **Lehner &Grill (2013)**.](figs/map4_aguasPORbacias.png){width=100% #map4-aguasporbacias}
+
+A largura máxima foi utilizada para gerar agrupamentos dos rios em quatro classes de largura: :::{} i. 1 a 250 metros, ii. 250 a 1000 metros, iii. 1000 a 4000 metros e iv. maiores de 4000 metros :::. Por meio da ferramenta “Mosaic to New Raster” (@fig-4), realizamos uma mosaicagem entre a camada contendo essas quatro classes e a camada do MapBiomas (já subtraída da classe de águas abertas), elevando de 29 para 32 o número de classes de uso e cobertura do solo.
+
+![Ferramenta “Mosaic to New Raster”, do programa ArcGis 10.5, utilizada para fazer a mosaicagem entre a superfície contendo as quatro classes de corpos d’água com larguras distintas e a superfície do MapBiomas 2021 com pixels de 90 metros (excetuando a classe de águas abertas a ser substituída pelas quatro novas classes de corpos d’água).](figs/fig_4.png){width=100% #fig-4}
+
+
+## Conversão das camadas de Infraestrutura
+
+As camadas de infraestrutura de transportes e energia estavam em formatos vetoriais e foram convertidas para *raster*, com pixels de tamanho aproximado de 90 m (@fig-2). Essa conversão foi realizada para cada arquivo usando a ferramenta `Polyline to Raster`. As camadas geradas receberam valores de resistência (ver “Indicação de valores de resistência por classe”) como atributo específico de cada uma das classes de infraestrutura e, posteriormente, todas as camadas foram agrupadas em um único arquivo matricial. Introduzimos o arquivo de entrada em `Input Features`, atribuímos o nome do *output* em `Value field`, a resolução espacial (0.00083333333) em `Output Raster Dataset`. Em
+`Cell assignment type (optional)` selecionamos `MAXIMUM_LENGTH` para que, no caso de sobreposição entre pixels de diferentes camadas de infraestrutura, prevaleça o valor do pixek com resistência mais alta (valor máximo de resistência).
+
+![Método de conversão de arquivos vetoriais para arquivos matriciais (*raster*) já definindo os pixels com tamanho aproximado de 90 m, no ArcGis 10.5.](figs/fig2.png){width=100% #fig-2}
 
 Nas situações em que havia sobreposição entre pixels de infraestrutura, sempre prevalecia o valor do pixel com resistência mais alta (superfície com valores de resistência máximos – @fig-3), conforme descrito abaixo.
 
 ![Uso da ferramenta “Cell Statistics”, no ArcGis 10.5, para agrupar as bases de infraestrutura em uma única superfície, onde prevalecem os valores máximos de resistência atribuídos a cada classe (ver descrição dos valores de resistência, abaixo).](figs/fig3.png){width=100% #fig-3}
 
-
 Conjugamos, por álgebra de mapas, as bases matriciais do MapBiomas e de infraestrutura do IBGE e ANEEL, de tal maneira que, nas sobreposições entre a base do MapBiomas e a de infraestrutura, sempre prevaleceu o pixel com o maior valor de resistência (@fig-4).
 
 ![Uso da ferramenta “Cel Statistics”, no ArcGis 10.5, para agrupar as bases de infraestrutura e de coberturaem uma única superfície, onde prevalecem os valores máximos de resistência atribuídos a cada classe (ver descrição dos valores de resistência, abaixo).](figs/fig4.png){width=100% #fig-4}
 
-Feita esta operação, obtivemos uma nova superfície de cobertura do solo composta pelas classes originais do MapBiomas mais as classes de infraestrutura, somando 34 classes distintas @tbl-1. Em um primeiro momento, consideramos os corpos d’água (ou águas abertas) como uma única classe, sem distinção de largura @fig-5. Essa distinção é necessária por conta do diferente efeito da largura dos rios na movimentação de organismos e foi realizada nos próximos passos.
+Feita esta operação, obtivemos uma nova superfície de cobertura do solo composta pelas classes originais do MapBiomas, contendo a informação das larguras dos rios pro bacia hidrográfica, mais as classes de infraestrutura, somando 39 classes distintas.
 
-![Superfície de resistência gerada a partir do mapa com 34 classes de cobertura do solo - resultante da junção das superfícies do MapBiomas e de infraestrutura. Nesta superfície a resistência das águas abertas (rios, lagos e oceanos) não foi diferenciada em função da largura dos corpos d’água.](figs/fig5.png){width=100% #fig-5}
 
-**[INSERIR TABELA _atualizada_ COM AS CLASSES OBTIDAS ATÉ O MOMENTO das classes do mapbiomas E infraestrutura]**
-
-|Classe de cobertura do solo|	Amazônia|	Caatinga|	Cerrado|	Mata Atlântica|	Pampa|	Pantanal|
-|---:|--:|--:|--:|--:|--:|--:|
-|Aquacultura| -|10|7|7|7|7|
-|Praia, duna e areal|2|2|2|2|2|2|
-|Citrus| -| -|10|4| -| -|
-|Café| -|7|10|4| -| -|
-|Algodão|7|7|10| -| -|10|
-|Estradas não pavimentadas|10|10|7|10|7|3|
-|Estradas pavimentadas|20|20|20|20|20|20|
-|Formação florestal|1|1|1|1|1|1|
-|Silvicultura (floresta plantada)|7|2|7|3|10|5|
-|Formação campestre (campos)|1|1|1|2|1|1|
-|Vegetação de restinga herbácea| -|1| -|2|1| -|
-|Mangue|1|1|1|1| -|1|
-|Mineração|20|20|20|20|20|20|
-|Mosaico de usos|10|7|10|10|10|7|
-|Outras formações não florestais| -|7| -|2|-|-
-|Outras áreas não vegetadas|10|9|10|10|10|10|
-|Outras culturas perenes|10|7|7|4| -| -|
-|Outras culturas temporárias|15|7|10|10|10|5|
-|Pastagem|17|7|7|9|7|7|
-|Arroz| -| -|10|10|10| -|
-|Afloramento rochoso| -|1|2|3|2| -|
-|Salina|2|1|2|2| -| -|
-|Formação de savana|1|1|1|2| -|1|
-|Soja|17|10|10|10|10|10|
-|Cana de açúcar|15|10|10|10| -|10|
-|Área urbana|20|20|20|20|20|20|
-|Áreas alagadas|1| -|1|2|1|1|
-|Vegetação de restinga arbórea| -|1| -|1|1| -|
-|Aerogeradores|15|15|15|15|15|15|
-|Centrais geradoras de energia solar|15|17|17|17|17|17|
-|Termelétricas|20|20|20|20|20|20|
-|Linhas de transmissão (tradicionais e anexas ao sistema eólico)|10|7|7|7|7|7|
-|Ferrovias|10|10|10|10|10|10|
-: Valores de resistência para as 34 classes de uso e cobertura do solo - resultante da junção das superfícies de uso do solo do MapBiomas e de infraestrutura. {#tbl-1}
 
 ## Indicação de valores de resistência por classe
 
-As 34 classes do mapa consolidado de cobertura do solo, já incluindo os dados de infraestrutura como novas classes @tbl-1, receberam valores de resistências atribuídos separademente para cada bioma. Esses valores de resistência tem como objetivo representar de forma comparativa o grau de dificuldade para movimentação da biodiversidade dentro de uma classe específica de cobertura do solo. A premissa assumida para definir os valores foi que quanto maior for a diferença estrutural da classe de cobertura do solo para o hábitat original do bioma, maior será a dificuldade à movimentação que a classe oferece. Os valores de resistência das classes foram atribuídos, por bioma, pela equipe do projeto e por um grupo de especialistas. Esses valores variaram de 1 a 20 em números inteiros, sendo 1 o valor menos resistente e 20 o mais resistente @tbl-1.
+As 39 classes do mapa consolidado de cobertura e uso do solo, receberam valores de resistências atribuídos separademente para cada bioma. Esses valores de resistência tem como objetivo representar de forma comparativa o grau de dificuldade para movimentação da biodiversidade dentro de uma classe específica de cobertura do solo. A premissa assumida para definir os valores foi que quanto maior for a diferença estrutural da classe de cobertura do solo para o hábitat original do bioma, maior será a dificuldade à movimentação que a classe oferece. Os valores de resistência das classes foram atribuídos, por bioma, pela equipe do projeto e por um grupo de especialistas. Esses valores variaram de 1 a 20 em números inteiros, sendo 1 o valor menos resistente e 20 o mais resistente @tbl-1.
 
-<!--**Movi a seção de 'Gerando a camada' para depois dos valores de resistencias de rios -->
+|N|Classe de cobertura do solo|Amazônia|Caatinga|Cerrado|Mata Atlântica|Pampa|Pantanal|
+|--:|--:|--:|--:|--:|--:|--:|--:|
+|1|Afloramento rochoso|3|1|2|3|2|-|
+|2|Algodão|7|7|10|-|-|-|
+|3|Aquacultura|-|10|7|7|7|-|
+|4|Área urbana|20|20|20|20|20|20|
+|5|Áreas alagadas (Campos e Pântanos)|1|-|1|2|1|1|
+|6|Arroz|-|-|10|10|10|-|
+|7|Café|-|7|10|4|-|-|
+|8|Cana de açúcar|15|10|10|10|-|10|
+|9|Citrus|-|-|10|4|-|-|
+|10|Dendê|10|-|-|-|-|-|
+|11|Floresta alagada|1|-|-|-|-|-|
+|12|Formação campestre (campos)|1|1|1|2|1|1|
+|13|Formação de savana|1|1|1|2|-|1|
+|14|Formação florestal|1|1|1|1|1|1|
+|15|Mangue|1|1|1|1|-|-|
+|16|Mineração|20|20|20|20|20|20|
+|17|Mosaico de usos|10|7|10|10|10|7|
+|18|Outras áreas não vegetadas|10|10|10|10|10|10|
+|19|Outras culturas perenes|10|7|7|4|-|-|
+|20|Outras culturas temporárias|15|7|10|10|10|5|
+|21|Outras formações não florestais|-|7|-|2|-|-|
+|22|Pastagem|17|7|7|9|7|7|
+|23|Praia, duna e areal|2|2|2|2|2|2|
+|24|Salina (Apicum)|2|1|2|2|-|-|
+|25|Silvicultura (floresta plantada)|7|2|7|3|10|5|
+|26|Soja|17|10|10|10|10|10|
+|27|Vegetação de restinga arbórea|-|1|-|1|1|-|
+|28|Vegetação de restinga herbácea|-|1|-|2|1|-|
+|29|Corpos d’águas abertas até 250 metros|2|2|2|2|2|2|
+|30|Corpos d’águas abertas de 250 a 1000 metros|5|5|5|5|5|5|
+|31|Corpos d’águas abertas de 1000 a 4000 metros|10|10|10|10|10|10|
+|32|Corpos d’águas abertas acima de 4000 metros|12|12|12|12|12|12|
+|33|Aerogeradores|15|15|15|15|15|15|
+|34|Centrais geradoras de energia solar|15|17|17|17|17|17|
+|35|Estradas não pavimentadas|10|10|7|10|7|3|
+|36|Estradas pavimentadas|20|20|20|20|20|20|
+|37|Ferrovias|10|10|10|10|10|10|
+|38|Linhas de transmissão (tradicionais e anexas ao sistema eólico)|10|7|7|7|7|7|
+|39|Termelétricas|20|20|20|20|20|20|
+: Valores de resistência para as 39 classes de uso e cobertura do solo - resultante da junção das superfícies de uso do solo do MapBiomas (N: 1 - 28), as separações do tamanho dos rios por bacias hidrográficas (N 29 - 32) e de infraestrutura de transporte e energia (N: 33 - 39). {#tbl-1}
+
+
+<!--
+COMO COLOCAMOS ESSES VALORES DENTRO DAS NOSSAS CAMADAS? 
+NO TEXTO SAIMOS DIRETO DAS CAMADAS E DA TABELO PRO MAPA FINAL DE RESISTÊNCIA SEM DIZER COMO PODEMOS DEFINIR OS VALORES DOS PIXELS
+-->
+
+
+![Superfície de resistência gerada a partir do mapa com 39 classes de cobertura do solo - resultante da junção das superfícies do MapBiomas e de infraestrutura. Nesta superfície a resistência das águas abertas (rios, lagos e oceanos) não foi diferenciada em função da largura dos corpos d’água.](figs/fig6.png){width=100% #fig-5}
+
+<!--
+ATUALIZAR MAPAS DE RESISTÊNCIA
+ -->
+
+<!--
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ESTOU COLOCANDO ESSA SEÇÃO EM COMENTÁRIO PORQUE ESTÁ EXPLICADO ANTERIORMENTE. 
+TALVEZ POSSAMOS REVISAR OS DOIS TEXTOS E VER SE TEM ALGUMA INFORMAÇÃO AQUI QUE AINDA NÃO FOI EXPLICADO ACIMA?
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 ## Classificação das larguras dos rios
 
 A classe de cobertura do solo equivalente a águas abertas (rios, lagos e oceanos) recebeu valores de resistência variando em função da largura desses corpos d’água já que rios maiores são barreiras mais resistentes à movimentação da biodiversidade terrestre. Para que isso fosse possível, tivemos que dividir os corpos d’água em pedaços menores, regionalizando suas larguras por trechos. Nesta divisão usamos as bacias hidrográficas no nível 8 produzidas por Venticinque e colaboradores (2021). Os trechos de corpos d’água foram utilizados para segmentar a largura efetiva dos corpos d’água, de margem a margem, ao longo de todo o canal da base disponibilizada por Yamashida e colaboradores (2014).
 
 Para cada trecho da máscara de corpos d’água por bacias, com base nos dados de largura efetiva de margem a margem, extraímos o valor máximo de largura, sendo esse valor utilizado como medida de largura de cada trecho de águas abertas. Uma vez identificada a largura máxima de cada trecho de corpo d’água, agrupamos os rios nas seguintes classes de largura: i. 1 a 250 metros, ii. 250 a 1000 metros, iii. 1000 a 4000 metros e iv. maiores de 4000 metros. A inclusão dessas quatro classes de largura de corpos d’água, elevou de 34 para 37 o número de classes de cobertura do solo. Os valores de resistência atribuído para cada uma dessas classes variou e podem ser vistos na @tbl-2.
-
-<!--** EXPLICAÇÃO DO PASSO A PASSO NO ARCGIS**
-1)Regionalizar os rios por bacias
-2)Como medimos o tamanho dos rios?
-3)Cortar os rios em pedaços maiores
 -->
 
-|Classe de cobertura do solo|	Amazônia|	Caatinga|	Cerrado|	Mata Atlântica|	Pampa|	Pantanal|
-|---:|--:|--:|--:|--:|--:|--:|
-|Aquacultura| -|10|7|7|7|7|
-|Praia, duna e areal|2|2|2|2|2|2|
-|Citrus| -| -|10|4| -| -|
-|Café| -|7|10|4| -| -|
-|Algodão|7|7|10| -| -|10|
-|Estradas não pavimentadas|10|10|7|10|7|3|
-|Estradas pavimentadas|20|20|20|20|20|20|
-|Formação florestal|1|1|1|1|1|1|
-|Silvicultura (floresta plantada)|7|2|7|3|10|5|
-|Formação campestre (campos)|1|1|1|2|1|1|
-|Vegetação de restinga herbácea| -|1| -|2|1| -|
-|Mangue|1|1|1|1| -|1|
-|Mineração|20|20|20|20|20|20|
-|Mosaico de usos|10|7|10|10|10|7|
-|Outras formações não florestais| -|7| -|2|-|-
-|Outras áreas não vegetadas|10|9|10|10|10|10|
-|Outras culturas perenes|10|7|7|4| -| -|
-|Outras culturas temporárias|15|7|10|10|10|5|
-|Pastagem|17|7|7|9|7|7|
-|Arroz| -| -|10|10|10| -|
-|Afloramento rochoso| -|1|2|3|2| -|
-|Salina|2|1|2|2| -| -|
-|Formação de savana|1|1|1|2| -|1|
-|Soja|17|10|10|10|10|10|
-|Cana de açúcar|15|10|10|10| -|10|
-|Área urbana|20|20|20|20|20|20|
-|Áreas alagadas|1| -|1|2|1|1|
-|Vegetação de restinga arbórea| -|1| -|1|1| -|
-|Aerogeradores|15|15|15|15|15|15|
-|Centrais geradoras de energia solar|15|17|17|17|17|17|
-|Termelétricas|20|20|20|20|20|20|
-|Linhas de transmissão (tradicionais e anexas ao sistema eólico)|10|7|7|7|7|7|
-|Ferrovias|10|10|10|10|10|10|
-|Corpos d’águas abertas até 250 metros|2|2|2|2|2|2|
-|Corpos d’águas abertas de 250 a 1000 metros|5|5|5|5|5|5|
-|Corpos d’águas abertas de 1000 a 4000 metros|10|10|10|10|10|10|
-|Corpos d’águas abertas acima de 4000 metros|12|12|12|12|12|12|
-: Valores de resistência para as 37 classes de cobertura do solo - resultante da junção das superfícies de uso do solo do MapBiomas, de infraestrutura e de largura dos rios. {#tbl-2}
-
-
-## Gerando a camada de resistência da paisagem
-
-Com a nova camada de resistência, já incluindo valores distintos para as larguras dos corpos d’água, aplicamos à superfície gerada a função _kernel_ de decaimento linear. Esta análise considerou - numa janela móvel definida por um raio de 23 pixels (~2070 m) - o contexto espacial em que cada pixel está inserido, reconhecendo que pixels mais próximos possuem uma influência maior que os mais distantes. Desta maneira, a função _kernel_ nos auxilia na tarefa de encontrar os melhores caminhos de deslocamento na paisagem, ou seja, aqueles caminhos que oferecem menor resistência. Essa função gera uma superfície mais suavizada, gerando um valor para cada pixel que leva em conta a vizinhança. 
-
-Assim, quando consideramos, por exemplo, pequenos corpos d’água inseridos em uma grande área de floresta contínua, há uma “contaminação” do contexto preservado do entorno nestes corpos d’água, que acabam não se configurando como barreiras importantes para o deslocamento dos organismos. Porém, se por um lado consideramos que um corpo d’água pode ser relativamente mais ou menos resistente aos deslocamentos dos organismos em função de onde está inserido, o raciocínio contrário não se aplica. Ou seja, não esperamos que um organismo irá evitar a borda de um grande rio, simplesmente porque o rio oferece uma grande resistência para ser transposto. Com esse princípio em mente, depois de aplicado o Kernell em toda a superfície, conforme descrito acima, recortamos os valores obtidos para os corpos d’água, substituindo essa classe no mapa (independente do tamanho) por *NoData*. 
+## Gerando a camada de Conectividade Local
 
 <!--
-Depois de atribuídos os valores de resistência, aplicamos à superfície gerada a função _kernel_ de decaimento linear. Esta análise considerou, numa janela móvel de 23 pixels (~2070 m), o contexto espacial em que cada pixel está inserido, reconhecendo que pixels mais próximos possuem uma influência maior que os mais distantes. Desta maneira, a função _kernel_ nos auxilia na tarefa de encontrar os melhores caminhos de deslocamento na paisagem, ou seja, aqueles caminhos que oferecem menor resistência. -->
-<!-- **Acho que toda esse parágrafo está aqui como legado da análise anterior. No parágrafo de cima já explicamos para que serve o kernel e como atingimos os valores finais de resistência**-->
-
-<!--
-![Superfície de resistência gerada a partir do mapa com 37 classes de cobertura do solo - resultante da junção das superfícies do MapBiomas, de infraestrutura e de largura dos rios.](figs/fi){width=100% #fig-6}
+FALTA COMPLEMENTAR TODA ESSAS SESSÃO COM AS IMAGENS DE COMO FAZER O PASSO A PASSO NO ARCGIS
 -->
 
-Por fim, para calcularmos os valores finais de **conectividade local** multiplicamos os valores de resistência por -1 por considerarmos que a conectividade é o inverso dos valores de resistência suavizados pelo _kernel_ @fig-6.
-
-![Mapa final da **Conectividade Local**, definida como o inverso da resistência dos diferentes uso e coberturas do solo à movimentação da biodiversidade.](figs/fig7.png){width=100% #fig-6}
+A superfície final de conectividade local foi gerada a partir das seguintes etapas:
+•	Etapa 1
+Usando a ferramenta “Reclassify” do Spatial Analyst (Figura 9 - @fig6) construímos máscaras a partir da superfície de uso e cobertura do solo (com 39 classes), gerando duas superfícies:
+a.	Superfície de águas abertas, onde as classes de largura dos rios receberam o valor de 1 e as demais classes foram consideradas como NoData (@fig7).
+b.	Superfície terrestre, onde as classes de água foram reclassificadas para NoData e das demais receberam o valor igual a 1 (@fig7).
 
 <!--
-Por fim, calculamos os valores de Z para cada pixel ($Z_{pixel}$) ao subtrair o valor da média ($\mu$) e dividindo o resultado pelo desvio padrão ($\sigma$) e multiplicando tudo por -1, como mostrado na fórmula a seguir:
-$$
-Z_{pixel}= \left(\frac {X_{pixel}-\mu} {\sigma}\right) \times -1
-$$
-Os cálculos de $Z$ foram feitos dentro de cada classificação de regiões eco-geológicas usando as médias e desvios padrão dentro de cada uma das classes. Multiplicamos o valores por -1 por considerarmos que a conectividade local é o inverso dos valores de resistência suavizados pelo _kernel_.
+ADICIONAR FIGURA 6 MOSTRANDO COMO FAZER O RECLASSIFY
+ADICIONAR COMO FICAM AS IMAGENS DAS SUPERFICIES A E B??
 -->
 
-<!-- Os dados espaciais primários para calcular a superfície de resistência foram a camada de cobertura do solo fornecida pelo MapBiomas [@mapbiomas_project_collection_2020] e a base de estradas fornecida pelo IBGE (BCIM250 de 2021). Os seguintes passos foram realizados:
-1.	Os pixels da camada do MapBiomas foram reamostrados de 30 metros par 90 metros, usando a ferramenta “Ressample” do software ArcGis 10.5
-2.	O shapefile de estradas do IBGE foi convertido para o formato raster, com pixels de aproximadamente 90 metros de tamanho. Os pixels correspondentes a estradas pavimentadas receberam o valor de 2000, os pixels de estradas não pavimentadas receberam o valor de 1000 e os demais pixels (que não correspondem a nenhuma estrada) receberam o valor de 0 (zero)
-3.	No ArcGis 10.5, usando a ferramenta “Map Calculator” as camadas de cobertura do solo e de estradas foram somadas. Na superfície gerada, foram mantidos os valores dos pixels, originalmente atribuídos pelo MapBiomas, quando um pixel de cobertura do solo se sobrepusesse a algum pixel da camada de estradas com valor igual a zero. Nos casos onde os pixels de cobertura do solo se sobrepuseram a um pixel de estrada pavimentadas o valor final desses pixels foi reclassificado para 98 e quando a sobreposição ocorreu com algum pixel de estrada não pavimentada, o valor final foi reclassificado para 99
-4.	Na superfície gerada, os pixels de cada uma das classes receberam valores de resistência, inferidos separadamente para cada bioma (obs: neste arquivo os valores de resistência foram inferidos pela equipe de bolsistas de pós-doutorado do Projeto e seus supervisores, com auxílio da equipe da TNC). Os valores de resistência para cada classe de uso e cobertura do solo, por bioma, encontram-se na tabela 1 (abaixo). Os valores de resistência buscaram traduzir, comparativamente entre as classes, o grau de dificuldade de movimentação de um dado animal ou propágulo naquela classe de cobertura do solo. A premissa assumida aqui, para todos os biomas, é que quanto maior fora a diferença estrutural daquela classe para o hábitat original do bioma, maior será a dificuldade de movimentação por um dado pixel
-5.	Depois de atribuídos os valores de resistência, usando a ferramenta “Focal Statistics” do ArcGis 10.5, foi calculada o valor médio do pixel focal, em um raio de 23 pixels, aplicando a função de _Kernel_, com decaimento linear. Esta análise considera o contexto espacial em que cada pixel está inserido, reconhecendo que pixels mais próximos possuem uma influência maior um sobre o outro do que pixels mais distantes -->
+•	Etapa 2
+Usando a ferramenta Focal Statistics, aplicamos a função Kernel à superfície de resistência (com 39 classes) gerada para todo o Brasil **(Figura 10 - @fig8)**. Esta análise considerou uma função de decaimento linear em uma janela móvel definida por um raio de 23 pixels (~2070 m), que representa o contexto espacial em que cada pixel está inserido, reconhecendo que pixels mais próximos possuem maior influência um sobre o outro do que pixels mais distantes, influenciando o valor de conectividade local de cada pixel. Desta maneira, a função Kernel nos auxilia na tarefa de encontrar os melhores caminhos de deslocamento na paisagem, ou seja, aqueles caminhos que oferecem menor resistência.
 
+•	Etapa3
+Multiplicamos a superfície gerada na etapa 2 pela superfície a (de águas abertas) geradas na etapa 1. Essa multiplicação foi realizada com o uso da ferramenta “Raster Calculator” **(Figura 11 - @fig9)**, nos fornecendo os valores de conectividade local apenas para os corpos d’água. Os valores de conectividade local gerados para as águas abertas, uma vez que foram gerados juntamente com os valores para as áreas terrestres (antes da aplicação da máscara), consideram a influência da resistência das áreas terrestres na conectividade dos corpos d’água. Na prática isso quer dizer que se um pequeno corpo d’água estiver inserido em uma área de baixa resistência, como uma formação florestal, ele terá valores de conectividade local menores do que se estiver inserido em uma área de alta resistência, como uma pastagem, por exemplo.
 
-    
+•	Etapa 4
+Multiplicamos a superfície b (máscara das classes terrestres) gerada na etapa 1 pela superfície de resistência original. Esta operação foi realizada com o auxílio da ferramenta “Raster Calculator” **(Figura 11 - @fig9)** e nos forneceu um arquivo de resistência apenas para as áreas terrestres. Neste cenário os valores de resistência das classes de águas abertas, por terem sido excluídos das análises, não afetam os valores de resistência das áreas terrestres. 
+
+•	Etapa 5 
+Aplicamos o filtro Kernel à superfície de resistência das classes terrestres (gerada na etapa 4). Essa análise foi realizada com o auxílio da ferramenta “Focal Statistics” e gerou uma camada de conectividade local onde as áreas terrestres não são influenciadas pelas águas abertas. Ou seja, nesta operação esperamos que um organismo terrestre não evite um pixel de habitat na borda de um rio largo, por exemplo, simplesmente porque esse rio oferece uma grande resistência para ser transposto.
+
+•	Etapa 6
+Usando a ferramenta “Mosaic to new Raster” **(Figura 12- @fig10)**, realizamos a mosaicagem das superfícies geradas nas etapas 4 e 5. Esse produto é considerado a nossa superfície final de conectividade local **(Figura 13 - @fig11)**.
+
+Por fim, para calcularmos os valores finais de **conectividade local** multiplicamos os valores de resistência por -1 por considerarmos que a conectividade é o inverso dos valores de resistência suavizados pelo _kernel_ @fig-7.
+
+![Mapa final da **Conectividade Local**, definida como o inverso da resistência dos diferentes uso e coberturas do solo à movimentação da biodiversidade.](figs/fig7.png){width=100% #fig-7} <!--Temos que atualizar. A camada final vai ser de resistência e não conectividade -->
