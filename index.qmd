@@ -16,9 +16,14 @@ A superfície de resistência foi calculada usando como base os dados de uso e c
 
 As informações sobre largura dos rios foram derivadas a partir das camadas de águas do abertas do MapBiomas [@mapbiomas_project_collection_2020], a camada de bacias hidrográficas no nível 8 [Lehner &Grill (2013)]<!--COLOCAR NO ZOTERO--> e a camada de largura efetiva dos corpos d'água [Yamashida et al. 2014].
 
+<!-- acho importante colocar também o link para o download, não somente a citação. No caso das bacias foi o HydroSHEDS? -->
+
 As informações sobre infraestrutura de transporte foram originadas a partir das camadas de estradas pavimentadas, estradas não-pavimentadas e ferrovias fornecidas pelo Instituto Brasileiro de Geografia e Estatística (IBGE) (\[BCIM250, 2021\]) <!-- Isso é uma citação? --> (<https://www.ibge.gov.br/geociencias/cartas-e-mapas/bases-cartograficas-continuas/15759-brasil.html?=&t=downloads>).
 
+
 As bases de infraestrutura de energia correspondem às camadas de aerogeradores, centrais geradoras de energia fotovoltaicas, linhas de transmissão de energia eólica e usinas termelétricas fornecidas pela Agência Nacional de Energia Elétrica (ANEEL) (<https://gisepeprd2.epe.gov.br/WebMapEPE/>) e a camada de linhas de transmissão de energia fornecida pelo IBGE (\[BCIM250, 2021\]).
+
+<!-- houve a necessidade de filtrar algum dados antes para fazer as análises, por exemplo na parte de energia, algum filtro foi aplicado para retirar informações que não eram necessárias? -->
 
 <!--
 precisamos citar:
