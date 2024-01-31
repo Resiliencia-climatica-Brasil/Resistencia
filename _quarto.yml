@@ -10,8 +10,9 @@ website:
       - text: Tutoriais
         menu:
          - text: Heterogeneidade da paisagem
+           href: https://resiliencia-climatica-brasil.github.io/diversity-resilience-python/apresentacao.html
          - text: Conectividade local 
-         - text: Resiliência da paisagem  
+         
       - text: Downloads
         href: https://projeto-resiliencia-tnc.hub.arcgis.com   
       - text: Relatório Técnico
