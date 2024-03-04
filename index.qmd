@@ -110,6 +110,19 @@ Por meio da ferramenta “Mosaic to New Raster” (@fig-4), realizamos uma mosai
 
 ![Ferramenta “Mosaic to New Raster”, do programa ArcGis 10.5, utilizada para fazer a mosaicagem entre a superfície contendo as quatro classes de corpos d’água com larguras distintas e a superfície do MapBiomas 2021 na escala de 90 metros sem a classe de águas abertas (a ser substituída pelas quatro novas classes de corpos d’água).](figs/fig_4.png){width=100% #fig-4}
 
+<!--
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ESTOU COLOCANDO ESSA SEÇÃO EM COMENTÁRIO PORQUE ESTÁ EXPLICADO ANTERIORMENTE. 
+TALVEZ POSSAMOS REVISAR OS DOIS TEXTOS E VER SE TEM ALGUMA INFORMAÇÃO AQUI QUE AINDA NÃO FOI EXPLICADO ACIMA?
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+## Classificação das larguras dos rios
+
+A classe de cobertura do solo equivalente a águas abertas (rios, lagos e oceanos) recebeu valores de resistência variando em função da largura desses corpos d’água já que rios maiores são barreiras mais resistentes à movimentação da biodiversidade terrestre. Para que isso fosse possível, tivemos que dividir os corpos d’água em pedaços menores, regionalizando suas larguras por trechos. Nesta divisão usamos as bacias hidrográficas no nível 8 produzidas por Venticinque e colaboradores (2021). Os trechos de corpos d’água foram utilizados para segmentar a largura efetiva dos corpos d’água, de margem a margem, ao longo de todo o canal da base disponibilizada por Yamashida e colaboradores (2014).
+
+Para cada trecho da máscara de corpos d’água por bacias, com base nos dados de largura efetiva de margem a margem, extraímos o valor máximo de largura, sendo esse valor utilizado como medida de largura de cada trecho de águas abertas. Uma vez identificada a largura máxima de cada trecho de corpo d’água, agrupamos os rios nas seguintes classes de largura: i. 1 a 250 metros, ii. 250 a 1000 metros, iii. 1000 a 4000 metros e iv. maiores de 4000 metros. A inclusão dessas quatro classes de largura de corpos d’água, elevou de 34 para 37 o número de classes de cobertura do solo. Os valores de resistência atribuído para cada uma dessas classes variou e podem ser vistos na @tbl-2.
+-->
+
 
 ## Camada de infraestrutura de transporte e de energia
 
@@ -123,27 +136,23 @@ As camadas *raster* geradas receberam valores de resistência (ver item Valores 
 
 ![Uso da ferramenta “`Cell Statistics`”, no ArcGis 10.5, para agrupar as bases de infraestrutura em uma única superfície, onde prevalecem os valores máximos de resistência atribuídos a cada classe.](figs/fig3.png){width=100% #fig-3}
 
-Usando novamente a ferramenta `Cell Statistics` conjugamos as bases matriciais de infraestrutura de transporte e energia indicadas acima com a camada de uso e cobertura do solo combinada com as classes de corpos d'água. Da mesma forma como conduzido anteriormente, no agrupamento das camadas de infraestrutura de transporte e de energia, durante a sobreposição, prevaleceu sempre o maior valor de resistência: no campo `overlay satatistic` o resultado do agrupamento deve considerar o valor máximo do pixel (@fig-4).
+Usando novamente a ferramenta `Cell Statistics` conjugamos as bases matriciais de infraestrutura de transporte e energia indicadas acima com a camada de uso e cobertura do solo combinada com as classes de corpos d'água. Da mesma forma como conduzido anteriormente, no agrupamento das camadas de infraestrutura de transporte e de energia, durante a sobreposição, prevaleceu sempre o maior valor de resistência: no campo `overlay satatistic` o resultado do agrupamento deve considerar o valor máximo do pixel (@fig-4). Feita esta operação, obtivemos uma nova superfície matricial (*raster*), combinando todas as classes listadas aqui.
 
 ![Uso da ferramenta “Cel Statistics”, no ArcGis 10.5, para agrupar a camada de infraestrutura de transporte e de energia com a camada de uso e cobertura em uma única superfície, onde prevalecem os valores máximos de resistência atribuídos a cada classe.](figs/fig4.png){width=100% #fig-4}
-
-Feita esta operação, obtivemos uma nova superfície matricial (*raster*), composta apenas pelos valores de resistência das 39 classes analisadas (@tbl-1).
 
 
 ## Valores de resistência
 
-Acrescentamos uma coluna na tabela de atributos da camada de uso e cobertura do solo com as classes de largura dos corpos d'água onde pudemos atribuir, por bioma, os valores de resistência de cada uma das classes. Os valores de resistência das classes foram atribuídos, por bioma, pela equipe do projeto e por especialistas. Esses valores variaram de 1 a 20 em números inteiros, sendo 1 o valor de menor resistência e 20 o de maior resistência (Tabela 1).
+Os valores de resistência para cada classe de uso e cobertura do solo foram atribuídos, por bioma, pela equipe do projeto e por especialistas. Esses valores variaram de 1 a 20 em números inteiros, sendo 1 o valor de menor resistência e 20 o de maior resistência (@tbl-1).
+
+Iniciamos a atribuição dos valores de resistência na camada de uso e cobertura do solo (Tabela 1). A esse conjunto de dados, acrescentamos uma coluna na tabela de atributos, com as 4 classes de largura dos corpos d'água. Por fim, atribuímos à camada de infraestrutura de transporte e de energia, os valores de resistência e combinamos o resultado à camada anterior (conforme descrito no item anterior).
+
+O mapa consolidado de cobertura e uso do solo, combinando as classes de largura dos corpos d'água e as classes de infraestrutura de transporte e de energia, totalizou 39 classes.
 
 <!-- NECESSÁRIO INCLUIR A TABELA DE RESISTÊNCIAS GERADA ATÉ AQUI -->
 
 <!-- 2024-03-04 remover
 Os valores de resistência têm como objetivo representar de forma comparativa o grau de dificuldade imposto à movimentação da biodiversidade por cada classe específica de uso e cobertura do solo. As premissas assumidas para definir os valores foram: i. quanto maior for a diferença estrutural da classe de cobertura do solo para o hábitat original do bioma, maior será a dificuldade à movimentação que a classe oferece e ii. corpos d’água mais largos oferecem maior resistência ao deslocamento de organismos terrestres na paisagem do que corpos d’água mais estreitos. -->
-
-<!---
-## Indicação de valores de resistência por classe
-
-As 39 classes do mapa consolidado de cobertura e uso do solo, receberam valores de resistências atribuídos separademente para cada bioma. Esses valores de resistência tem como objetivo representar de forma comparativa o grau de dificuldade para movimentação da biodiversidade dentro de uma classe específica de cobertura do solo. A premissa assumida para definir os valores foi que quanto maior for a diferença estrutural da classe de cobertura do solo para o hábitat original do bioma, maior será a dificuldade à movimentação que a classe oferece. Os valores de resistência das classes foram atribuídos, por bioma, pela equipe do projeto e por um grupo de especialistas. Esses valores variaram de 1 a 20 em números inteiros, sendo 1 o valor menos resistente e 20 o mais resistente @tbl-1.
---->
 
 |N|Classe de cobertura do solo|Amazônia|Caatinga|Cerrado|Mata Atlântica|Pampa|Pantanal|
 |--:|--:|--:|--:|--:|--:|--:|--:|
@@ -175,10 +184,10 @@ As 39 classes do mapa consolidado de cobertura e uso do solo, receberam valores 
 |26|Soja|17|10|10|10|10|10|
 |27|Vegetação de restinga arbórea|-|1|-|1|1|-|
 |28|Vegetação de restinga herbácea|-|1|-|2|1|-|
-|29|Corpos d’águas abertas até 250 metros|2|2|2|2|2|2|
-|30|Corpos d’águas abertas de 250 a 1000 metros|5|5|5|5|5|5|
-|31|Corpos d’águas abertas de 1000 a 4000 metros|10|10|10|10|10|10|
-|32|Corpos d’águas abertas acima de 4000 metros|12|12|12|12|12|12|
+|29|Corpos d’águas abertas até 250 m|2|2|2|2|2|2|
+|30|Corpos d’águas abertas de 250 a 1000 m|5|5|5|5|5|5|
+|31|Corpos d’águas abertas de 1000 a 4000 m|10|10|10|10|10|10|
+|32|Corpos d’águas abertas acima de 4000 m|12|12|12|12|12|12|
 |33|Aerogeradores|15|15|15|15|15|15|
 |34|Centrais geradoras de energia solar|15|17|17|17|17|17|
 |35|Estradas não pavimentadas|10|10|7|10|7|3|
@@ -186,7 +195,7 @@ As 39 classes do mapa consolidado de cobertura e uso do solo, receberam valores 
 |37|Ferrovias|10|10|10|10|10|10|
 |38|Linhas de transmissão (tradicionais e anexas ao sistema eólico)|10|7|7|7|7|7|
 |39|Termelétricas|20|20|20|20|20|20|
-: Valores de resistência para as 39 classes de uso e cobertura do solo - resultante da junção das superfícies de uso do solo do MapBiomas (N: 1 - 28), as separações do tamanho dos rios por bacias hidrográficas (N 29 - 32) e de infraestrutura de transporte e energia (N: 33 - 39). {#tbl-1}
+: Valores de resistência, por bioma, para as 39 classes de uso e cobertura do solo, resultado da combinação das superfícies de uso e cobertura do solo do MapBiomas (N: 1 - 28), as classes de tamanho dos rios (N: 29 - 32) e da camada de infraestrutura de transporte e de energia (N: 33 - 39). {#tbl-1}
 
 
 <!--
@@ -194,27 +203,14 @@ COMO COLOCAMOS ESSES VALORES DENTRO DAS NOSSAS CAMADAS?
 NO TEXTO SAIMOS DIRETO DAS CAMADAS E DA TABELO PRO MAPA FINAL DE RESISTÊNCIA SEM DIZER COMO PODEMOS DEFINIR OS VALORES DOS PIXELS
 -->
 
-
-![Superfície de resistência gerada a partir do mapa com 39 classes de cobertura do solo - resultante da junção das superfícies do MapBiomas e de infraestrutura. Nesta superfície a resistência das águas abertas (rios, lagos e oceanos) não foi diferenciada em função da largura dos corpos d’água.](figs/fig6.png){width=100% #fig-5}
-
 <!--
-ATUALIZAR MAPAS DE RESISTÊNCIA
+ATUALIZAR MAPA DE RESISTÊNCIA
  -->
 
-<!--
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-ESTOU COLOCANDO ESSA SEÇÃO EM COMENTÁRIO PORQUE ESTÁ EXPLICADO ANTERIORMENTE. 
-TALVEZ POSSAMOS REVISAR OS DOIS TEXTOS E VER SE TEM ALGUMA INFORMAÇÃO AQUI QUE AINDA NÃO FOI EXPLICADO ACIMA?
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+![Superfície de resistência gerada a partir do mapa com 39 classes de uso e cobertura do solo, resultado da combinação das superfícies de uso e cobertura do solo do MapBiomas e de infraestrutura. Nesta superfície a resistência das águas abertas (rios, lagos e oceanos) não foi diferenciada em função da largura dos corpos d’água.](figs/fig6.png){width=100% #fig-5}
 
-## Classificação das larguras dos rios
 
-A classe de cobertura do solo equivalente a águas abertas (rios, lagos e oceanos) recebeu valores de resistência variando em função da largura desses corpos d’água já que rios maiores são barreiras mais resistentes à movimentação da biodiversidade terrestre. Para que isso fosse possível, tivemos que dividir os corpos d’água em pedaços menores, regionalizando suas larguras por trechos. Nesta divisão usamos as bacias hidrográficas no nível 8 produzidas por Venticinque e colaboradores (2021). Os trechos de corpos d’água foram utilizados para segmentar a largura efetiva dos corpos d’água, de margem a margem, ao longo de todo o canal da base disponibilizada por Yamashida e colaboradores (2014).
-
-Para cada trecho da máscara de corpos d’água por bacias, com base nos dados de largura efetiva de margem a margem, extraímos o valor máximo de largura, sendo esse valor utilizado como medida de largura de cada trecho de águas abertas. Uma vez identificada a largura máxima de cada trecho de corpo d’água, agrupamos os rios nas seguintes classes de largura: i. 1 a 250 metros, ii. 250 a 1000 metros, iii. 1000 a 4000 metros e iv. maiores de 4000 metros. A inclusão dessas quatro classes de largura de corpos d’água, elevou de 34 para 37 o número de classes de cobertura do solo. Os valores de resistência atribuído para cada uma dessas classes variou e podem ser vistos na @tbl-2.
--->
-
-## Gerando a camada de Conectividade Local
+## Aplicação do filtro *kernel*
 
 <!--
 FALTA COMPLEMENTAR TODA ESSAS SESSÃO COM AS IMAGENS DE COMO FAZER O PASSO A PASSO NO ARCGIS
@@ -222,32 +218,40 @@ FALTA COMPLEMENTAR TODA ESSAS SESSÃO COM AS IMAGENS DE COMO FAZER O PASSO A PAS
 **2024 -  ainda nao temos as fotos com o passo a passo dessa seção (fig 6 até a 11)**
 -->
 
-A superfície final de conectividade local foi gerada a partir das seguintes etapas:
-•	Etapa 1
-Usando a ferramenta “Reclassify” do Spatial Analyst (Figura 9 - @fig6) construímos máscaras a partir da superfície de uso e cobertura do solo, gerando duas superfícies:
-a.	Superfície de águas abertas, onde as classes de largura dos rios receberam o valor de 1 e as demais classes foram consideradas como NoData (@fig7).
-b.	Superfície terrestre, onde as classes de água foram reclassificadas para NoData e das demais receberam o valor igual a 1 (@fig7).
+A superfície final de conectividade local foi gerada a partir dos seguintes passos:
+
+Passo 1 - Usando a ferramenta “Reclassify” do Spatial Analyst (Figura 9 - @fig6) construímos máscaras a partir da superfície de uso e cobertura do solo, gerando duas superfícies:
++ a.	Superfície de águas abertas, onde as classes de largura dos rios receberam o valor de 1 e as demais classes foram consideradas como "NoData" (@fig7).
++ b.	Superfície terrestre, onde as classes de água foram reclassificadas para "NoData" e das demais receberam o valor igual a 1 (@fig7).
 
 <!--
 ADICIONAR FIGURA 6 MOSTRANDO COMO FAZER O RECLASSIFY
 ADICIONAR COMO FICAM AS IMAGENS DAS SUPERFICIES A E B??
 -->
 
-•	Etapa 2
-Usando a ferramenta Focal Statistics, aplicamos a função Kernel à superfície de resistência gerada para todo o Brasil **(Figura 10 - @fig8)**. Esta análise considerou uma função de decaimento linear em uma janela móvel definida por um raio de 23 pixels (~2070 m), que representa o contexto espacial em que cada pixel está inserido, reconhecendo que pixels mais próximos possuem maior influência um sobre o outro do que pixels mais distantes, influenciando o valor de conectividade local de cada pixel. Desta maneira, a função Kernel nos auxilia na tarefa de encontrar os melhores caminhos de deslocamento na paisagem, ou seja, aqueles caminhos que oferecem menor resistência.
+Passo 2 - Usando a ferramenta Focal Statistics, aplicamos a função *kernel* à superfície de resistência gerada para todo o Brasil (Figura 10 - @fig8). Esta análise considerou uma função de decaimento linear em uma janela móvel definida por um raio de 23 pixels (~2.070 m).
 
-•	Etapa3
-Multiplicamos a superfície gerada na etapa 2 pela superfície a (de águas abertas) geradas na etapa 1. Essa multiplicação foi realizada com o uso da ferramenta “Raster Calculator” **(Figura 11 - @fig9)**, nos fornecendo os valores de conectividade local apenas para os corpos d’água. Os valores de conectividade local gerados para as águas abertas, uma vez que foram gerados juntamente com os valores para as áreas terrestres (na **Etapa 2**), consideram a influência da resistência das áreas terrestres na conectividade dos corpos d’água. Na prática isso quer dizer que se um pequeno corpo d’água estiver inserido em uma área de baixa resistência, como uma formação florestal, ele terá valores de conectividade local maiores do que se estiver inserido em uma área de alta resistência, como uma pastagem, por exemplo.
+<!-- 2024-03-04 remover
+que representa o contexto espacial em que cada pixel está inserido, reconhecendo que pixels mais próximos possuem maior influência um sobre o outro do que pixels mais distantes, influenciando o valor de conectividade local de cada pixel. Desta maneira, a função Kernel nos auxilia na tarefa de encontrar os melhores caminhos de deslocamento na paisagem, ou seja, aqueles caminhos que oferecem menor resistência. -->
 
-•	Etapa 4
-Multiplicamos a superfície b (máscara das classes terrestres) gerada na etapa 1 pela superfície de resistência original. Esta operação foi realizada com o auxílio da ferramenta “Raster Calculator” **(Figura 11 - @fig9)** e nos forneceu um arquivo de resistência apenas para as áreas terrestres. Neste cenário os valores de resistência das classes de águas abertas, por terem sido excluídos das análises, não afetam os valores de resistência das áreas terrestres. 
+Passo 3 - Multiplicamos a superfície gerada no passo 2 pela superfície *a* (águas abertas) geradas no Passo 1. Essa multiplicação foi realizada com o uso da ferramenta “Raster Calculator” (Figura 11 - @fig9), nos fornecendo os valores de conectividade local apenas para os corpos d’água.
 
-•	Etapa 5 
-Aplicamos o filtro Kernel à superfície de resistência das classes terrestres (gerada na etapa 4). Essa análise foi realizada com o auxílio da ferramenta “Focal Statistics” e gerou uma camada de conectividade local onde as áreas terrestres não são influenciadas pelas águas abertas. Ou seja, nesta operação esperamos que um organismo terrestre não evite um pixel de habitat na borda de um rio largo, por exemplo, simplesmente porque esse rio oferece uma grande resistência para ser transposto.
+<!-- 2024-03-04 remover
+Os valores de conectividade local gerados para as águas abertas, uma vez que foram gerados juntamente com os valores para as áreas terrestres (no Passo 2), consideram a influência da resistência das áreas terrestres na conectividade dos corpos d’água. Na prática isso quer dizer que se um pequeno corpo d’água estiver inserido em uma área de baixa resistência, como uma formação florestal, ele terá valores de conectividade local maiores do que se estiver inserido em uma área de alta resistência, como uma pastagem, por exemplo. -->
 
-•	Etapa 6
-Usando a ferramenta “Mosaic to new Raster” **(Figura 12- @fig10)**, realizamos a mosaicagem das superfícies geradas nas etapas 4 e 5. Esse produto é considerado a nossa superfície final de conectividade local **(Figura 13 - @fig11)**.
+Passo 4 - Multiplicamos a superfície *b* (máscara das classes terrestres) gerada no Passo 1 pela superfície de resistência original. Esta operação foi realizada com o auxílio da ferramenta “Raster Calculator” (Figura 11 - @fig9) e nos forneceu um arquivo de resistência apenas para as áreas terrestres.
 
-Por fim, para calcularmos os valores finais de **conectividade local** multiplicamos os valores de resistência por -1 por considerarmos que a conectividade é o inverso dos valores de resistência suavizados pelo _kernel_ @fig-7.
+<!-- 2024-03-04 remover
+Neste cenário os valores de resistência das classes de águas abertas, por terem sido excluídos das análises, não afetam os valores de resistência das áreas terrestres. -->
 
-![Mapa final da **Conectividade Local**, definida como o inverso da resistência dos diferentes uso e coberturas do solo à movimentação da biodiversidade.](figs/fig7.png){width=100% #fig-7} <!--Temos que atualizar. A camada final vai ser de resistência e não conectividade -->
+Passo 5 - Aplicamos o filtro *kernel* à superfície de resistência das classes terrestres (gerada no Passo 4). Essa análise foi realizada com o auxílio da ferramenta “Focal Statistics” e gerou uma camada de conectividade local onde as áreas terrestres não são influenciadas pelas águas abertas.
+
+<!-- 2024-03-04 remover
+Ou seja, nesta operação esperamos que um organismo terrestre não evite um pixel de habitat na borda de um rio largo, por exemplo, simplesmente porque esse rio oferece uma grande resistência para ser transposto. -->
+
+Passo 6 - Usando a ferramenta “Mosaic to new Raster” (Figura 12- @fig10), realizamos a mosaicagem das superfícies geradas nos Passos 4 e 5.
+<!-- Esse produto é considerado a nossa superfície final de conectividade local (Figura 13 - @fig11). -->
+
+Por fim, para calcularmos os valores finais de conectividade local multiplicamos os valores de resistência por -1 por considerarmos que a conectividade é o inverso dos valores de resistência suavizados pelo filtro *kernel* @fig-7.
+
+![Conectividade local, definida como o inverso da resistência à movimentação de organismos das diferentes classes de uso e coberturas do solo.](figs/fig7.png){width=100% #fig-7} <!--Temos que atualizar. A camada final vai ser de resistência e não conectividade -->
