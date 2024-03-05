@@ -262,5 +262,5 @@ Por fim, para calcularmos os valores finais de conectividade local multiplicamos
 
 ![Conectividade local, definida como o inverso da resistência à movimentação de organismos das diferentes classes de uso e coberturas do solo.](figs/fig7.png){width=100% #fig-7} <!--Temos que atualizar. A camada final vai ser de resistência e não conectividade -->
 
-/////////////////////////////////////////
--->
+
+

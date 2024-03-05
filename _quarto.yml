@@ -3,6 +3,13 @@ project:
   output-dir: docs
   render:
     - index.qmd
+    - bases_dados.qmd
+    - reamostragem_mapbiomas.qmd
+    - largura_corpos_dagua.qmd
+    - infra_transporte_energia.qmd
+    - valores_resistencia.qmd
+    - resultado_conectividade.qmd
+  
   
 website: 
   navbar:
@@ -15,7 +22,7 @@ website:
          - text: Resiliência
            href: https://resiliencia-climatica-brasil.github.io/diversity-resilience-python/resilience.html
          
-      - text: Downloads
+      - text: Mapas
         href: https://projeto-resiliencia-tnc.hub.arcgis.com   
       - text: Relatório Técnico
         href: https://resiliencia-climatica-brasil.github.io/Relatorio_final/     
@@ -23,6 +30,17 @@ website:
     title: "Mapeamento de áreas resilientes a mudanças climáticas nos biomas brasileiros" 
     logo: figs/1667403883848_theme_logo.png     
     style: "docked"
+    contents:
+      - section: "Sumário"
+        contents:
+          - index.qmd
+          - bases_dados.qmd
+          - reamostragem_mapbiomas.qmd
+          - largura_corpos_dagua.qmd
+          - infra_transporte_energia.qmd
+          - valores_resistencia.qmd
+          - resultado_conectividade.qmd
+    
     
                
   page-navigation: true
