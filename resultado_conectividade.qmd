@@ -1,0 +1,45 @@
+## Resultado de conectividade local
+
+<!--
+FALTA COMPLEMENTAR TODA ESSAS SESSÃO COM AS IMAGENS DE COMO FAZER O PASSO A PASSO NO ARCGIS
+
+**2024 -  ainda nao temos as fotos com o passo a passo dessa seção (fig 6 até a 11)**
+-->
+
+A superfície final de conectividade local foi gerada a partir dos seguintes passos:
+
+Passo 1 - Usando a ferramenta “Reclassify” do Spatial Analyst (Figura 9 - @fig6) construímos máscaras a partir da superfície de uso e cobertura do solo, gerando duas superfícies:
++ a.	Superfície de águas abertas, onde as classes de largura dos rios receberam o valor de 1 e as demais classes foram consideradas como "NoData" (@fig7).
++ b.	Superfície terrestre, onde as classes de água foram reclassificadas para "NoData" e das demais receberam o valor igual a 1 (@fig7).
+
+<!--
+ADICIONAR FIGURA 6 MOSTRANDO COMO FAZER O RECLASSIFY
+ADICIONAR COMO FICAM AS IMAGENS DAS SUPERFICIES A E B??
+-->
+
+Passo 2 - Usando a ferramenta Focal Statistics, aplicamos a função *kernel* à superfície de resistência gerada para todo o Brasil (Figura 10 - @fig8). Esta análise considerou uma função de decaimento linear em uma janela móvel definida por um raio de 23 pixels (~2.070 m).
+
+<!-- 2024-03-04 remover
+que representa o contexto espacial em que cada pixel está inserido, reconhecendo que pixels mais próximos possuem maior influência um sobre o outro do que pixels mais distantes, influenciando o valor de conectividade local de cada pixel. Desta maneira, a função Kernel nos auxilia na tarefa de encontrar os melhores caminhos de deslocamento na paisagem, ou seja, aqueles caminhos que oferecem menor resistência. -->
+
+Passo 3 - Multiplicamos a superfície gerada no passo 2 pela superfície *a* (águas abertas) geradas no Passo 1. Essa multiplicação foi realizada com o uso da ferramenta “Raster Calculator” (Figura 11 - @fig9), nos fornecendo os valores de conectividade local apenas para os corpos d’água.
+
+<!-- 2024-03-04 remover
+Os valores de conectividade local gerados para as águas abertas, uma vez que foram gerados juntamente com os valores para as áreas terrestres (no Passo 2), consideram a influência da resistência das áreas terrestres na conectividade dos corpos d’água. Na prática isso quer dizer que se um pequeno corpo d’água estiver inserido em uma área de baixa resistência, como uma formação florestal, ele terá valores de conectividade local maiores do que se estiver inserido em uma área de alta resistência, como uma pastagem, por exemplo. -->
+
+Passo 4 - Multiplicamos a superfície *b* (máscara das classes terrestres) gerada no Passo 1 pela superfície de resistência original. Esta operação foi realizada com o auxílio da ferramenta “Raster Calculator” (Figura 11 - @fig9) e nos forneceu um arquivo de resistência apenas para as áreas terrestres.
+
+<!-- 2024-03-04 remover
+Neste cenário os valores de resistência das classes de águas abertas, por terem sido excluídos das análises, não afetam os valores de resistência das áreas terrestres. -->
+
+Passo 5 - Aplicamos o filtro *kernel* à superfície de resistência das classes terrestres (gerada no Passo 4). Essa análise foi realizada com o auxílio da ferramenta “Focal Statistics” e gerou uma camada de conectividade local onde as áreas terrestres não são influenciadas pelas águas abertas.
+
+<!-- 2024-03-04 remover
+Ou seja, nesta operação esperamos que um organismo terrestre não evite um pixel de habitat na borda de um rio largo, por exemplo, simplesmente porque esse rio oferece uma grande resistência para ser transposto. -->
+
+Passo 6 - Usando a ferramenta “Mosaic to new Raster” (Figura 12- @fig10), realizamos a mosaicagem das superfícies geradas nos Passos 4 e 5.
+<!-- Esse produto é considerado a nossa superfície final de conectividade local (Figura 13 - @fig11). -->
+
+Por fim, para calcularmos os valores finais de conectividade local multiplicamos os valores de resistência por -1 por considerarmos que a conectividade é o inverso dos valores de resistência suavizados pelo filtro *kernel* @fig-7.
+
+![Conectividade local, definida como o inverso da resistência à movimentação de organismos das diferentes classes de uso e coberturas do solo.](figs/fig7.png){width=100% #fig-7} <!--Temos que atualizar. A camada final vai ser de resistência e não conectividade -->
