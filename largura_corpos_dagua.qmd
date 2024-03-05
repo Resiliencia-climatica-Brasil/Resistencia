@@ -1,2 +1,30 @@
 ## Largura dos corpos d'água
 
+A análise para categorizar os corpos d'água em classes de largura corresponde à Etapa 2 da análise de conectividade local.
+Nessa etapa, inicialmente extraímos a máscara de corpos de águas abertas (rios, lagos e oceanos) da camada de uso e cobertura do solo (na escala de 90 m; @map2_aguas) e dividimos essa classe única em pedaços menores, regionalizando suas larguras por trechos. 
+
+![Camada de águas abertas do MapBiomas, usada como base para classificação dos tamanhos dos rios.](figs/map2_aguas.png){width=100% #map2-aguas}
+
+A divisão em trechos ocorreu com o uso da ferramenta “Raster Calculator” (@fig-2), por meio da intersecção entre as camadas matriciais de águas abertas e de bacias hidrográficas no nível 8, produzidas por Lehner &Grill (2013) (@map3-bacias).
+
+![Ferramenta “Raster Calculator”, do programa ArcGis 10.5, utilizada para a intersecção entre as camadas de águas abertas e bacias hidrográficas, gerando trechos de corpos d’água utilizados para consulta da largura dos mesmos.](figs/fig_2.png){width=100% #fig-2}
+
+![Bacias hidrográficas de nivel 8 (Lehner &Grill 2013).](figs/map3_bacias.png){width=100% #map3-bacias}
+
+Para cada um dos trechos gerados, foi calculado o valor máximo de largura de cada trecho de águas abertas, por meio meio da estatística zonal (@fig-3). A largura efetiva máxima dos corpos d’água, de margem a margem, foi obtida através da base GWD – LR de Yamashida et al. 2014 (@map4-aguasporbacias). 
+
+![Uso da ferramenta “Zonal Statistics”, do programa ArcGis 10.5, para calcular a largura máxima de cada trecho de corpos d’água por unidade de consulta.](figs/fig_3.png){width=100% #fig-3}
+
+![Divisão da camada de águas abertas do MapBiomas recortada pelas bacias hidrográficas de nivel 8.](figs/map4_aguasPORbacias.png){width=100% #map4-aguasporbacias}
+
+Uma vez identificada a largura máxima de cada trecho de corpo d’água, agrupamos os rios em quatro classes de largura:
+
++ i. 1 a 250 m;
++ ii. 250 a 1.000 m; 
++ iii. 1.000 a 4.000 m;
++ iv. maior de 4.000 m. 
+
+Por meio da ferramenta “Mosaic to New Raster” (@fig-4), realizamos uma mosaicagem entre a camada contendo essas quatro classes e a camada do MapBiomas (já subtraída da classe de águas abertas), elevando de 29 para 32 o número de classes de uso e cobertura do solo.
+
+![Ferramenta “Mosaic to New Raster”, do programa ArcGis 10.5, utilizada para fazer a mosaicagem entre a superfície contendo as quatro classes de corpos d’água com larguras distintas e a superfície do MapBiomas 2021 na escala de 90 m sem a classe de águas abertas (a ser substituída pelas quatro novas classes de corpos d’água).](figs/fig_4.png){width=100% #fig-4}
+
