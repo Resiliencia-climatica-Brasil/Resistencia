@@ -5,17 +5,25 @@ A análise de conectividade local é uma das camadas utilizadas para gerar o map
 <!-- 2024-03-04 remover
 As áreas resilientes às mudanças climáticas são classificadas por dois eixos, (1) a **heterogeneidade da paisagem** e (2) **conectividade local**. A conectividade local é calculada sobre uma superfície de resistência ao movimento dos organismos na paisagem. Essa superfície representa, por meio da atribuição de pesos, o grau de dificuldade que os diferentes tipos de usos e coberturas do solo oferecem à movimentação dos organismos, sendo as coberturas naturais aquelas com menor resistência e as superfícies mais antropizadas, com maior resistência (ex. áreas urbanas). -->
 
-A superfície de resistência foi calculada usando como base os dados de uso e cobertura do solo fornecida pelo MapBiomas. A essa base foram incorporadas informações sobre a largura dos rios e também dados sobre infraestrutura de transporte e de energia. As classes de uso e cobertura do solo do MapBiomas, já com a divisão dos corpos d’água em classes de largura, foram acrescidas das classes de infraestrutura de transporte e energia, com pesos de resitência específicos para cada classe, para formarem a superfície de resistência. Essas análises foram realizadas no ArcGis 10.5. Todas as ferramentas do ArcGis 10.5 descritas abaixo podem ser acessadas no ícone de busca.
+A superfície de resistência foi calculada usando como base os dados de uso e cobertura do solo fornecida pelo MapBiomas. A essa base foram incorporadas informações sobre a largura dos rios e também dados sobre infraestrutura de transporte e de energia. Ao longo da análise para gerar a superfície de resistência, à tabela com as classes de uso e cobertura do solo do MapBiomas, foram crescentadas as classes de largura dos corpos d’água, bem como as classes de infraestrutura de transporte e de energia, com pesos de resitência específicos para cada classe. Essas análises foram realizadas no ArcGis 10.5. Todas as ferramentas do ArcGis 10.5 descritas aqui podem ser acessadas no ícone de busca.
 
 O fluxograma da análise de conectividade local é apresentado na figura 1 e pode ser dividido em cinco etapas principais:
 
 + Etapa 1: Reamostragem do MapBiomas
 + Etapa 2: Largura dos corpos d'água
-+ Etapa 3: Infraestrutura de transporte e energia
-+ Etapa 4: Valores de resistência
-+ Etapa 5: Aplicação do filtro *kernel*
++ Etapa 3: Infraestrutura de transporte e de energia
++ Etapa 4: Valores de resistência e combinação das bases de dados
++ Etapa 5: Resultado de conectividade local
 
 <!-- 2024-03-04 [INSERIR FIGURA FLUXOGRAMA AQUI] -->
+
+
+<!-- 
+//////////////////////////////////////////////////////
+2024-03-05
+TUDO O QUE ESTÁ ABAIXO FOI SEPARADO EM qmd ESPECÍFICOS
+MANTIVE APENAS PARA CONFERÊNCIA ANTES DE FINALIZARMOS
+//////////////////////////////////////////////////////
 
 
 ## Bases de dados e arquivos utilizados na análise
@@ -61,12 +69,11 @@ As bases de infraestrutura de energia correspondem às camadas de aerogeradores,
 + Filtro *kernel*: [ADICIONAR ARQUIVO TXT COM O FILTRO] 
 
 
-## Reamostragem  do MapBiomas
+## Reamostragem do MapBiomas
 
-Foi necessário reamostrar os dados do MapBiomas de 30 m (resolução original) para 90 m. A reamostragem foi realizada com o uso da ferramenta "Resample" pelo *método de vizinho mais próximo* (*nearest*). 
+A reamostragem da base de dados do MapBiomas corresponde à Etapa 1 da análise de conectividade local. Foi necessário reamostrar os dados do MapBiomas de 30 m (resolução original) para 90 m. A reamostragem foi realizada com o uso da ferramenta "Resample" pelo *método de vizinho mais próximo* (*nearest*). 
 
-Para essa etapa, o arquivo de entrada "input raster" correspondeu à camada original do MapBiomas e para o arquivo de saída "output raster" atribuímos um novo nome. 
-A resolução de aproximadamente 90 metros (ou seja 0.00083333333) para o pixel do novo arquivo gerado foi indicada no campo `Output Cell Size (optional)`. A escolha do método `Nearest` foi definida no campo `Resampling technique (optional)` (@fig-1). No final do processo de reamostragem seguimos a mesma classificação proposta pelo MapBiomas (com 27 classes) para colorir os usos do solo (@map1-mapbiomas).
+Para essa etapa, o arquivo de entrada "input raster" correspondeu à camada original do MapBiomas e para o arquivo de saída "output raster" atribuímos um novo nome. A resolução de aproximadamente 90 m (ou seja 0.00083333333) para o pixel do novo arquivo gerado foi indicada no campo `Output Cell Size (optional)`. A escolha do método `Nearest` foi definida no campo `Resampling technique (optional)` (@fig-1). No final do processo de reamostragem seguimos a mesma classificação proposta pelo MapBiomas para colorir os usos do solo (@map1-mapbiomas). Esse processo gerou a listagem de 29 classes de uso e cobertura do solo. 
 
 <!-- 2024-03-04 remover
 As análises conduzidas para o mapeamento das áreas resilientes às mudanças climáticas foram realizadas na resolução espacial de 90 metros. Desta forma, reamostramos os dados do MapBiomas, que originalmente estavam com resolução de 30 metros, para uma resolução de 90 metros. A reamostragem foi realizada com o uso da ferramenta "Resample" pelo **método de vizinho mais próximo** (*nearest*). O arquivo de entrada "input raster" correspondeu a camada original do MapBiomas, e para o arquivo de saída "output raster" atribuímos um novo nome. A resolução de aproximadamente 90 metros (ou seja 0.00083333333) para o pixel do novo arquivo gerado foi estabelecida no campo `Output Cell Size (optional)`. A escolha do método `Nearest` foi definida no campo `Resampling technique (optional)` (@fig-1). No final do processo de reamostragem seguimos a mesma classificação proposta pelo MapBiomas (com 27 classes) para colorir os usos do solo (@map1-mapbiomas).
@@ -74,10 +81,8 @@ As análises conduzidas para o mapeamento das áreas resilientes às mudanças c
 
 ![Método da reamostragem da superfície de uso e cobertura do solo (MapBiomas coleção 8 de 2021), de 30 m para 90 m, por meio da técnica NEAREST, no ArcGis 10.5.](figs/fig_1.png){width=100% #fig-1}
 
-
 ![Classificação do uso e cobertura do solo convertida de uma resolução de 30 m para 90 m, tomando como base MapBiomas, coleção 8 de 2023.](figs/map1_mapbiomas.png){width=100% #map1-mapbiomas}
 
-<!-- 2024-03-04 Necessário indicar aqui quantas classes de uso e cobertura foram listadas --> 
 
 ## Largura dos corpos d'água
 
@@ -98,17 +103,16 @@ Para cada um dos trechos gerados, foi calculado o valor máximo de largura de ca
 
 ![Divisão da camada de águas abertas do MapBiomas recortada pelas bacias hidrográficas de nivel 8.](figs/map4_aguasPORbacias.png){width=100% #map4-aguasporbacias}
 
-
 Com base nos valores de largura máxima agrupamos os trechos dos rios em quatro classes de largura:
 
 + i. 1 a 250 m;
 + ii. 250 a 1.000 m; 
-+ iii. 1.000 a 4.000 m e 
-iv. maior de 4.000 m. 
++ iii. 1.000 a 4.000 m;
++ iv. maior de 4.000 m. 
 
 Por meio da ferramenta “Mosaic to New Raster” (@fig-4), realizamos uma mosaicagem entre a camada contendo essas quatro classes e a camada do MapBiomas (já subtraída da classe de águas abertas), elevando de 29 para 32 o número de classes de uso e cobertura do solo.
 
-![Ferramenta “Mosaic to New Raster”, do programa ArcGis 10.5, utilizada para fazer a mosaicagem entre a superfície contendo as quatro classes de corpos d’água com larguras distintas e a superfície do MapBiomas 2021 na escala de 90 metros sem a classe de águas abertas (a ser substituída pelas quatro novas classes de corpos d’água).](figs/fig_4.png){width=100% #fig-4}
+![Ferramenta “Mosaic to New Raster”, do programa ArcGis 10.5, utilizada para fazer a mosaicagem entre a superfície contendo as quatro classes de corpos d’água com larguras distintas e a superfície do MapBiomas 2021 na escala de 90 m sem a classe de águas abertas (a ser substituída pelas quatro novas classes de corpos d’água).](figs/fig_4.png){width=100% #fig-4}
 
 <!--
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -124,7 +128,7 @@ Para cada trecho da máscara de corpos d’água por bacias, com base nos dados 
 -->
 
 
-## Camada de infraestrutura de transporte e de energia
+## Infraestrutura de transporte e de energia
 
 <!-- 2024-03-04 Precisa descrever aqui quais dados estão sendo utlizados. Bases IBGE e ANEEL e listar direitinho quais dados dessas bases - não foram todos de energia e isso precisa ficar bem claro. --> 
 
@@ -153,6 +157,8 @@ O mapa consolidado de cobertura e uso do solo, combinando as classes de largura 
 
 <!-- 2024-03-04 remover
 Os valores de resistência têm como objetivo representar de forma comparativa o grau de dificuldade imposto à movimentação da biodiversidade por cada classe específica de uso e cobertura do solo. As premissas assumidas para definir os valores foram: i. quanto maior for a diferença estrutural da classe de cobertura do solo para o hábitat original do bioma, maior será a dificuldade à movimentação que a classe oferece e ii. corpos d’água mais largos oferecem maior resistência ao deslocamento de organismos terrestres na paisagem do que corpos d’água mais estreitos. -->
+
+
 
 |N|Classe de cobertura do solo|Amazônia|Caatinga|Cerrado|Mata Atlântica|Pampa|Pantanal|
 |--:|--:|--:|--:|--:|--:|--:|--:|
@@ -210,7 +216,7 @@ ATUALIZAR MAPA DE RESISTÊNCIA
 ![Superfície de resistência gerada a partir do mapa com 39 classes de uso e cobertura do solo, resultado da combinação das superfícies de uso e cobertura do solo do MapBiomas e de infraestrutura. Nesta superfície a resistência das águas abertas (rios, lagos e oceanos) não foi diferenciada em função da largura dos corpos d’água.](figs/fig6.png){width=100% #fig-5}
 
 
-## Aplicação do filtro *kernel*
+## Resultado de conectividade local
 
 <!--
 FALTA COMPLEMENTAR TODA ESSAS SESSÃO COM AS IMAGENS DE COMO FAZER O PASSO A PASSO NO ARCGIS
@@ -255,3 +261,6 @@ Passo 6 - Usando a ferramenta “Mosaic to new Raster” (Figura 12- @fig10), re
 Por fim, para calcularmos os valores finais de conectividade local multiplicamos os valores de resistência por -1 por considerarmos que a conectividade é o inverso dos valores de resistência suavizados pelo filtro *kernel* @fig-7.
 
 ![Conectividade local, definida como o inverso da resistência à movimentação de organismos das diferentes classes de uso e coberturas do solo.](figs/fig7.png){width=100% #fig-7} <!--Temos que atualizar. A camada final vai ser de resistência e não conectividade -->
+
+/////////////////////////////////////////
+-->
