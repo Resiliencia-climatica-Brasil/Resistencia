@@ -15,7 +15,7 @@ O fluxograma da análise de conectividade local é apresentado na figura 1 e pod
 + Etapa 2: Largura dos corpos d'água
 + Etapa 3: Infraestrutura de transporte e de energia
 + Etapa 4: Valores de resistência e combinação das bases de dados
-+ Etapa 5: Resultado de conectividade local
++ Etapa 5: Aplicação de filtros e camada final
 
 <!-- 2024-03-04 [INSERIR FIGURA GERAL DO FLUXOGRAMA AQUI] -->
 
