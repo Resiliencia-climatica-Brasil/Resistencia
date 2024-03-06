@@ -179,7 +179,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./resultado_conectividade.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Aplicação de filtros</span></a>
+ <span class="menu-text">Aplicação de filtros e camada final</span></a>
   </div>
 </li>
       </ul>
@@ -200,7 +200,7 @@ ul.task-list li input[type="checkbox"] {
 <p>A análise para categorizar os corpos d’água em classes de largura corresponde à <strong>Etapa 2</strong> da análise de conectividade local.</p>
 <section id="passo-1" class="level3">
 <h3 class="anchored" data-anchor-id="passo-1">Passo 1</h3>
-<p>Nessa etapa, inicialmente extraímos a máscara de corpos de águas abertas (rios, lagos e oceanos) da camada de uso e cobertura do solo (na escala de 90 m; <span class="citation" data-cites="map2_aguas">(<a href="#ref-map2_aguas" role="doc-biblioref"><strong>map2_aguas?</strong></a>)</span>) e dividimos essa classe única em pedaços menores, regionalizando suas larguras por trechos.</p>
+<p>No Passo 1 dessa etapa, inicialmente extraímos a máscara de corpos de águas abertas (rios, lagos e oceanos) da camada de uso e cobertura do solo (na escala de 90 m; <span class="citation" data-cites="map2_aguas">(<a href="#ref-map2_aguas" role="doc-biblioref"><strong>map2_aguas?</strong></a>)</span>) e dividimos essa classe única em pedaços menores, regionalizando suas larguras por trechos.</p>
 <div id="map2-aguas" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="figs/map2_aguas.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -223,7 +223,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="passo-2" class="level3">
 <h3 class="anchored" data-anchor-id="passo-2">Passo 2</h3>
-<p>Para cada um dos trechos gerados, foi calculado o valor máximo de largura de cada trecho de águas abertas, por meio meio da estatística zonal (<a href="#fig-3">Figura&nbsp;2</a>). A largura efetiva máxima dos corpos d’água, de margem a margem, foi obtida através da base GWD – LR de Yamashida et al.&nbsp;2014 (<span class="citation" data-cites="map4-aguasporbacias">(<a href="#ref-map4-aguasporbacias" role="doc-biblioref"><strong>map4-aguasporbacias?</strong></a>)</span>).</p>
+<p>No Passo 2, para cada um dos trechos gerados no passo anterior, foi calculado o valor máximo de largura de cada trecho de águas abertas, por meio meio da estatística zonal (<a href="#fig-3">Figura&nbsp;2</a>). A largura efetiva máxima dos corpos d’água, de margem a margem, foi obtida através da base GWD – LR de Yamashida et al.&nbsp;2014 (<span class="citation" data-cites="map4-aguasporbacias">(<a href="#ref-map4-aguasporbacias" role="doc-biblioref"><strong>map4-aguasporbacias?</strong></a>)</span>).</p>
 <div id="fig-3" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="figs/fig_3.png" class="img-fluid figure-img" style="width:100.0%"></p>
@@ -257,7 +257,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="passo-4" class="level3">
 <h3 class="anchored" data-anchor-id="passo-4">Passo 4</h3>
-<p>Por meio da ferramenta “Mosaic to New Raster” (<a href="#fig-4">Figura&nbsp;3</a>), realizamos uma mosaicagem entre a camada contendo essas quatro classes e a camada do MapBiomas (já subtraída da classe de águas abertas), elevando de 29 para 32 o número de classes de uso e cobertura do solo.</p>
+<p>Por fim, utilizando a ferramenta “Mosaic to New Raster” (<a href="#fig-4">Figura&nbsp;3</a>), realizamos uma mosaicagem entre a camada contendo essas quatro classes e a camada do MapBiomas (já subtraída da classe de águas abertas), elevando de 29 para 32 o número de classes de uso e cobertura do solo.</p>
 <div id="fig-4" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="figs/fig_4.png" class="img-fluid figure-img" style="width:100.0%"></p>
