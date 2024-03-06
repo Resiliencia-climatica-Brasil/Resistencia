@@ -1,6 +1,10 @@
 ## Aplicação de filtros e camada final
 
-A aplicação de máscaras e filtros para gerar o resultado de conectividade local corresponde à **Etapa 5** da análise.
+A aplicação de máscaras e filtros para gerar o resultado de conectividade local corresponde à **Etapa 5** da análise (Figura 1).
+
+<!-- 2024-03-06 INSERIR FIGURA: fluxograma_etapa5
+LEGENDA: Fluxograma com a indicação da Etapa 5 da análise de conectividade local: aplicação de filtros e camada final.
+-->
 
 <!--
 FALTA COMPLEMENTAR TODA ESSAS SESSÃO COM AS IMAGENS DE COMO FAZER O PASSO A PASSO NO ARCGIS
