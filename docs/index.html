@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt-br" xml:lang="pt-br"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.340">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -57,7 +57,8 @@ ul.task-list li input[type="checkbox"] {
     "search-more-matches-text": "mais correspondências neste documento",
     "search-clear-button-title": "Limpar",
     "search-detached-cancel-button-title": "Cancelar",
-    "search-submit-button-title": "Enviar"
+    "search-submit-button-title": "Enviar",
+    "search-label": "Procurar"
   }
 }</script>
 
@@ -227,108 +228,81 @@ As bases de dados e arquivos utilizadas em cada etapa da análise são apresenta
 ### Largura dos rios
 
 <!-- 2024-03-04 remover
-As informações sobre largura dos rios foram derivadas a partir das camadas de águas abertas do MapBiomas [@mapbiomas_project_collection_2020], a camada de bacias hidrográficas no nível 8 [Lehner &Grill (2013)]<!--COLOCAR NO ZOTERO-->
-<p>e a camada de largura efetiva dos corpos d’água [Yamashida et al.&nbsp;2014]. –&gt;</p>
-<ul>
-<li><p>MapBiomas Água: [INSERIR LINK BASE DE DADOS - PARA DOWNLOAD]</p></li>
-<li><p>Bacias hidrográficas nível 8 (Lehner &amp;Grill 2013): [INSERIR LINK BASE DE DADOS - PARA DOWNLOAD]</p></li>
-<li><p>Largura efetiva dos corpos d’água (Yamashida et al.&nbsp;2014): [INSERIR LINK BASE DE DADOS - PARA DOWNLOAD]</p></li>
-</ul>
+As informações sobre largura dos rios foram derivadas a partir das camadas de águas abertas do MapBiomas [@mapbiomas_project_collection_2020], a camada de bacias hidrográficas no nível 8 [Lehner &Grill (2013)]<!--COLOCAR NO ZOTERO   e a camada de largura efetiva dos corpos d'água [Yamashida et al. 2014]. -->
+<!--
++ MapBiomas Água: [INSERIR LINK BASE DE DADOS - PARA DOWNLOAD]
+
++ Bacias hidrográficas nível 8 (Lehner &Grill 2013): [INSERIR LINK BASE DE DADOS - PARA DOWNLOAD]
+
++ Largura efetiva dos corpos d'água (Yamashida et al. 2014): [INSERIR LINK BASE DE DADOS - PARA DOWNLOAD] -->
 <!-- acho importante colocar também o link para o download, não somente a citação. No caso das bacias foi o HydroSHEDS? -->
-<section id="infraestrutura-de-transporte-e-de-energia" class="level3">
-<h3 class="anchored" data-anchor-id="infraestrutura-de-transporte-e-de-energia">Infraestrutura de transporte e de energia</h3>
 <!-- 2024-03-04 remover
-As informações sobre infraestrutura de transporte foram originadas a partir das camadas de estradas pavimentadas, estradas não-pavimentadas e ferrovias fornecidas pelo Instituto Brasileiro de Geografia e Estatística (IBGE) (\[BCIM250, 2021\]) <!-- Isso é uma citação? -->
-<p>(<a href="https://www.ibge.gov.br/geociencias/cartas-e-mapas/bases-cartograficas-continuas/15759-brasil.html?=&amp;t=downloads" class="uri">https://www.ibge.gov.br/geociencias/cartas-e-mapas/bases-cartograficas-continuas/15759-brasil.html?=&amp;t=downloads</a>). As bases de infraestrutura de energia correspondem às camadas de aerogeradores, centrais geradoras de energia fotovoltaicas, linhas de transmissão de energia eólica e usinas termelétricas fornecidas pela Agência Nacional de Energia Elétrica (ANEEL) (<a href="https://gisepeprd2.epe.gov.br/WebMapEPE/" class="uri">https://gisepeprd2.epe.gov.br/WebMapEPE/</a>) e a camada de linhas de transmissão de energia fornecida pelo IBGE ([BCIM250, 2021]). –&gt;</p>
-<ul>
-<li><p>Estradas pavimentadas, estradas não-pavimentadas, ferrovias e linhas de transmissão de energia (IBGE - BCIM250, 2021): <a href="https://www.ibge.gov.br/geociencias/cartas-e-mapas/bases-cartograficas-continuas/15759-brasil.html?=&amp;t=downloads" class="uri">https://www.ibge.gov.br/geociencias/cartas-e-mapas/bases-cartograficas-continuas/15759-brasil.html?=&amp;t=downloads</a></p></li>
-<li><p>Aerogeradores, centrais geradoras de energia fotovoltaicas, linhas de transmissão de energia eólica e usinas termelétricas (ANEEL): <a href="https://gisepeprd2.epe.gov.br/WebMapEPE/" class="uri">https://gisepeprd2.epe.gov.br/WebMapEPE/</a></p></li>
-</ul>
-<!-- houve a necessidade de filtrar algum dados antes para fazer as análises, por exemplo na parte de energia, algum filtro foi aplicado para retirar informações que não eram necessárias? -->
-</section>
-<section id="filtro-kernel" class="level3">
-<h3 class="anchored" data-anchor-id="filtro-kernel">Filtro <em>kernel</em></h3>
-<ul>
-<li>Filtro <em>kernel</em>: [ADICIONAR ARQUIVO TXT COM O FILTRO]</li>
-</ul>
-</section>
-<section id="reamostragem-do-mapbiomas" class="level2">
-<h2 class="anchored" data-anchor-id="reamostragem-do-mapbiomas">Reamostragem do MapBiomas</h2>
-<p>A reamostragem da base de dados do MapBiomas corresponde à Etapa 1 da análise de conectividade local. Foi necessário reamostrar os dados do MapBiomas de 30 m (resolução original) para 90 m. A reamostragem foi realizada com o uso da ferramenta “Resample” pelo <em>método de vizinho mais próximo</em> (<em>nearest</em>).</p>
-<p>Para essa etapa, o arquivo de entrada “input raster” correspondeu à camada original do MapBiomas e para o arquivo de saída “output raster” atribuímos um novo nome. A resolução de aproximadamente 90 m (ou seja 0.00083333333) para o pixel do novo arquivo gerado foi indicada no campo <code>Output Cell Size (optional)</code>. A escolha do método <code>Nearest</code> foi definida no campo <code>Resampling technique (optional)</code> (<a href="#fig-1">Figura&nbsp;1</a>). No final do processo de reamostragem seguimos a mesma classificação proposta pelo MapBiomas para colorir os usos do solo (<span class="citation" data-cites="map1-mapbiomas">(<a href="#ref-map1-mapbiomas" role="doc-biblioref"><strong>map1-mapbiomas?</strong></a>)</span>). Esse processo gerou a listagem de 29 classes de uso e cobertura do solo.</p>
+### Infraestrutura de transporte e de energia
+
+
+As informações sobre infraestrutura de transporte foram originadas a partir das camadas de estradas pavimentadas, estradas não-pavimentadas e ferrovias fornecidas pelo Instituto Brasileiro de Geografia e Estatística (IBGE) (\[BCIM250, 2021\]) (<https://www.ibge.gov.br/geociencias/cartas-e-mapas/bases-cartograficas-continuas/15759-brasil.html?=&t=downloads>).
+As bases de infraestrutura de energia correspondem às camadas de aerogeradores, centrais geradoras de energia fotovoltaicas, linhas de transmissão de energia eólica e usinas termelétricas fornecidas pela Agência Nacional de Energia Elétrica (ANEEL) (<https://gisepeprd2.epe.gov.br/WebMapEPE/>) e a camada de linhas de transmissão de energia fornecida pelo IBGE (\[BCIM250, 2021\]).
+
+
++ Estradas pavimentadas, estradas não-pavimentadas, ferrovias e linhas de transmissão de energia (IBGE - BCIM250, 2021):
+<https://www.ibge.gov.br/geociencias/cartas-e-mapas/bases-cartograficas-continuas/15759-brasil.html?=&t=downloads>
+
++ Aerogeradores, centrais geradoras de energia fotovoltaicas, linhas de transmissão de energia eólica e usinas termelétricas (ANEEL):
+<https://gisepeprd2.epe.gov.br/WebMapEPE/>
+
+<!-- houve a necessidade de filtrar algum dados antes para fazer as análises, por exemplo na parte de energia, algum filtro foi aplicado para retirar informações que não eram necessárias? 
+
+
+### Filtro *kernel*
+
++ Filtro *kernel*: [ADICIONAR ARQUIVO TXT COM O FILTRO] 
+
+
+## Reamostragem do MapBiomas
+
+A reamostragem da base de dados do MapBiomas corresponde à Etapa 1 da análise de conectividade local. Foi necessário reamostrar os dados do MapBiomas de 30 m (resolução original) para 90 m. A reamostragem foi realizada com o uso da ferramenta "Resample" pelo *método de vizinho mais próximo* (*nearest*). 
+
+Para essa etapa, o arquivo de entrada "input raster" correspondeu à camada original do MapBiomas e para o arquivo de saída "output raster" atribuímos um novo nome. A resolução de aproximadamente 90 m (ou seja 0.00083333333) para o pixel do novo arquivo gerado foi indicada no campo `Output Cell Size (optional)`. A escolha do método `Nearest` foi definida no campo `Resampling technique (optional)` (@fig-1). No final do processo de reamostragem seguimos a mesma classificação proposta pelo MapBiomas para colorir os usos do solo (@map1-mapbiomas). Esse processo gerou a listagem de 29 classes de uso e cobertura do solo. 
+
 <!-- 2024-03-04 remover
 As análises conduzidas para o mapeamento das áreas resilientes às mudanças climáticas foram realizadas na resolução espacial de 90 metros. Desta forma, reamostramos os dados do MapBiomas, que originalmente estavam com resolução de 30 metros, para uma resolução de 90 metros. A reamostragem foi realizada com o uso da ferramenta "Resample" pelo **método de vizinho mais próximo** (*nearest*). O arquivo de entrada "input raster" correspondeu a camada original do MapBiomas, e para o arquivo de saída "output raster" atribuímos um novo nome. A resolução de aproximadamente 90 metros (ou seja 0.00083333333) para o pixel do novo arquivo gerado foi estabelecida no campo `Output Cell Size (optional)`. A escolha do método `Nearest` foi definida no campo `Resampling technique (optional)` (@fig-1). No final do processo de reamostragem seguimos a mesma classificação proposta pelo MapBiomas (com 27 classes) para colorir os usos do solo (@map1-mapbiomas).
--->
-<div id="fig-1" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="figs/fig_1.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Figura&nbsp;1: Método da reamostragem da superfície de uso e cobertura do solo (MapBiomas coleção 8 de 2021), de 30 m para 90 m, por meio da técnica NEAREST, no ArcGis 10.5.</figcaption>
-</figure>
-</div>
-<div id="map1-mapbiomas" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="figs/map1_mapbiomas.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Classificação do uso e cobertura do solo convertida de uma resolução de 30 m para 90 m, tomando como base MapBiomas, coleção 8 de 2023.</figcaption>
-</figure>
-</div>
-</section>
-<section id="largura-dos-corpos-dágua" class="level2">
-<h2 class="anchored" data-anchor-id="largura-dos-corpos-dágua">Largura dos corpos d’água</h2>
-<p>A camada de uso e cobertura do solo na escala de 90 m equivalente a águas abertas (rios, lagos e oceanos; <span class="citation" data-cites="map2_aguas">(<a href="#ref-map2_aguas" role="doc-biblioref"><strong>map2_aguas?</strong></a>)</span>) foi subdividida em quatro classes distintas de acordo com a largura dos corpos d’água.</p>
-<div id="map2-aguas" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="figs/map2_aguas.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Camada de águas abertas do MapBiomas, usada como base para classificação dos tamanhos dos rios.</figcaption>
-</figure>
-</div>
-<p>Nessa etapa, inicialmente extraímos a máscara de corpos de águas abertas e dividimos essa classe única em pedaços menores, regionalizando suas larguras por trechos. Esta divisão ocorreu com o uso da ferramenta “Raster Calculator” (<a href="#fig-2">Figura&nbsp;5</a>), por meio da intersecção entre as camadas matriciais de águas abertas e de bacias hidrográficas no nível 8, produzidas por Lehner &amp;Grill (2013) (<span class="citation" data-cites="map3-bacias">(<a href="#ref-map3-bacias" role="doc-biblioref"><strong>map3-bacias?</strong></a>)</span>).</p>
-<div id="fig-2" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="figs/fig_2.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Figura&nbsp;2: Ferramenta “Raster Calculator”, do programa ArcGis 10.5, utilizada para a intersecção entre as camadas de águas abertas e bacias hidrográficas, gerando trechos de corpos d’água utilizados para consulta da largura dos mesmos.</figcaption>
-</figure>
-</div>
-<div id="map3-bacias" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="figs/map3_bacias.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Bacias hidrográficas de nivel 8 (Lehner &amp;Grill 2013).</figcaption>
-</figure>
-</div>
-<p>Para cada um dos trechos gerados, foi calculado o valor máximo de largura de cada trecho de águas abertas, por meio meio da estatística zonal (<a href="#fig-3">Figura&nbsp;6</a>). A largura efetiva máxima dos corpos d’água, de margem a margem, foi obtida através da base GWD – LR de Yamashida et al.&nbsp;2014 (<span class="citation" data-cites="map4-aguasporbacias">(<a href="#ref-map4-aguasporbacias" role="doc-biblioref"><strong>map4-aguasporbacias?</strong></a>)</span>).</p>
-<div id="fig-3" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="figs/fig_3.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Figura&nbsp;3: Uso da ferramenta “Zonal Statistics”, do programa ArcGis 10.5, para calcular a largura máxima de cada trecho de corpos d’água por unidade de consulta.</figcaption>
-</figure>
-</div>
-<div id="map4-aguasporbacias" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="figs/map4_aguasPORbacias.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Divisão da camada de águas abertas do MapBiomas recortada pelas bacias hidrográficas de nivel 8.</figcaption>
-</figure>
-</div>
-<p>Com base nos valores de largura máxima agrupamos os trechos dos rios em quatro classes de largura:</p>
-<ul>
-<li><ol type="i">
-<li>1 a 250 m;</li>
-</ol></li>
-<li><ol start="2" type="i">
-<li>250 a 1.000 m;</li>
-</ol></li>
-<li><ol start="3" type="i">
-<li>1.000 a 4.000 m;</li>
-</ol></li>
-<li><ol start="4" type="i">
-<li>maior de 4.000 m.</li>
-</ol></li>
-</ul>
-<p>Por meio da ferramenta “Mosaic to New Raster” (<a href="#fig-4">Figura&nbsp;7</a>), realizamos uma mosaicagem entre a camada contendo essas quatro classes e a camada do MapBiomas (já subtraída da classe de águas abertas), elevando de 29 para 32 o número de classes de uso e cobertura do solo.</p>
-<div id="fig-4" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="figs/fig_4.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Figura&nbsp;4: Ferramenta “Mosaic to New Raster”, do programa ArcGis 10.5, utilizada para fazer a mosaicagem entre a superfície contendo as quatro classes de corpos d’água com larguras distintas e a superfície do MapBiomas 2021 na escala de 90 m sem a classe de águas abertas (a ser substituída pelas quatro novas classes de corpos d’água).</figcaption>
-</figure>
-</div>
+
+
+![Método da reamostragem da superfície de uso e cobertura do solo (MapBiomas coleção 8 de 2021), de 30 m para 90 m, por meio da técnica NEAREST, no ArcGis 10.5.](figs/fig_1.png){width=100% #fig-1}
+
+![Classificação do uso e cobertura do solo convertida de uma resolução de 30 m para 90 m, tomando como base MapBiomas, coleção 8 de 2023.](figs/map1_mapbiomas.png){width=100% #map1-mapbiomas}
+
+
+## Largura dos corpos d'água
+
+A camada de uso e cobertura do solo na escala de 90 m equivalente a águas abertas (rios, lagos e oceanos; @map2_aguas) foi subdividida em quatro classes distintas de acordo com a largura dos corpos d’água.
+
+![Camada de águas abertas do MapBiomas, usada como base para classificação dos tamanhos dos rios.](figs/map2_aguas.png){width=100% #map2-aguas}
+
+
+Nessa etapa, inicialmente extraímos a máscara de corpos de águas abertas e dividimos essa classe única em pedaços menores, regionalizando suas larguras por trechos. Esta divisão ocorreu com o uso da ferramenta “Raster Calculator” (@fig-2), por meio da intersecção entre as camadas matriciais de águas abertas e de bacias hidrográficas no nível 8, produzidas por Lehner &Grill (2013) (@map3-bacias).
+
+![Ferramenta “Raster Calculator”, do programa ArcGis 10.5, utilizada para a intersecção entre as camadas de águas abertas e bacias hidrográficas, gerando trechos de corpos d’água utilizados para consulta da largura dos mesmos.](figs/fig_2.png){width=100% #fig-2}
+
+![Bacias hidrográficas de nivel 8 (Lehner &Grill 2013).](figs/map3_bacias.png){width=100% #map3-bacias}
+
+Para cada um dos trechos gerados, foi calculado o valor máximo de largura de cada trecho de águas abertas, por meio meio da estatística zonal (@fig-3). A largura efetiva máxima dos corpos d’água, de margem a margem, foi obtida através da base GWD – LR de Yamashida et al. 2014 (@map4-aguasporbacias). 
+
+![Uso da ferramenta “Zonal Statistics”, do programa ArcGis 10.5, para calcular a largura máxima de cada trecho de corpos d’água por unidade de consulta.](figs/fig_3.png){width=100% #fig-3}
+
+![Divisão da camada de águas abertas do MapBiomas recortada pelas bacias hidrográficas de nivel 8.](figs/map4_aguasPORbacias.png){width=100% #map4-aguasporbacias}
+
+Com base nos valores de largura máxima agrupamos os trechos dos rios em quatro classes de largura:
+
++ i. 1 a 250 m;
++ ii. 250 a 1.000 m; 
++ iii. 1.000 a 4.000 m;
++ iv. maior de 4.000 m. 
+
+Por meio da ferramenta “Mosaic to New Raster” (@fig-4), realizamos uma mosaicagem entre a camada contendo essas quatro classes e a camada do MapBiomas (já subtraída da classe de águas abertas), elevando de 29 para 32 o número de classes de uso e cobertura do solo.
+
+![Ferramenta “Mosaic to New Raster”, do programa ArcGis 10.5, utilizada para fazer a mosaicagem entre a superfície contendo as quatro classes de corpos d’água com larguras distintas e a superfície do MapBiomas 2021 na escala de 90 m sem a classe de águas abertas (a ser substituída pelas quatro novas classes de corpos d’água).](figs/fig_4.png){width=100% #fig-4}
+
 <!--
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ESTOU COLOCANDO ESSA SEÇÃO EM COMENTÁRIO PORQUE ESTÁ EXPLICADO ANTERIORMENTE. 
@@ -340,460 +314,81 @@ TALVEZ POSSAMOS REVISAR OS DOIS TEXTOS E VER SE TEM ALGUMA INFORMAÇÃO AQUI QUE
 A classe de cobertura do solo equivalente a águas abertas (rios, lagos e oceanos) recebeu valores de resistência variando em função da largura desses corpos d’água já que rios maiores são barreiras mais resistentes à movimentação da biodiversidade terrestre. Para que isso fosse possível, tivemos que dividir os corpos d’água em pedaços menores, regionalizando suas larguras por trechos. Nesta divisão usamos as bacias hidrográficas no nível 8 produzidas por Venticinque e colaboradores (2021). Os trechos de corpos d’água foram utilizados para segmentar a largura efetiva dos corpos d’água, de margem a margem, ao longo de todo o canal da base disponibilizada por Yamashida e colaboradores (2014).
 
 Para cada trecho da máscara de corpos d’água por bacias, com base nos dados de largura efetiva de margem a margem, extraímos o valor máximo de largura, sendo esse valor utilizado como medida de largura de cada trecho de águas abertas. Uma vez identificada a largura máxima de cada trecho de corpo d’água, agrupamos os rios nas seguintes classes de largura: i. 1 a 250 metros, ii. 250 a 1000 metros, iii. 1000 a 4000 metros e iv. maiores de 4000 metros. A inclusão dessas quatro classes de largura de corpos d’água, elevou de 34 para 37 o número de classes de cobertura do solo. Os valores de resistência atribuído para cada uma dessas classes variou e podem ser vistos na @tbl-2.
--->
-</section>
-<section id="infraestrutura-de-transporte-e-de-energia-1" class="level2">
-<h2 class="anchored" data-anchor-id="infraestrutura-de-transporte-e-de-energia-1">Infraestrutura de transporte e de energia</h2>
+
+
+
+## Infraestrutura de transporte e de energia
+
 <!-- 2024-03-04 Precisa descrever aqui quais dados estão sendo utlizados. Bases IBGE e ANEEL e listar direitinho quais dados dessas bases - não foram todos de energia e isso precisa ficar bem claro. -->
-<p>As camadas de infraestrutura de transporte e de energia foram inicialmente convertidas de formatos vetoriais para <em>raster</em>, com pixels de tamanho aproximado de 90 m (<a href="#fig-2">Figura&nbsp;5</a>). Essa conversão foi realizada para cada arquivo usando a ferramenta <code>Polyline to Raster</code>, onde o arquivo de entrada “Input Features” corresponde à camada de infraestrutura original e o arquivo de saída “Value field” é a camada <em>raster</em> que será criada. A definição da resolução espacial “Output Raster Dataset” corresponde a 0.00083333333 (ou seja 90 m de resolução).</p>
-<div id="fig-2" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="figs/fig2.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Figura&nbsp;5: Método de conversão de arquivos vetoriais para arquivos matriciais (<em>raster</em>) já definindo os pixels com tamanho aproximado de 90 m, no ArcGis 10.5.</figcaption>
-</figure>
-</div>
-<p>As camadas <em>raster</em> geradas receberam valores de resistência (ver item Valores de resistência) como atributo específico das classes de infraestrutura e, posteriormente, todas as camadas foram agrupadas em um único arquivo matricial. Para realizar esse agrupamento, usamos a ferramenta <code>Cell Statistics</code>, informando, no campo <code>overlay satatistic</code>, que o resultado do agrupamento deve considerar o valor máximo do pixel (<a href="#fig-3">Figura&nbsp;6</a>). Essa indicação é importante para que, na sobreposição das várias camadas de infraestrutura, prevaleça sempre o valor de pixel com resistência mais alta.</p>
-<div id="fig-3" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="figs/fig3.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Figura&nbsp;6: Uso da ferramenta “<code>Cell Statistics</code>”, no ArcGis 10.5, para agrupar as bases de infraestrutura em uma única superfície, onde prevalecem os valores máximos de resistência atribuídos a cada classe.</figcaption>
-</figure>
-</div>
-<p>Usando novamente a ferramenta <code>Cell Statistics</code> conjugamos as bases matriciais de infraestrutura de transporte e energia indicadas acima com a camada de uso e cobertura do solo combinada com as classes de corpos d’água. Da mesma forma como conduzido anteriormente, no agrupamento das camadas de infraestrutura de transporte e de energia, durante a sobreposição, prevaleceu sempre o maior valor de resistência: no campo <code>overlay satatistic</code> o resultado do agrupamento deve considerar o valor máximo do pixel (<a href="#fig-4">Figura&nbsp;7</a>). Feita esta operação, obtivemos uma nova superfície matricial (<em>raster</em>), combinando todas as classes listadas aqui.</p>
-<div id="fig-4" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="figs/fig4.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Figura&nbsp;7: Uso da ferramenta “Cel Statistics”, no ArcGis 10.5, para agrupar a camada de infraestrutura de transporte e de energia com a camada de uso e cobertura em uma única superfície, onde prevalecem os valores máximos de resistência atribuídos a cada classe.</figcaption>
-</figure>
-</div>
-</section>
-<section id="valores-de-resistência" class="level2">
-<h2 class="anchored" data-anchor-id="valores-de-resistência">Valores de resistência</h2>
-<p>Os valores de resistência para cada classe de uso e cobertura do solo foram atribuídos, por bioma, pela equipe do projeto e por especialistas. Esses valores variaram de 1 a 20 em números inteiros, sendo 1 o valor de menor resistência e 20 o de maior resistência (<a href="#tbl-1">Tabela&nbsp;1</a>).</p>
-<p>Iniciamos a atribuição dos valores de resistência na camada de uso e cobertura do solo (Tabela 1). A esse conjunto de dados, acrescentamos uma coluna na tabela de atributos, com as 4 classes de largura dos corpos d’água. Por fim, atribuímos à camada de infraestrutura de transporte e de energia, os valores de resistência e combinamos o resultado à camada anterior (conforme descrito no item anterior).</p>
-<p>O mapa consolidado de cobertura e uso do solo, combinando as classes de largura dos corpos d’água e as classes de infraestrutura de transporte e de energia, totalizou 39 classes.</p>
+<!--
+As camadas de infraestrutura de transporte e de energia foram inicialmente convertidas de formatos vetoriais para *raster*, com pixels de tamanho aproximado de 90 m (@fig-2). Essa conversão foi realizada para cada arquivo usando a ferramenta `Polyline to Raster`, onde o arquivo de entrada "Input Features" corresponde à camada de infraestrutura original e o arquivo de saída "Value field" é a camada *raster* que será criada. A definição da resolução espacial "Output Raster Dataset" corresponde a 0.00083333333 (ou seja 90 m de resolução).
+
+![Método de conversão de arquivos vetoriais para arquivos matriciais (*raster*) já definindo os pixels com tamanho aproximado de 90 m, no ArcGis 10.5.](figs/fig2.png){width=100% #fig-2}
+
+As camadas *raster* geradas receberam valores de resistência (ver item Valores de resistência) como atributo específico das classes de infraestrutura e, posteriormente, todas as camadas foram agrupadas em um único arquivo matricial. Para realizar esse agrupamento, usamos a ferramenta `Cell Statistics`, informando, no campo `overlay satatistic`, que o resultado do agrupamento deve considerar o valor máximo do pixel (@fig-3). Essa indicação é importante para que, na sobreposição das várias camadas de infraestrutura, prevaleça sempre o valor de pixel com resistência mais alta.
+
+![Uso da ferramenta “`Cell Statistics`”, no ArcGis 10.5, para agrupar as bases de infraestrutura em uma única superfície, onde prevalecem os valores máximos de resistência atribuídos a cada classe.](figs/fig3.png){width=100% #fig-3}
+
+Usando novamente a ferramenta `Cell Statistics` conjugamos as bases matriciais de infraestrutura de transporte e energia indicadas acima com a camada de uso e cobertura do solo combinada com as classes de corpos d'água. Da mesma forma como conduzido anteriormente, no agrupamento das camadas de infraestrutura de transporte e de energia, durante a sobreposição, prevaleceu sempre o maior valor de resistência: no campo `overlay satatistic` o resultado do agrupamento deve considerar o valor máximo do pixel (@fig-4). Feita esta operação, obtivemos uma nova superfície matricial (*raster*), combinando todas as classes listadas aqui.
+
+![Uso da ferramenta “Cel Statistics”, no ArcGis 10.5, para agrupar a camada de infraestrutura de transporte e de energia com a camada de uso e cobertura em uma única superfície, onde prevalecem os valores máximos de resistência atribuídos a cada classe.](figs/fig4.png){width=100% #fig-4}
+
+
+## Valores de resistência
+
+Os valores de resistência para cada classe de uso e cobertura do solo foram atribuídos, por bioma, pela equipe do projeto e por especialistas. Esses valores variaram de 1 a 20 em números inteiros, sendo 1 o valor de menor resistência e 20 o de maior resistência (@tbl-1).
+
+Iniciamos a atribuição dos valores de resistência na camada de uso e cobertura do solo (Tabela 1). A esse conjunto de dados, acrescentamos uma coluna na tabela de atributos, com as 4 classes de largura dos corpos d'água. Por fim, atribuímos à camada de infraestrutura de transporte e de energia, os valores de resistência e combinamos o resultado à camada anterior (conforme descrito no item anterior).
+
+O mapa consolidado de cobertura e uso do solo, combinando as classes de largura dos corpos d'água e as classes de infraestrutura de transporte e de energia, totalizou 39 classes.
+-->
 <!-- NECESSÁRIO INCLUIR A TABELA DE RESISTÊNCIAS GERADA ATÉ AQUI -->
 <!-- 2024-03-04 remover
 Os valores de resistência têm como objetivo representar de forma comparativa o grau de dificuldade imposto à movimentação da biodiversidade por cada classe específica de uso e cobertura do solo. As premissas assumidas para definir os valores foram: i. quanto maior for a diferença estrutural da classe de cobertura do solo para o hábitat original do bioma, maior será a dificuldade à movimentação que a classe oferece e ii. corpos d’água mais largos oferecem maior resistência ao deslocamento de organismos terrestres na paisagem do que corpos d’água mais estreitos. -->
-<div id="tbl-1" class="anchored">
-<table class="table">
-<caption>Tabela&nbsp;1: Valores de resistência, por bioma, para as 39 classes de uso e cobertura do solo, resultado da combinação das superfícies de uso e cobertura do solo do MapBiomas (N: 1 - 28), as classes de tamanho dos rios (N: 29 - 32) e da camada de infraestrutura de transporte e de energia (N: 33 - 39).</caption>
-<colgroup>
-<col style="width: 12%">
-<col style="width: 12%">
-<col style="width: 12%">
-<col style="width: 12%">
-<col style="width: 12%">
-<col style="width: 12%">
-<col style="width: 12%">
-<col style="width: 12%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: right;">N</th>
-<th style="text-align: right;">Classe de cobertura do solo</th>
-<th style="text-align: right;">Amazônia</th>
-<th style="text-align: right;">Caatinga</th>
-<th style="text-align: right;">Cerrado</th>
-<th style="text-align: right;">Mata Atlântica</th>
-<th style="text-align: right;">Pampa</th>
-<th style="text-align: right;">Pantanal</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">Afloramento rochoso</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">Algodão</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">Aquacultura</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">Área urbana</td>
-<td style="text-align: right;">20</td>
-<td style="text-align: right;">20</td>
-<td style="text-align: right;">20</td>
-<td style="text-align: right;">20</td>
-<td style="text-align: right;">20</td>
-<td style="text-align: right;">20</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">Áreas alagadas (Campos e Pântanos)</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">1</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">Arroz</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">Café</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">8</td>
-<td style="text-align: right;">Cana de açúcar</td>
-<td style="text-align: right;">15</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">10</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">9</td>
-<td style="text-align: right;">Citrus</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">Dendê</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">11</td>
-<td style="text-align: right;">Floresta alagada</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">12</td>
-<td style="text-align: right;">Formação campestre (campos)</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">1</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">13</td>
-<td style="text-align: right;">Formação de savana</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">1</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">14</td>
-<td style="text-align: right;">Formação florestal</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">1</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">15</td>
-<td style="text-align: right;">Mangue</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">16</td>
-<td style="text-align: right;">Mineração</td>
-<td style="text-align: right;">20</td>
-<td style="text-align: right;">20</td>
-<td style="text-align: right;">20</td>
-<td style="text-align: right;">20</td>
-<td style="text-align: right;">20</td>
-<td style="text-align: right;">20</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">17</td>
-<td style="text-align: right;">Mosaico de usos</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">7</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">18</td>
-<td style="text-align: right;">Outras áreas não vegetadas</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">10</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">19</td>
-<td style="text-align: right;">Outras culturas perenes</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">20</td>
-<td style="text-align: right;">Outras culturas temporárias</td>
-<td style="text-align: right;">15</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">5</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">21</td>
-<td style="text-align: right;">Outras formações não florestais</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">22</td>
-<td style="text-align: right;">Pastagem</td>
-<td style="text-align: right;">17</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">9</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">7</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">23</td>
-<td style="text-align: right;">Praia, duna e areal</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">2</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">24</td>
-<td style="text-align: right;">Salina (Apicum)</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">25</td>
-<td style="text-align: right;">Silvicultura (floresta plantada)</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">5</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">26</td>
-<td style="text-align: right;">Soja</td>
-<td style="text-align: right;">17</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">10</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">27</td>
-<td style="text-align: right;">Vegetação de restinga arbórea</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">28</td>
-<td style="text-align: right;">Vegetação de restinga herbácea</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">-</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">-</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">29</td>
-<td style="text-align: right;">Corpos d’águas abertas até 250 m</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">2</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">30</td>
-<td style="text-align: right;">Corpos d’águas abertas de 250 a 1000 m</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">5</td>
-<td style="text-align: right;">5</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">31</td>
-<td style="text-align: right;">Corpos d’águas abertas de 1000 a 4000 m</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">10</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">32</td>
-<td style="text-align: right;">Corpos d’águas abertas acima de 4000 m</td>
-<td style="text-align: right;">12</td>
-<td style="text-align: right;">12</td>
-<td style="text-align: right;">12</td>
-<td style="text-align: right;">12</td>
-<td style="text-align: right;">12</td>
-<td style="text-align: right;">12</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">33</td>
-<td style="text-align: right;">Aerogeradores</td>
-<td style="text-align: right;">15</td>
-<td style="text-align: right;">15</td>
-<td style="text-align: right;">15</td>
-<td style="text-align: right;">15</td>
-<td style="text-align: right;">15</td>
-<td style="text-align: right;">15</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">34</td>
-<td style="text-align: right;">Centrais geradoras de energia solar</td>
-<td style="text-align: right;">15</td>
-<td style="text-align: right;">17</td>
-<td style="text-align: right;">17</td>
-<td style="text-align: right;">17</td>
-<td style="text-align: right;">17</td>
-<td style="text-align: right;">17</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">35</td>
-<td style="text-align: right;">Estradas não pavimentadas</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">3</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">36</td>
-<td style="text-align: right;">Estradas pavimentadas</td>
-<td style="text-align: right;">20</td>
-<td style="text-align: right;">20</td>
-<td style="text-align: right;">20</td>
-<td style="text-align: right;">20</td>
-<td style="text-align: right;">20</td>
-<td style="text-align: right;">20</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">37</td>
-<td style="text-align: right;">Ferrovias</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">10</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">38</td>
-<td style="text-align: right;">Linhas de transmissão (tradicionais e anexas ao sistema eólico)</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">7</td>
-<td style="text-align: right;">7</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">39</td>
-<td style="text-align: right;">Termelétricas</td>
-<td style="text-align: right;">20</td>
-<td style="text-align: right;">20</td>
-<td style="text-align: right;">20</td>
-<td style="text-align: right;">20</td>
-<td style="text-align: right;">20</td>
-<td style="text-align: right;">20</td>
-</tr>
-</tbody>
-</table>
-</div>
+<!--
+|N|Classe de cobertura do solo|Amazônia|Caatinga|Cerrado|Mata Atlântica|Pampa|Pantanal|
+|--:|--:|--:|--:|--:|--:|--:|--:|
+|1|Afloramento rochoso|3|1|2|3|2|-|
+|2|Algodão|7|7|10|-|-|-|
+|3|Aquacultura|-|10|7|7|7|-|
+|4|Área urbana|20|20|20|20|20|20|
+|5|Áreas alagadas (Campos e Pântanos)|1|-|1|2|1|1|
+|6|Arroz|-|-|10|10|10|-|
+|7|Café|-|7|10|4|-|-|
+|8|Cana de açúcar|15|10|10|10|-|10|
+|9|Citrus|-|-|10|4|-|-|
+|10|Dendê|10|-|-|-|-|-|
+|11|Floresta alagada|1|-|-|-|-|-|
+|12|Formação campestre (campos)|1|1|1|2|1|1|
+|13|Formação de savana|1|1|1|2|-|1|
+|14|Formação florestal|1|1|1|1|1|1|
+|15|Mangue|1|1|1|1|-|-|
+|16|Mineração|20|20|20|20|20|20|
+|17|Mosaico de usos|10|7|10|10|10|7|
+|18|Outras áreas não vegetadas|10|10|10|10|10|10|
+|19|Outras culturas perenes|10|7|7|4|-|-|
+|20|Outras culturas temporárias|15|7|10|10|10|5|
+|21|Outras formações não florestais|-|7|-|2|-|-|
+|22|Pastagem|17|7|7|9|7|7|
+|23|Praia, duna e areal|2|2|2|2|2|2|
+|24|Salina (Apicum)|2|1|2|2|-|-|
+|25|Silvicultura (floresta plantada)|7|2|7|3|10|5|
+|26|Soja|17|10|10|10|10|10|
+|27|Vegetação de restinga arbórea|-|1|-|1|1|-|
+|28|Vegetação de restinga herbácea|-|1|-|2|1|-|
+|29|Corpos d’águas abertas até 250 m|2|2|2|2|2|2|
+|30|Corpos d’águas abertas de 250 a 1000 m|5|5|5|5|5|5|
+|31|Corpos d’águas abertas de 1000 a 4000 m|10|10|10|10|10|10|
+|32|Corpos d’águas abertas acima de 4000 m|12|12|12|12|12|12|
+|33|Aerogeradores|15|15|15|15|15|15|
+|34|Centrais geradoras de energia solar|15|17|17|17|17|17|
+|35|Estradas não pavimentadas|10|10|7|10|7|3|
+|36|Estradas pavimentadas|20|20|20|20|20|20|
+|37|Ferrovias|10|10|10|10|10|10|
+|38|Linhas de transmissão (tradicionais e anexas ao sistema eólico)|10|7|7|7|7|7|
+|39|Termelétricas|20|20|20|20|20|20|
+: Valores de resistência, por bioma, para as 39 classes de uso e cobertura do solo, resultado da combinação das superfícies de uso e cobertura do solo do MapBiomas (N: 1 - 28), as classes de tamanho dos rios (N: 29 - 32) e da camada de infraestrutura de transporte e de energia (N: 33 - 39). {#tbl-1}
+-->
 <!--
 COMO COLOCAMOS ESSES VALORES DENTRO DAS NOSSAS CAMADAS? 
 NO TEXTO SAIMOS DIRETO DAS CAMADAS E DA TABELO PRO MAPA FINAL DE RESISTÊNCIA SEM DIZER COMO PODEMOS DEFINIR OS VALORES DOS PIXELS
@@ -801,44 +396,58 @@ NO TEXTO SAIMOS DIRETO DAS CAMADAS E DA TABELO PRO MAPA FINAL DE RESISTÊNCIA SE
 <!--
 ATUALIZAR MAPA DE RESISTÊNCIA
  -->
-<div id="fig-5" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="figs/fig6.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Figura&nbsp;8: Superfície de resistência gerada a partir do mapa com 39 classes de uso e cobertura do solo, resultado da combinação das superfícies de uso e cobertura do solo do MapBiomas e de infraestrutura. Nesta superfície a resistência das águas abertas (rios, lagos e oceanos) não foi diferenciada em função da largura dos corpos d’água.</figcaption>
-</figure>
-</div>
-</section>
-<section id="resultado-de-conectividade-local" class="level2">
-<h2 class="anchored" data-anchor-id="resultado-de-conectividade-local">Resultado de conectividade local</h2>
+<!--
+![Superfície de resistência gerada a partir do mapa com 39 classes de uso e cobertura do solo, resultado da combinação das superfícies de uso e cobertura do solo do MapBiomas e de infraestrutura. Nesta superfície a resistência das águas abertas (rios, lagos e oceanos) não foi diferenciada em função da largura dos corpos d’água.](figs/fig6.png){width=100% #fig-5}
+
+
+## Resultado de conectividade local
+-->
 <!--
 FALTA COMPLEMENTAR TODA ESSAS SESSÃO COM AS IMAGENS DE COMO FAZER O PASSO A PASSO NO ARCGIS
 
 **2024 -  ainda nao temos as fotos com o passo a passo dessa seção (fig 6 até a 11)**
 -->
-<p>A superfície final de conectividade local foi gerada a partir dos seguintes passos:</p>
-<p>Passo 1 - Usando a ferramenta “Reclassify” do Spatial Analyst (Figura 9 - <span class="citation" data-cites="fig6">(<a href="#ref-fig6" role="doc-biblioref"><strong>fig6?</strong></a>)</span>) construímos máscaras a partir da superfície de uso e cobertura do solo, gerando duas superfícies: + a. Superfície de águas abertas, onde as classes de largura dos rios receberam o valor de 1 e as demais classes foram consideradas como “NoData” (<span class="citation" data-cites="fig7">(<a href="#ref-fig7" role="doc-biblioref"><strong>fig7?</strong></a>)</span>). + b. Superfície terrestre, onde as classes de água foram reclassificadas para “NoData” e das demais receberam o valor igual a 1 (<span class="citation" data-cites="fig7">(<a href="#ref-fig7" role="doc-biblioref"><strong>fig7?</strong></a>)</span>).</p>
+<!--
+A superfície final de conectividade local foi gerada a partir dos seguintes passos:
+
+Passo 1 - Usando a ferramenta “Reclassify” do Spatial Analyst (Figura 9 - @fig6) construímos máscaras a partir da superfície de uso e cobertura do solo, gerando duas superfícies:
++ a.    Superfície de águas abertas, onde as classes de largura dos rios receberam o valor de 1 e as demais classes foram consideradas como "NoData" (@fig7).
++ b.    Superfície terrestre, onde as classes de água foram reclassificadas para "NoData" e das demais receberam o valor igual a 1 (@fig7).
+-->
 <!--
 ADICIONAR FIGURA 6 MOSTRANDO COMO FAZER O RECLASSIFY
 ADICIONAR COMO FICAM AS IMAGENS DAS SUPERFICIES A E B??
 -->
-<p>Passo 2 - Usando a ferramenta Focal Statistics, aplicamos a função <em>kernel</em> à superfície de resistência gerada para todo o Brasil (Figura 10 - <span class="citation" data-cites="fig8">(<a href="#ref-fig8" role="doc-biblioref"><strong>fig8?</strong></a>)</span>). Esta análise considerou uma função de decaimento linear em uma janela móvel definida por um raio de 23 pixels (~2.070 m).</p>
+<!--
+Passo 2 - Usando a ferramenta Focal Statistics, aplicamos a função *kernel* à superfície de resistência gerada para todo o Brasil (Figura 10 - @fig8). Esta análise considerou uma função de decaimento linear em uma janela móvel definida por um raio de 23 pixels (~2.070 m).
+-->
 <!-- 2024-03-04 remover
 que representa o contexto espacial em que cada pixel está inserido, reconhecendo que pixels mais próximos possuem maior influência um sobre o outro do que pixels mais distantes, influenciando o valor de conectividade local de cada pixel. Desta maneira, a função Kernel nos auxilia na tarefa de encontrar os melhores caminhos de deslocamento na paisagem, ou seja, aqueles caminhos que oferecem menor resistência. -->
-<p>Passo 3 - Multiplicamos a superfície gerada no passo 2 pela superfície <em>a</em> (águas abertas) geradas no Passo 1. Essa multiplicação foi realizada com o uso da ferramenta “Raster Calculator” (Figura 11 - <span class="citation" data-cites="fig9">(<a href="#ref-fig9" role="doc-biblioref"><strong>fig9?</strong></a>)</span>), nos fornecendo os valores de conectividade local apenas para os corpos d’água.</p>
+<!--
+Passo 3 - Multiplicamos a superfície gerada no passo 2 pela superfície *a* (águas abertas) geradas no Passo 1. Essa multiplicação foi realizada com o uso da ferramenta “Raster Calculator” (Figura 11 - @fig9), nos fornecendo os valores de conectividade local apenas para os corpos d’água.
+-->
 <!-- 2024-03-04 remover
 Os valores de conectividade local gerados para as águas abertas, uma vez que foram gerados juntamente com os valores para as áreas terrestres (no Passo 2), consideram a influência da resistência das áreas terrestres na conectividade dos corpos d’água. Na prática isso quer dizer que se um pequeno corpo d’água estiver inserido em uma área de baixa resistência, como uma formação florestal, ele terá valores de conectividade local maiores do que se estiver inserido em uma área de alta resistência, como uma pastagem, por exemplo. -->
-<p>Passo 4 - Multiplicamos a superfície <em>b</em> (máscara das classes terrestres) gerada no Passo 1 pela superfície de resistência original. Esta operação foi realizada com o auxílio da ferramenta “Raster Calculator” (Figura 11 - <span class="citation" data-cites="fig9">(<a href="#ref-fig9" role="doc-biblioref"><strong>fig9?</strong></a>)</span>) e nos forneceu um arquivo de resistência apenas para as áreas terrestres.</p>
+<!--
+Passo 4 - Multiplicamos a superfície *b* (máscara das classes terrestres) gerada no Passo 1 pela superfície de resistência original. Esta operação foi realizada com o auxílio da ferramenta “Raster Calculator” (Figura 11 - @fig9) e nos forneceu um arquivo de resistência apenas para as áreas terrestres.
+-->
 <!-- 2024-03-04 remover
 Neste cenário os valores de resistência das classes de águas abertas, por terem sido excluídos das análises, não afetam os valores de resistência das áreas terrestres. -->
-<p>Passo 5 - Aplicamos o filtro <em>kernel</em> à superfície de resistência das classes terrestres (gerada no Passo 4). Essa análise foi realizada com o auxílio da ferramenta “Focal Statistics” e gerou uma camada de conectividade local onde as áreas terrestres não são influenciadas pelas águas abertas.</p>
+<!--
+Passo 5 - Aplicamos o filtro *kernel* à superfície de resistência das classes terrestres (gerada no Passo 4). Essa análise foi realizada com o auxílio da ferramenta “Focal Statistics” e gerou uma camada de conectividade local onde as áreas terrestres não são influenciadas pelas águas abertas.
+-->
 <!-- 2024-03-04 remover
 Ou seja, nesta operação esperamos que um organismo terrestre não evite um pixel de habitat na borda de um rio largo, por exemplo, simplesmente porque esse rio oferece uma grande resistência para ser transposto. -->
-<p>Passo 6 - Usando a ferramenta “Mosaic to new Raster” (Figura 12- <span class="citation" data-cites="fig10">(<a href="#ref-fig10" role="doc-biblioref"><strong>fig10?</strong></a>)</span>), realizamos a mosaicagem das superfícies geradas nos Passos 4 e 5. <!-- Esse produto é considerado a nossa superfície final de conectividade local (Figura 13 - @fig11). --></p>
-<p>Por fim, para calcularmos os valores finais de conectividade local multiplicamos os valores de resistência por -1 por considerarmos que a conectividade é o inverso dos valores de resistência suavizados pelo filtro <em>kernel</em> <strong>?@fig-7</strong>.</p>
-<p><img src="figs/fig7.png" id="fig-7" class="img-fluid" style="width:100.0%" alt="Conectividade local, definida como o inverso da resistência à movimentação de organismos das diferentes classes de uso e coberturas do solo."> <!--Temos que atualizar. A camada final vai ser de resistência e não conectividade --></p>
+<!--
+Passo 6 - Usando a ferramenta “Mosaic to new Raster” (Figura 12- @fig10), realizamos a mosaicagem das superfícies geradas nos Passos 4 e 5.
+ Esse produto é considerado a nossa superfície final de conectividade local (Figura 13 - @fig11). -->
+<!--
+Por fim, para calcularmos os valores finais de conectividade local multiplicamos os valores de resistência por -1 por considerarmos que a conectividade é o inverso dos valores de resistência suavizados pelo filtro *kernel* @fig-7.
 
 
-</section>
+![Conectividade local, definida como o inverso da resistência à movimentação de organismos das diferentes classes de uso e coberturas do solo.](figs/fig7.png){width=100% #fig-7}  -->
+
+
 </section>
 
 </main> <!-- /main -->
