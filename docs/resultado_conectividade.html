@@ -113,7 +113,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Sumário</a></li><li class="breadcrumb-item"><a href="./resultado_conectividade.html">Resultado de conectividade local</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Sumário</a></li><li class="breadcrumb-item"><a href="./resultado_conectividade.html">Aplicação de filtros</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
@@ -178,7 +178,7 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./resultado_conectividade.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Resultado de conectividade local</span></a>
+ <span class="menu-text">Aplicação de filtros</span></a>
   </div>
 </li>
       </ul>
@@ -194,27 +194,39 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="resultado-de-conectividade-local" class="level2">
-<h2 class="anchored" data-anchor-id="resultado-de-conectividade-local">Resultado de conectividade local</h2>
+<section id="aplicação-de-filtros" class="level2">
+<h2 class="anchored" data-anchor-id="aplicação-de-filtros">Aplicação de filtros</h2>
 <!--
 FALTA COMPLEMENTAR TODA ESSAS SESSÃO COM AS IMAGENS DE COMO FAZER O PASSO A PASSO NO ARCGIS
 
 **2024 -  ainda nao temos as fotos com o passo a passo dessa seção (fig 6 até a 11)**
 -->
-<p>A aplicação de máscaras e filtros para gerar o resultado de conectividade local corresponde à Etapa 5 da análise de conectividade local.</p>
-<p>Usando a ferramenta “Reclassify” do Spatial Analyst (Figura 9 - <span class="citation" data-cites="fig6">(<a href="#ref-fig6" role="doc-biblioref"><strong>fig6?</strong></a>)</span>) construímos máscaras a partir da superfície de resistência, gerando duas superfícies: + a. Superfície de águas abertas, na qual as classes de largura dos rios receberam o valor de 1 e as demais classes foram consideradas como “NoData” (<span class="citation" data-cites="fig7">(<a href="#ref-fig7" role="doc-biblioref"><strong>fig7?</strong></a>)</span>). + b. Superfície terrestre, na qual as classes de água foram reclassificadas para “NoData” e as demais receberam o valor igual a 1 (<span class="citation" data-cites="fig7">(<a href="#ref-fig7" role="doc-biblioref"><strong>fig7?</strong></a>)</span>).</p>
+<p>A aplicação de máscaras e filtros para gerar o resultado de conectividade local corresponde à <strong>Etapa 5</strong> da análise.</p>
+<section id="passo-1" class="level3">
+<h3 class="anchored" data-anchor-id="passo-1">Passo 1</h3>
+<p>Usando a ferramenta “Reclassify” do Spatial Analyst (Figura 9 - <span class="citation" data-cites="fig6">(<a href="#ref-fig6" role="doc-biblioref"><strong>fig6?</strong></a>)</span>) construímos máscaras a partir da superfície de resistência, gerando duas superfícies: + <em>a</em>. Superfície de águas abertas, na qual as classes de largura dos rios receberam o valor de 1 e as demais classes foram consideradas como “NoData” (<span class="citation" data-cites="fig7">(<a href="#ref-fig7" role="doc-biblioref"><strong>fig7?</strong></a>)</span>). + <em>b</em>. Superfície terrestre, na qual as classes de água foram reclassificadas para “NoData” e as demais receberam o valor igual a 1 (<span class="citation" data-cites="fig7">(<a href="#ref-fig7" role="doc-biblioref"><strong>fig7?</strong></a>)</span>).</p>
 <!--
 ADICIONAR FIGURA 6 MOSTRANDO COMO FAZER O RECLASSIFY
 ADICIONAR COMO FICAM AS IMAGENS DAS SUPERFICIES A E B??
 -->
 <p>Usando a ferramenta Focal Statistics, aplicamos a função <em>kernel</em> à superfície de resistência gerada para todo o Brasil (Figura 10 - <span class="citation" data-cites="fig8">(<a href="#ref-fig8" role="doc-biblioref"><strong>fig8?</strong></a>)</span>). Esta análise considerou uma função de decaimento linear em uma janela móvel definida por um raio de 23 pixels (~2.070 m). <!-- 2024-03-04 PRECISA INCLUIR A CHAMADA DO ARQUIVO COM O FILTRO KERNEL E COMO ENTRAR COM ELE NO ARCGIS --></p>
-<p>Multiplicamos essa superfície gerada para todo Brasil com a superfície de águas abertas (item a acima) geradas no passo anterior. Essa multiplicação foi realizada com o uso da ferramenta “Raster Calculator” (Figura 11 - <span class="citation" data-cites="fig9">(<a href="#ref-fig9" role="doc-biblioref"><strong>fig9?</strong></a>)</span>), nos fornecendo os valores de conectividade local apenas para os corpos d’água.</p>
-<p>De modo similar, multiplicamos a superfície terrestre (item b acima) gerada no passo inicial pela superfície de resistência original. Esta operação foi realizada com o auxílio da ferramenta “Raster Calculator” (Figura 11 - <span class="citation" data-cites="fig9">(<a href="#ref-fig9" role="doc-biblioref"><strong>fig9?</strong></a>)</span>) e nos forneceu um arquivo de resistência apenas para as áreas terrestres.</p>
+</section>
+<section id="passo-2" class="level3">
+<h3 class="anchored" data-anchor-id="passo-2">Passo 2</h3>
+<p>Multiplicamos essa superfície gerada para todo Brasil com a superfície de águas abertas (subitem <em>a</em> do Passo 1) geradas no passo anterior. Essa multiplicação foi realizada com o uso da ferramenta “Raster Calculator” (Figura 11 - <span class="citation" data-cites="fig9">(<a href="#ref-fig9" role="doc-biblioref"><strong>fig9?</strong></a>)</span>), nos fornecendo os valores de conectividade local apenas para os corpos d’água.</p>
+</section>
+<section id="passo-3" class="level3">
+<h3 class="anchored" data-anchor-id="passo-3">Passo 3</h3>
+<p>De modo similar, multiplicamos a superfície terrestre (subitem <em>b</em> do Passo 1) gerada no passo inicial pela superfície de resistência original. Esta operação foi realizada com o auxílio da ferramenta “Raster Calculator” (Figura 11 - <span class="citation" data-cites="fig9">(<a href="#ref-fig9" role="doc-biblioref"><strong>fig9?</strong></a>)</span>) e nos forneceu um arquivo de resistência apenas para as áreas terrestres.</p>
 <p>Em seguida, aplicamos o filtro <em>kernel</em> à superfície terrestre gerada no passo anterior. Essa análise foi realizada com o auxílio da ferramenta “Focal Statistics” e gerou uma camada de conectividade local onde as áreas terrestres não são influenciadas pelas águas abertas.</p>
+</section>
+<section id="passo-4" class="level3">
+<h3 class="anchored" data-anchor-id="passo-4">Passo 4</h3>
 <p>Usando a ferramenta “Mosaic to new Raster” (Figura 12- <span class="citation" data-cites="fig10">(<a href="#ref-fig10" role="doc-biblioref"><strong>fig10?</strong></a>)</span>), realizamos a mosaicagem das superfícies geradas nos passos anteriores. E, por fim, para calcularmos os valores finais de conectividade local multiplicamos os valores de resistência por -1 por considerarmos que a conectividade é o inverso dos valores de resistência suavizados pelo filtro <em>kernel</em> (<strong>?@fig-7</strong>).</p>
 <p><img src="figs/fig7.png" id="fig-7" class="img-fluid" style="width:100.0%" alt="Conectividade local, definida como o inverso da resistência à movimentação de organismos das diferentes classes de uso e coberturas do solo."> <!--Temos que atualizar. A camada final vai ser de resistência e não conectividade --></p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
