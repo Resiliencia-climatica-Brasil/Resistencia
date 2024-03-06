@@ -35,6 +35,8 @@ Em seguida, aplicamos o filtro *kernel* à superfície terrestre gerada no passo
 
 ### Passo 4
 
-Usando a ferramenta “Mosaic to new Raster” (Figura 12- @fig10), realizamos a mosaicagem das superfícies geradas nos passos anteriores. E, por fim, para calcularmos os valores finais de conectividade local multiplicamos os valores de resistência por -1 por considerarmos que a conectividade é o inverso dos valores de resistência suavizados pelo filtro *kernel* ( @fig-11 ).
+Usando a ferramenta “Mosaic to new Raster” (Figura 12- @fig10), realizamos a mosaicagem das superfícies geradas nos passos anteriores. E, por fim, para calcularmos os valores finais de conectividade local multiplicamos os valores de resistência por -1 por considerarmos que a conectividade é o inverso dos valores de resistência suavizados pelo filtro *kernel* ( @fig-11 ) @fig-11.
 
-![Conectividade local, definida como o inverso da resistência à movimentação de organismos das diferentes classes de uso e coberturas do solo.](figs/fig7.png){width=100% #fig-11} <!--Temos que atualizar. A camada final vai ser de resistência e não conectividade -->
+![Conectividade local, definida como o inverso da resistência à movimentação de organismos das diferentes classes de uso e coberturas do solo.](figs/fig7.png){width=100% #fig-11} 
+
+<!--Temos que atualizar. A camada final vai ser de resistência e não conectividade -->
