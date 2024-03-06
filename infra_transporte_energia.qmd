@@ -1,5 +1,7 @@
 ## Infraestrutura de transporte e de energia
 
+A inclusão de dados de infraestrutura de transporte e de energia corresponde à **Etapa 3** da análise de conectividade local.
+
 Das bases de dados do IBGE e da ANEEL foram extraídos os seguintes dados:
 
 + IBGE: estradas pavimentadas, estradas não pavimentadas, ferrovias e linhas de transmissão de energia.
