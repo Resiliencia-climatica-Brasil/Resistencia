@@ -1,6 +1,10 @@
 ## Valores de resistência e combinação das bases de dados
 
-A atribuição dos valores de resistência para cada classe de uso e cobertura do solo e a combinação das diferentes bases de dados corresponde à **Etapa 4** da análise conectividade local.
+A atribuição dos valores de resistência para cada classe de uso e cobertura do solo e a combinação das diferentes bases de dados corresponde à **Etapa 4** da análise conectividade local (Figura 1).
+
+<!-- 2024-03-06 INSERIR FIGURA: fluxograma_etapa4
+LEGENDA: Fluxograma com a indicação da Etapa 4 da análise de conectividade local: valores de resistência e combinação das bases de dados.
+-->
 
 Os valores de resistência para cada classe de uso e cobertura do solo foram atribuídos, por bioma, pela equipe do projeto e por especialistas. Esses valores variaram de 1 a 20 em números inteiros, sendo 1 o valor de menor resistência e 20 o de maior resistência.
 
