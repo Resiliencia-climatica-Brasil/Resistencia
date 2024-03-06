@@ -1,6 +1,10 @@
 ## Infraestrutura de transporte e de energia
 
-A inclusão de dados de infraestrutura de transporte e de energia corresponde à **Etapa 3** da análise de conectividade local.
+A inclusão de dados de infraestrutura de transporte e de energia corresponde à **Etapa 3** da análise de conectividade local (Figura 1).
+
+<!-- 2024-03-06 INSERIR FIGURA: fluxograma_etapa3
+LEGENDA: Fluxograma com a indicação da Etapa 3 da análise de conectividade local: infraestrutura de transporte e de energia.
+-->
 
 Das bases de dados do IBGE e da ANEEL foram extraídos os seguintes dados:
 
