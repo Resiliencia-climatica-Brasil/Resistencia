@@ -1,14 +1,13 @@
 ## Valores de resistência e combinação das bases de dados
 
-A atribuição dos valores de resistência para cada classe de uso e cobertura do solo e a combinação das diferentes bases de dados corresponde à Etapa 4 da análise conectividade local.
+A atribuição dos valores de resistência para cada classe de uso e cobertura do solo e a combinação das diferentes bases de dados corresponde à **Etapa 4** da análise conectividade local.
+
 Os valores de resistência para cada classe de uso e cobertura do solo foram atribuídos, por bioma, pela equipe do projeto e por especialistas. Esses valores variaram de 1 a 20 em números inteiros, sendo 1 o valor de menor resistência e 20 o de maior resistência.
 
-Iniciamos a atribuição dos valores de resistência na camada de uso e cobertura do solo do MapBiomas com resolução de 90 m, conforme valores apresentados na @tbl-2.
+### Passo 1
+
+Iniciamos a atribuição dos valores de resistência na camada de uso e cobertura do solo do MapBiomas reamostrada na resolução de 90 m, conforme valores apresentados na @tbl-2.
 <!-- COMO COLOCAMOS ESSES VALORES DENTRO DAS NOSSAS CAMADAS? -->
-<!-- 
-ADICIONAR TABELA 1 APENAS COM OS VALORES DE RESISTÊNCIA PARA AS 29 CLASSES DO MAPBIOMAS
-06/03/2024 --Feito 
- -->
 
 |N|Classe de cobertura do solo|Amazônia|Caatinga|Cerrado|Mata Atlântica|Pampa|Pantanal|
 |--:|--:|--:|--:|--:|--:|--:|--:|
@@ -40,27 +39,23 @@ ADICIONAR TABELA 1 APENAS COM OS VALORES DE RESISTÊNCIA PARA AS 29 CLASSES DO M
 |26|Soja|17|10|10|10|10|10|
 |27|Vegetação de restinga arbórea|-|1|-|1|1|-|
 |28|Vegetação de restinga herbácea|-|1|-|2|1|-|
-: Valores de resistência, por bioma, para as 39 classes de uso e cobertura do solo, resultado da combinação das superfícies de uso e cobertura do solo do MapBiomas. { #tbl-2 }
+: Valores de resistência, por bioma, para as 28 classes de uso e cobertura do solo (sem a classe de águas abertas), obtidas da base de dados de uso e cobertura do solo do MapBiomas. { #tbl-2 }
+
+### Passo 2
 
 A esse conjunto de dados, acrescentamos uma coluna na tabela de atributos, com as 4 classes de largura dos corpos d'água, conforme valores apresentados na @tbl-3. 
-<!-- ADICIONAR TABELA 2 APENAS COM OS VALORES DE RESISTÊNCIA PARA AS 4 CLASSES DE LARGURA DOS CORPOS D'ÁGUA
-06/03/2024 --Feito 
- --> 
 
 |N|Classe de cobertura do solo|Amazônia|Caatinga|Cerrado|Mata Atlântica|Pampa|Pantanal|
 |--:|--:|--:|--:|--:|--:|--:|--:|
 |29|Corpos d’águas abertas até 250 m|2|2|2|2|2|2|
-|30|Corpos d’águas abertas de 250 a 1000 m|5|5|5|5|5|5|
-|31|Corpos d’águas abertas de 1000 a 4000 m|10|10|10|10|10|10|
-|32|Corpos d’águas abertas acima de 4000 m|12|12|12|12|12|12|
+|30|Corpos d’águas abertas de 250 a 1.000 m|5|5|5|5|5|5|
+|31|Corpos d’águas abertas de 1.000 a 4.000 m|10|10|10|10|10|10|
+|32|Corpos d’águas abertas acima de 4.000 m|12|12|12|12|12|12|
 : Valores de resistência, por bioma, para as quatro classes de tamanho dos rios (N: 29 - 32). { #tbl-3 }
 
-Por fim, atribuímos à camada de infraestrutura de transporte e de energia, os valores de resistência e combinamos o resultado à camada anterior (conforme descrito no item anterior).
+### Passo 3
 
-As camadas *raster* geradas para as bases de dados de infraestrutura de transporte e de energia receberam valores de resistência como atributo específico, conforme indicado na @tbl-4. 
-<!-- ADICIONAR TABELA 3 APENAS COM OS VALORES DE RESISTÊNCIA PARA AS CLASSES DE INFRA DE TRANSPORTE E DE ENERGIA 
-06/03/2024 --Feito 
- -->
+As camadas *raster* geradas para as bases de dados de infraestrutura de transporte e de energia receberam valores de resistência como atributo específico, conforme indicado na @tbl-4.
 
 |N|Classe de cobertura do solo|Amazônia|Caatinga|Cerrado|Mata Atlântica|Pampa|Pantanal|
 |--:|--:|--:|--:|--:|--:|--:|--:|
@@ -77,11 +72,11 @@ Em seguida, todas as camadas foram agrupadas em um único arquivo matricial. Par
 
 ![Uso da ferramenta “`Cell Statistics`”, no ArcGis 10.5, para agrupar as bases de infraestrutura em uma única superfície, onde prevalecem os valores máximos de resistência atribuídos a cada classe.](figs/fig3.png){width=100% #fig-3}
 
-Usando novamente a ferramenta `Cell Statistics` conjugamos as bases matriciais de infraestrutura de transporte e de energia indicadas acima com a camada de uso e cobertura do solo combinada com as classes de corpos d'água. Da mesma forma como conduzido anteriormente, no agrupamento das camadas de infraestrutura de transporte e de energia, durante a sobreposição, prevaleceu sempre o maior valor de resistência: no campo `overlay satatistic` o resultado do agrupamento deve considerar o valor máximo do pixel (@fig-4). Feita esta operação, obtivemos uma nova superfície matricial (*raster*), combinando todas as classes listadas aqui.
+Por fim, a essa camada com os valores de resistência para classes de infraestrutura de transporte e de energia, combinamos o resultado à camada anterior (descrita no Passo 2). Usando novamente a ferramenta `Cell Statistics` conjugamos as bases matriciais de infraestrutura de transporte e de energia indicadas acima com a camada de uso e cobertura do solo combinada com as classes de corpos d'água (descrita no Passo 2). Da mesma forma como conduzido anteriormente, no agrupamento das camadas de infraestrutura de transporte e de energia, durante a sobreposição, prevaleceu sempre o maior valor de resistência: no campo `overlay satatistic` o resultado do agrupamento deve considerar o valor máximo do pixel (@fig-4). 
 
 ![Uso da ferramenta “Cel Statistics”, no ArcGis 10.5, para agrupar a camada de infraestrutura de transporte e de energia com a camada de uso e cobertura em uma única superfície, onde prevalecem os valores máximos de resistência atribuídos a cada classe.](figs/fig4.png){width=100% #fig-4}
 
-O mapa consolidado dos valores de resistência para cada uso e cobertura do solo @fig-5, combinando as classes de largura dos corpos d'água e as classes de infraestrutura de transporte e de energia, totalizou 39 classes  @tbl-1.
+Feita esta operação, obtivemos uma nova superfície matricial (*raster*), combinando todas as classes listadas aqui. O mapa consolidado dos valores de resistência para cada uso e cobertura do solo @fig-5, combinando as classes de largura dos corpos d'água e as classes de infraestrutura de transporte e de energia, totalizou 39 classes @tbl-1.
 
 |N|Classe de cobertura do solo|Amazônia|Caatinga|Cerrado|Mata Atlântica|Pampa|Pantanal|
 |--:|--:|--:|--:|--:|--:|--:|--:|
