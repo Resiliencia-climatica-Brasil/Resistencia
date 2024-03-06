@@ -1,4 +1,6 @@
-## Aplicação de filtros
+## Aplicação de filtros e camada final
+
+A aplicação de máscaras e filtros para gerar o resultado de conectividade local corresponde à **Etapa 5** da análise.
 
 <!--
 FALTA COMPLEMENTAR TODA ESSAS SESSÃO COM AS IMAGENS DE COMO FAZER O PASSO A PASSO NO ARCGIS
@@ -6,12 +8,11 @@ FALTA COMPLEMENTAR TODA ESSAS SESSÃO COM AS IMAGENS DE COMO FAZER O PASSO A PAS
 **2024 -  ainda nao temos as fotos com o passo a passo dessa seção (fig 6 até a 11)**
 -->
 
-A aplicação de máscaras e filtros para gerar o resultado de conectividade local corresponde à **Etapa 5** da análise.
-
 ### Passo 1
 
 Usando a ferramenta “Reclassify” do Spatial Analyst (Figura 9 - @fig6) construímos máscaras a partir da superfície de resistência, gerando duas superfícies:
-+ *a*.	Superfície de águas abertas, na qual as classes de largura dos rios receberam o valor de 1 e as demais classes foram consideradas como "NoData" (@fig7).
+
++ *a*.	Superfície de águas abertas, na qual as classes de largura dos rios receberam o valor de 1 e as demais classes foram consideradas como "NoData" (@fig7);
 + *b*.	Superfície terrestre, na qual as classes de água foram reclassificadas para "NoData" e as demais receberam o valor igual a 1 (@fig7).
 
 <!--
@@ -28,7 +29,7 @@ Multiplicamos essa superfície gerada para todo Brasil com a superfície de águ
 
 ### Passo 3
 
-De modo similar, multiplicamos a superfície terrestre (subitem *b* do Passo 1) gerada no passo inicial pela superfície de resistência original. Esta operação foi realizada com o auxílio da ferramenta “Raster Calculator” (Figura 11 - @fig9) e nos forneceu um arquivo de resistência apenas para as áreas terrestres.
+De modo similar, multiplicamos a superfície terrestre (subitem *b* do Passo 1), gerada no passo inicial, pela superfície de resistência original. Esta operação foi realizada com o auxílio da ferramenta “Raster Calculator” (Figura 11 - @fig9) e nos forneceu um arquivo de resistência apenas para as áreas terrestres.
 
 Em seguida, aplicamos o filtro *kernel* à superfície terrestre gerada no passo anterior. Essa análise foi realizada com o auxílio da ferramenta “Focal Statistics” e gerou uma camada de conectividade local onde as áreas terrestres não são influenciadas pelas águas abertas.
 
