@@ -2,7 +2,7 @@
 
 A análise para categorizar os corpos d'água em classes de largura corresponde à **Etapa 2** da análise de conectividade local (@fig-flux2).
 
-![Fluxograma com a indicação da Etapa 2 da análise de conectividade local: largura dos corpos d'água.](figs/Fluxograma_etapa2.png){width=100% #fig-flux2 fig-align="center"} 
+![Fluxograma com a indicação da Etapa 2 da análise de conectividade local: largura dos corpos d'água.](figs/fluxograma_etapa2.png){width=100% #fig-flux2 fig-align="center"} 
 
 ### Passo 1
 
