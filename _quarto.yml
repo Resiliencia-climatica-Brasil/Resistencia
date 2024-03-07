@@ -1,7 +1,8 @@
 project:
-  type: website
+  type: book
   output-dir: docs
-  render:
+book: 
+  chapters:
     - index.qmd
     - bases_dados.qmd
     - reamostragem_mapbiomas.qmd
@@ -9,42 +10,30 @@ project:
     - infra_transporte_energia.qmd
     - valores_resistencia.qmd
     - resultado_conectividade.qmd
-  
-  
-website: 
+
+
   navbar:
     left:
       - text: Tutoriais
         menu:
          - text: Heterogeneidade da paisagem
-           href: https://resiliencia-climatica-brasil.github.io/diversity-resilience-python/apresentacao.html
+           href: https://resiliencia-climatica-brasil.github.io/diversity-resilience-python/apresentacao.html                  
          - text: Conectividade local 
          - text: Resiliência
-           href: https://resiliencia-climatica-brasil.github.io/diversity-resilience-python/resilience.html
-         
+           href: https://resiliencia-climatica-brasil.github.io/diversity-resilience-python/resilience.html      
       - text: Mapas
-        href: https://projeto-resiliencia-tnc.hub.arcgis.com   
+        href: https://projeto-resiliencia-tnc.hub.arcgis.com
       - text: Relatório Técnico
-        href: https://resiliencia-climatica-brasil.github.io/Relatorio_final/     
+        href: https://resiliencia-climatica-brasil.github.io/Relatorio_final/  
   sidebar: 
     title: "Mapeamento de áreas resilientes a mudanças climáticas nos biomas brasileiros" 
     logo: figs/1667403883848_theme_logo.png     
-    style: "docked"
-    contents:
-      - section: "Sumário"
-        contents:
-          - index.qmd
-          - bases_dados.qmd
-          - reamostragem_mapbiomas.qmd
-          - largura_corpos_dagua.qmd
-          - infra_transporte_energia.qmd
-          - valores_resistencia.qmd
-          - resultado_conectividade.qmd
-    
-    
-               
-  page-navigation: true
+    style: "docked"   
+    page-navigation: true
   favicon: figs/1667403883848_theme_logo.png
+
+   
+
 bibliography: bibliografia.bib
 csl: citation_style.csl
 lang: pt-br

@@ -4,7 +4,6 @@ A análise para categorizar os corpos d'água em classes de largura corresponde 
 
 ![Fluxograma com a indicação da Etapa 2 da análise de conectividade local: largura dos corpos d'água.](figs/Fluxograma_etapa2.png){width=100% #fig-flux2 fig-align="center"} 
 
-
 ### Passo 1
 
 No Passo 1 dessa etapa, inicialmente extraímos a máscara de corpos de águas abertas (rios, lagos e oceanos) da camada de uso e cobertura do solo (na escala de 90 m; @fig-map-2) e dividimos essa classe única em pedaços menores, regionalizando suas larguras por trechos. 
