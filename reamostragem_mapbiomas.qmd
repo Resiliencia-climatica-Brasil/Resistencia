@@ -1,10 +1,8 @@
 ## Reamostragem do MapBiomas
 
-A reamostragem da base de dados do MapBiomas corresponde à **Etapa 1** da análise de conectividade local (Figura 1).
+A reamostragem da base de dados do MapBiomas corresponde à **Etapa 1** da análise de conectividade local (@flux1).
 
-<!-- 2024-03-06 INSERIR FIGURA: fluxograma_etapa1
-LEGENDA: Fluxograma com a indicação da Etapa 1 da análise de conectividade local: reamostragem do MapBiomas.
--->
+![Fluxograma com a indicação da Etapa 1 da análise de conectividade local: reamostragem do MapBiomas.](figs/Fluxograma_etapa1.png){width=100% #flux1} 
 
 Foi necessário reamostrar os dados do MapBiomas a partir da resolução original de 30 m para a resolução de 90 m utilizada no estudo. A reamostragem foi realizada com o uso da ferramenta "Resample" pelo *método de vizinho mais próximo* (*nearest*). 
 

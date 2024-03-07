@@ -9,7 +9,7 @@ A superfície de resistência foi calculada usando como base os dados de uso e c
 
 Essas análises foram realizadas no ArcGis 10.5. Todas as ferramentas do ArcGis 10.5 descritas aqui podem ser acessadas no ícone de busca.
 
-O fluxograma da análise de conectividade local é apresentado na figura 1 e pode ser dividido em cinco etapas principais:
+O fluxograma da análise de conectividade local é apresentado na @fluxgeral e pode ser dividido em cinco etapas principais:
 
 + Etapa 1: Reamostragem do MapBiomas
 + Etapa 2: Largura dos corpos d'água
@@ -19,6 +19,7 @@ O fluxograma da análise de conectividade local é apresentado na figura 1 e pod
 
 <!-- 2024-03-04 [INSERIR FIGURA GERAL DO FLUXOGRAMA AQUI] -->
 
+![Fluxograma da análise de conectividade local.](figs/Fluxograma_geral.png){width=100% #fluxgeral} 
 
 <!-- 
 //////////////////////////////////////////////////////
