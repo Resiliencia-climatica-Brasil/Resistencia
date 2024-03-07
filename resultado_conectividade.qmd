@@ -1,9 +1,9 @@
 ## Aplicação de filtros e camada final
 
-A aplicação de máscaras e filtros para gerar o resultado de conectividade local corresponde à **Etapa 5** da análise (@fluxo5).
+A aplicação de máscaras e filtros para gerar o resultado de conectividade local corresponde à **Etapa 5** da análise (@fig-fluxo5).
 
 
-![Fluxograma com a indicação da Etapa 5 da análise de conectividade local: aplicação de filtros e camada final.](figs/Fluxograma_etapa5.png){width=100% #fluxo5} 
+![Fluxograma com a indicação da Etapa 5 da análise de conectividade local: aplicação de filtros e camada final.](figs/Fluxograma_etapa5.png){width=100% #fig-fluxo5} 
 
 <!--
 FALTA COMPLEMENTAR TODA ESSAS SESSÃO COM AS IMAGENS DE COMO FAZER O PASSO A PASSO NO ARCGIS
@@ -15,40 +15,40 @@ FALTA COMPLEMENTAR TODA ESSAS SESSÃO COM AS IMAGENS DE COMO FAZER O PASSO A PAS
 
 ### Passo 1
 
-Usando a ferramenta “Reclassify” do Spatial Analyst ( @fig6) construímos máscaras a partir da superfície de resistência, gerando duas superfícies:
+Usando a ferramenta “Reclassify” do Spatial Analyst ( @fig-6) construímos máscaras a partir da superfície de resistência, gerando duas superfícies:
 ![](figs/NOME.png){width=100% #fig6}
 
-+ *a*.	Superfície de águas abertas, na qual as classes de largura dos rios receberam o valor de 1 e as demais classes foram consideradas como "NoData" (@fig7);
-+ *b*.	Superfície terrestre, na qual as classes de água foram reclassificadas para "NoData" e as demais receberam o valor igual a 1 (@fig7).
++ *a*.	Superfície de águas abertas, na qual as classes de largura dos rios receberam o valor de 1 e as demais classes foram consideradas como "NoData" (@fig-7);
++ *b*.	Superfície terrestre, na qual as classes de água foram reclassificadas para "NoData" e as demais receberam o valor igual a 1 (@fig-7).
 
-![](figs/NOME.png){width=100% #fig7}
+![](figs/NOME.png){width=100% #fig-7}
 <!--
 ADICIONAR FIGURA 6 MOSTRANDO COMO FAZER O RECLASSIFY
 ADICIONAR COMO FICAM AS IMAGENS DAS SUPERFICIES A E B??
 -->
 
-Usando a ferramenta Focal Statistics, aplicamos a função *kernel* à superfície de resistência gerada para todo o Brasil ( @fig8). Esta análise considerou uma função de decaimento linear em uma janela móvel definida por um raio de 23 pixels (~2.070 m).
+Usando a ferramenta Focal Statistics, aplicamos a função *kernel* à superfície de resistência gerada para todo o Brasil ( @fig-8). Esta análise considerou uma função de decaimento linear em uma janela móvel definida por um raio de 23 pixels (~2.070 m).
 
 <!-- 2024-03-04 PRECISA INCLUIR A CHAMADA DO ARQUIVO COM O FILTRO KERNEL E COMO ENTRAR COM ELE NO ARCGIS -->
 ![](figs/NOME.png){width=100% #fig8}
 
 ### Passo 2
 
-Multiplicamos essa superfície gerada para todo Brasil com a superfície de águas abertas (subitem *a* do Passo 1) geradas no passo anterior. Essa multiplicação foi realizada com o uso da ferramenta “Raster Calculator” ( @fig9), nos fornecendo os valores de conectividade local apenas para os corpos d’água.
+Multiplicamos essa superfície gerada para todo Brasil com a superfície de águas abertas (subitem *a* do Passo 1) geradas no passo anterior. Essa multiplicação foi realizada com o uso da ferramenta “Raster Calculator” ( @fig-9), nos fornecendo os valores de conectividade local apenas para os corpos d’água.
 
-![](figs/NOME.png){width=100% #fig9}
+![](figs/NOME.png){width=100% #fig-9}
 
 ### Passo 3
 
-De modo similar, multiplicamos a superfície terrestre (subitem *b* do Passo 1), gerada no passo inicial, pela superfície de resistência original. Esta operação foi realizada com o auxílio da ferramenta “Raster Calculator” ( @fig9) e nos forneceu um arquivo de resistência apenas para as áreas terrestres.
+De modo similar, multiplicamos a superfície terrestre (subitem *b* do Passo 1), gerada no passo inicial, pela superfície de resistência original. Esta operação foi realizada com o auxílio da ferramenta “Raster Calculator” ( @fig-9) e nos forneceu um arquivo de resistência apenas para as áreas terrestres.
 
 Em seguida, aplicamos o filtro *kernel* à superfície terrestre gerada no passo anterior. Essa análise foi realizada com o auxílio da ferramenta “Focal Statistics” e gerou uma camada de conectividade local onde as áreas terrestres não são influenciadas pelas águas abertas.
 
 ### Passo 4
 
-Usando a ferramenta “Mosaic to new Raster” ( @fig10), realizamos a mosaicagem das superfícies geradas nos passos anteriores. E, por fim, para calcularmos os valores finais de conectividade local multiplicamos os valores de resistência por -1 por considerarmos que a conectividade é o inverso dos valores de resistência suavizados pelo filtro *kernel* ( @fig-11 ) @fig-11.
+Usando a ferramenta “Mosaic to new Raster” ( @fig-10), realizamos a mosaicagem das superfícies geradas nos passos anteriores. E, por fim, para calcularmos os valores finais de conectividade local multiplicamos os valores de resistência por -1 por considerarmos que a conectividade é o inverso dos valores de resistência suavizados pelo filtro *kernel* ( @fig-11 ).
 
-![](figs/NOME.png){width=100% #fig10}
+![](figs/NOME.png){width=100% #fig-10}
 
 ![Conectividade local, definida como o inverso da resistência à movimentação de organismos das diferentes classes de uso e coberturas do solo.](figs/fig7.png){width=100% #fig-11} 
 

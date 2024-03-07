@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt-br" xml:lang="pt-br"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.3.340">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -58,8 +58,7 @@ ul.task-list li input[type="checkbox"] {
     "search-more-matches-text": "mais correspondências neste documento",
     "search-clear-button-title": "Limpar",
     "search-detached-cancel-button-title": "Cancelar",
-    "search-submit-button-title": "Enviar",
-    "search-label": "Procurar"
+    "search-submit-button-title": "Enviar"
   }
 }</script>
 
@@ -197,11 +196,11 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="valores-de-resistência-e-combinação-das-bases-de-dados" class="level2">
 <h2 class="anchored" data-anchor-id="valores-de-resistência-e-combinação-das-bases-de-dados">Valores de resistência e combinação das bases de dados</h2>
-<p>A atribuição dos valores de resistência para cada classe de uso e cobertura do solo e a combinação das diferentes bases de dados corresponde à <strong>Etapa 4</strong> da análise conectividade local (<span class="citation" data-cites="flux4">(<a href="#ref-flux4" role="doc-biblioref"><strong>flux4?</strong></a>)</span>).</p>
-<div id="flux4" class="quarto-figure quarto-figure-center anchored">
+<p>A atribuição dos valores de resistência para cada classe de uso e cobertura do solo e a combinação das diferentes bases de dados corresponde à <strong>Etapa 4</strong> da análise conectividade local (<a href="#fig-flux4">Figura&nbsp;1</a>).</p>
+<div id="fig-flux4" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="figs/Fluxograma_etapa4.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Fluxograma com a indicação da Etapa 4 da análise de conectividade local: valores de resistência e combinação das bases de dados.</figcaption>
+<figcaption class="figure-caption">Figura&nbsp;1: Fluxograma com a indicação da Etapa 4 da análise de conectividade local: valores de resistência e combinação das bases de dados.</figcaption>
 </figure>
 </div>
 <p>Os valores de resistência para cada classe de uso e cobertura do solo foram atribuídos, por bioma, pela equipe do projeto e por especialistas. Esses valores variaram de 1 a 20 em números inteiros, sendo 1 o valor de menor resistência e 20 o de maior resistência.</p>
@@ -693,21 +692,27 @@ ul.task-list li input[type="checkbox"] {
 </tbody>
 </table>
 </div>
-<p>Em seguida, todas as camadas foram agrupadas em um único arquivo matricial. Para realizar esse agrupamento, usamos a ferramenta <code>Cell Statistics</code>, informando, no campo <code>overlay satatistic</code>, que o resultado do agrupamento deve considerar o valor máximo do pixel (<a href="#fig-3">Figura&nbsp;1</a>). Essa indicação é importante para que, na sobreposição das várias camadas de infraestrutura, prevaleça sempre o valor de pixel com resistência mais alta.</p>
+<p>Em seguida, todas as camadas foram agrupadas em um único arquivo matricial. Para realizar esse agrupamento, usamos a ferramenta <code>Cell Statistics</code>, informando, no campo <code>overlay satatistic</code>, que o resultado do agrupamento deve considerar o valor máximo do pixel (<a href="#fig-3">Figura&nbsp;2</a>). Essa indicação é importante para que, na sobreposição das várias camadas de infraestrutura, prevaleça sempre o valor de pixel com resistência mais alta.</p>
 <div id="fig-3" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="figs/fig3.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Figura&nbsp;1: Uso da ferramenta “<code>Cell Statistics</code>”, no ArcGis 10.5, para agrupar as bases de infraestrutura em uma única superfície, onde prevalecem os valores máximos de resistência atribuídos a cada classe.</figcaption>
+<figcaption class="figure-caption">Figura&nbsp;2: Uso da ferramenta “<code>Cell Statistics</code>”, no ArcGis 10.5, para agrupar as bases de infraestrutura em uma única superfície, onde prevalecem os valores máximos de resistência atribuídos a cada classe.</figcaption>
 </figure>
 </div>
-<p>Por fim, a essa camada com os valores de resistência para classes de infraestrutura de transporte e de energia, combinamos o resultado à camada anterior (descrita no Passo 2). Usando novamente a ferramenta <code>Cell Statistics</code> conjugamos as bases matriciais de infraestrutura de transporte e de energia indicadas acima com a camada de uso e cobertura do solo combinada com as classes de corpos d’água (descrita no Passo 2). Da mesma forma como conduzido anteriormente, no agrupamento das camadas de infraestrutura de transporte e de energia, durante a sobreposição, prevaleceu sempre o maior valor de resistência: no campo <code>overlay satatistic</code> o resultado do agrupamento deve considerar o valor máximo do pixel (<a href="#fig-4">Figura&nbsp;2</a>).</p>
+<p>Por fim, a essa camada com os valores de resistência para classes de infraestrutura de transporte e de energia, combinamos o resultado à camada anterior (descrita no Passo 2). Usando novamente a ferramenta <code>Cell Statistics</code> conjugamos as bases matriciais de infraestrutura de transporte e de energia indicadas acima com a camada de uso e cobertura do solo combinada com as classes de corpos d’água (descrita no Passo 2). Da mesma forma como conduzido anteriormente, no agrupamento das camadas de infraestrutura de transporte e de energia, durante a sobreposição, prevaleceu sempre o maior valor de resistência: no campo <code>overlay satatistic</code> o resultado do agrupamento deve considerar o valor máximo do pixel (<a href="#fig-4">Figura&nbsp;3</a>).</p>
 <div id="fig-4" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="figs/fig4.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Figura&nbsp;2: Uso da ferramenta “Cel Statistics”, no ArcGis 10.5, para agrupar a camada de infraestrutura de transporte e de energia com a camada de uso e cobertura em uma única superfície, onde prevalecem os valores máximos de resistência atribuídos a cada classe.</figcaption>
+<figcaption class="figure-caption">Figura&nbsp;3: Uso da ferramenta “Cel Statistics”, no ArcGis 10.5, para agrupar a camada de infraestrutura de transporte e de energia com a camada de uso e cobertura em uma única superfície, onde prevalecem os valores máximos de resistência atribuídos a cada classe.</figcaption>
 </figure>
 </div>
-<p>Feita esta operação, obtivemos uma nova superfície matricial (<em>raster</em>), combinando todas as classes listadas aqui. O mapa consolidado dos valores de resistência para cada uso e cobertura do solo <a href="#fig-5">Figura&nbsp;3</a>, combinando as classes de largura dos corpos d’água e as classes de infraestrutura de transporte e de energia, totalizou 39 classes <a href="#tbl-4">Tabela&nbsp;4</a>.</p>
+<p>Feita esta operação, obtivemos uma nova superfície matricial (<em>raster</em>), combinando todas as classes listadas aqui. O mapa consolidado dos valores de resistência para cada uso e cobertura do solo <a href="#fig-5">Figura&nbsp;4</a>, combinando as classes de largura dos corpos d’água e as classes de infraestrutura de transporte e de energia, totalizou 39 classes <a href="#tbl-4">Tabela&nbsp;4</a>.</p>
+<div id="fig-5" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="figs/fig6.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption class="figure-caption">Figura&nbsp;4: Superfície de resistência gerada a partir do mapa com 39 classes de uso e cobertura do solo, resultado da combinação das superfícies de uso e cobertura do solo do MapBiomas e de infraestrutura. Nesta superfície a resistência das águas abertas (rios, lagos e oceanos) não foi diferenciada em função da largura dos corpos d’água.</figcaption>
+</figure>
+</div>
 <div id="tbl-4" class="anchored">
 <table class="table">
 <caption>Tabela&nbsp;4: Valores de resistência, por bioma, para as 39 classes de uso e cobertura do solo, resultado da combinação das superfícies de uso e cobertura do solo do MapBiomas (N: 1 - 28), as classes de tamanho dos rios (N: 29 - 32) e da camada de infraestrutura de transporte e de energia (N: 33 - 39).</caption>
@@ -1126,12 +1131,6 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
-</div>
-<div id="fig-5" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="figs/fig6.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Figura&nbsp;3: Superfície de resistência gerada a partir do mapa com 39 classes de uso e cobertura do solo, resultado da combinação das superfícies de uso e cobertura do solo do MapBiomas e de infraestrutura. Nesta superfície a resistência das águas abertas (rios, lagos e oceanos) não foi diferenciada em função da largura dos corpos d’água.</figcaption>
-</figure>
 </div>
 
 

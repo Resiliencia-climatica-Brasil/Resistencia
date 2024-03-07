@@ -1,9 +1,9 @@
 ## Valores de resistência e combinação das bases de dados
 
-A atribuição dos valores de resistência para cada classe de uso e cobertura do solo e a combinação das diferentes bases de dados corresponde à **Etapa 4** da análise conectividade local (@flux4).
+A atribuição dos valores de resistência para cada classe de uso e cobertura do solo e a combinação das diferentes bases de dados corresponde à **Etapa 4** da análise conectividade local (@fig-flux4).
 
 
-![Fluxograma com a indicação da Etapa 4 da análise de conectividade local: valores de resistência e combinação das bases de dados.](figs/Fluxograma_etapa4.png){width=100% #flux4} 
+![Fluxograma com a indicação da Etapa 4 da análise de conectividade local: valores de resistência e combinação das bases de dados.](figs/Fluxograma_etapa4.png){width=100% #fig-flux4} 
 
 Os valores de resistência para cada classe de uso e cobertura do solo foram atribuídos, por bioma, pela equipe do projeto e por especialistas. Esses valores variaram de 1 a 20 em números inteiros, sendo 1 o valor de menor resistência e 20 o de maior resistência.
 
@@ -81,6 +81,9 @@ Por fim, a essa camada com os valores de resistência para classes de infraestru
 
 Feita esta operação, obtivemos uma nova superfície matricial (*raster*), combinando todas as classes listadas aqui. O mapa consolidado dos valores de resistência para cada uso e cobertura do solo @fig-5, combinando as classes de largura dos corpos d'água e as classes de infraestrutura de transporte e de energia, totalizou 39 classes @tbl-4.
 
+![Superfície de resistência gerada a partir do mapa com 39 classes de uso e cobertura do solo, resultado da combinação das superfícies de uso e cobertura do solo do MapBiomas e de infraestrutura. Nesta superfície a resistência das águas abertas (rios, lagos e oceanos) não foi diferenciada em função da largura dos corpos d’água.](figs/fig6.png){width=100% #fig-5}
+
+
 |N|Classe de cobertura do solo|Amazônia|Caatinga|Cerrado|Mata Atlântica|Pampa|Pantanal|
 |--:|--:|--:|--:|--:|--:|--:|--:|
 |1|Afloramento rochoso|3|1|2|3|2|-|
@@ -125,4 +128,3 @@ Feita esta operação, obtivemos uma nova superfície matricial (*raster*), comb
 : Valores de resistência, por bioma, para as 39 classes de uso e cobertura do solo, resultado da combinação das superfícies de uso e cobertura do solo do MapBiomas (N: 1 - 28), as classes de tamanho dos rios (N: 29 - 32) e da camada de infraestrutura de transporte e de energia (N: 33 - 39). {#tbl-4}
 
 
-![Superfície de resistência gerada a partir do mapa com 39 classes de uso e cobertura do solo, resultado da combinação das superfícies de uso e cobertura do solo do MapBiomas e de infraestrutura. Nesta superfície a resistência das águas abertas (rios, lagos e oceanos) não foi diferenciada em função da largura dos corpos d’água.](figs/fig6.png){width=100% #fig-5}

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt-br" xml:lang="pt-br"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.3.340">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -58,8 +58,7 @@ ul.task-list li input[type="checkbox"] {
     "search-more-matches-text": "mais correspondências neste documento",
     "search-clear-button-title": "Limpar",
     "search-detached-cancel-button-title": "Cancelar",
-    "search-submit-button-title": "Enviar",
-    "search-label": "Procurar"
+    "search-submit-button-title": "Enviar"
   }
 }</script>
 
@@ -197,11 +196,11 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="infraestrutura-de-transporte-e-de-energia" class="level2">
 <h2 class="anchored" data-anchor-id="infraestrutura-de-transporte-e-de-energia">Infraestrutura de transporte e de energia</h2>
-<p>A inclusão de dados de infraestrutura de transporte e de energia corresponde à <strong>Etapa 3</strong> da análise de conectividade local (<span class="citation" data-cites="flux3">(<a href="#ref-flux3" role="doc-biblioref"><strong>flux3?</strong></a>)</span>).</p>
-<div id="flux3" class="quarto-figure quarto-figure-center anchored">
+<p>A inclusão de dados de infraestrutura de transporte e de energia corresponde à <strong>Etapa 3</strong> da análise de conectividade local (<a href="#fig-flux3">Figura&nbsp;1</a>).</p>
+<div id="fig-flux3" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="figs/Fluxograma_etapa3.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Fluxograma com a indicação da Etapa 3 da análise de conectividade local: infraestrutura de transporte e de energia.</figcaption>
+<figcaption class="figure-caption">Figura&nbsp;1: Fluxograma com a indicação da Etapa 3 da análise de conectividade local: infraestrutura de transporte e de energia.</figcaption>
 </figure>
 </div>
 <p>Das bases de dados do IBGE e da ANEEL foram extraídos os seguintes dados:</p>
@@ -209,11 +208,11 @@ ul.task-list li input[type="checkbox"] {
 <li><p>IBGE: estradas pavimentadas, estradas não pavimentadas, ferrovias e linhas de transmissão de energia.</p></li>
 <li><p>ANEEL: aerogeradores, centrais fotovoltaicas, linhas de transmissão de energia eólica e termelétricas.</p></li>
 </ul>
-<p>As camadas de infraestrutura de transporte e de energia foram inicialmente convertidas de formatos vetoriais para <em>raster</em>, com pixels de tamanho aproximado de 90 m (<a href="#fig-2">Figura&nbsp;1</a>). Essa conversão foi realizada para cada arquivo usando a ferramenta <code>Polyline to Raster</code>, onde o arquivo de entrada “Input Features” corresponde à camada de infraestrutura original e o arquivo de saída “Value field” é a camada <em>raster</em> que será criada. A definição da resolução espacial “Output Raster Dataset” corresponde a 0.00083333333 (ou seja 90 m de resolução).</p>
+<p>As camadas de infraestrutura de transporte e de energia foram inicialmente convertidas de formatos vetoriais para <em>raster</em>, com pixels de tamanho aproximado de 90 m (<a href="#fig-2">Figura&nbsp;2</a>). Essa conversão foi realizada para cada arquivo usando a ferramenta <code>Polyline to Raster</code>, onde o arquivo de entrada “Input Features” corresponde à camada de infraestrutura original e o arquivo de saída “Value field” é a camada <em>raster</em> que será criada. A definição da resolução espacial “Output Raster Dataset” corresponde a 0.00083333333 (ou seja 90 m de resolução).</p>
 <div id="fig-2" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="figs/fig2.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Figura&nbsp;1: Método de conversão de arquivos vetoriais para arquivos matriciais (<em>raster</em>) já definindo os pixels com tamanho aproximado de 90 m, no ArcGis 10.5.</figcaption>
+<figcaption class="figure-caption">Figura&nbsp;2: Método de conversão de arquivos vetoriais para arquivos matriciais (<em>raster</em>) já definindo os pixels com tamanho aproximado de 90 m, no ArcGis 10.5.</figcaption>
 </figure>
 </div>
 
