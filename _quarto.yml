@@ -40,5 +40,6 @@ lang: pt-br
 format:
   html:
     theme: default
-    css: styles.css   
+    css: styles.css 
+  docx: default  
 
