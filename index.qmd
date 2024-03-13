@@ -2,12 +2,9 @@
 
 A análise de conectividade local é uma das camadas utilizadas para gerar o mapa de resiliência da paisagem. A conectividade local é calculada sobre uma superfície de resistência ao movimento dos organismos na paisagem. Essa superfície representa, por meio da atribuição de pesos, o grau de dificuldade que os diferentes tipos de usos e coberturas do solo oferecem à movimentação dos organismos, sendo as coberturas naturais aquelas com menor resistência e as superfícies mais antropizadas (ex. áreas urbanas, áreas agrícolas), com maior resistência.
 
-<!-- 2024-03-04 remover
-As áreas resilientes às mudanças climáticas são classificadas por dois eixos, (1) a **heterogeneidade da paisagem** e (2) **conectividade local**. A conectividade local é calculada sobre uma superfície de resistência ao movimento dos organismos na paisagem. Essa superfície representa, por meio da atribuição de pesos, o grau de dificuldade que os diferentes tipos de usos e coberturas do solo oferecem à movimentação dos organismos, sendo as coberturas naturais aquelas com menor resistência e as superfícies mais antropizadas, com maior resistência (ex. áreas urbanas). -->
+A superfície de resistência foi calculada usando como base os dados de uso e cobertura do solo fornecidos pelo MapBiomas. A essa base foram incorporadas informações sobre a largura dos rios e também dados sobre infraestrutura de transporte e de energia. Ao longo da análise para gerar a superfície de resistência, primeiro foram atribuídos os valores de resistência à tabela com as classes de uso e cobertura do solo do MapBiomas e depois foram acrescentadas as classes de largura dos corpos d’água. Por fim, as classes de infraestrutura de transporte e de energia também receberam pesos de resistência específicos para cada classe.
 
-A superfície de resistência foi calculada usando como base os dados de uso e cobertura do solo fornecida pelo MapBiomas. A essa base foram incorporadas informações sobre a largura dos rios e também dados sobre infraestrutura de transporte e de energia. Ao longo da análise para gerar a superfície de resistência, primeiro foram atribuídos os valores de resistência à tabela com as classes de uso e cobertura do solo do MapBiomas e depois foram acrescentadas as classes de largura dos corpos d’água, bem como as classes de infraestrutura de transporte e de energia, com pesos de resitência específicos para cada classe.
-
-Essas análises foram realizadas no ArcGis 10.5. Todas as ferramentas do ArcGis 10.5 descritas aqui podem ser acessadas no ícone de busca.
+Essas análises foram realizadas no ArcGis 10.5. Todas as ferramentas do ArcGis 10.5 descritas aqui podem ser acessadas no ícone de busca do software.
 
 O fluxograma da análise de conectividade local é apresentado na @fig-fluxgeral e pode ser dividido em cinco etapas principais:
 
@@ -15,11 +12,13 @@ O fluxograma da análise de conectividade local é apresentado na @fig-fluxgeral
 + Etapa 2: Largura dos corpos d'água
 + Etapa 3: Infraestrutura de transporte e de energia
 + Etapa 4: Valores de resistência e combinação das bases de dados
-+ Etapa 5: Aplicação de filtros e camada final
-
-<!-- 2024-03-04 [INSERIR FIGURA GERAL DO FLUXOGRAMA AQUI] -->
++ Etapa 5: Aplicação de filtro e camada final
 
 ![Fluxograma da análise de conectividade local.](figs/Fluxograma_geral.png){#fig-fluxgeral width=100%  fig-align="center"}
+
+
+
+
 
 <!-- 
 //////////////////////////////////////////////////////
