@@ -1,30 +1,20 @@
-## Bases de dados e arquivos utilizados na análise
+## Bases de dados e arquivos utilizados nas análises
 
-As bases de dados e arquivos utilizadas em cada etapa da análise são apresentadas abaixo.
+As bases de dados e arquivos utilizados em cada etapa da análise são apresentadas abaixo.
 
 ### Uso e cobertura do solo
 
-+ MapBiomas Coleção 8 - Ano 2021 [LINK COLEÇÃO 8]: (Projeto MapBiomas – Coleção 8 da Série Anual de Mapas de Cobertura e Uso da Terra do Brasil, acessado em outubro de 2023 através do link: <https://storage.googleapis.com/mapbiomas-public/initiatives/brasil/collection_8/lclu/coverage/brasil_coverage_2022.tif>)  
++ Projeto MapBiomas Coleção 8 - Ano 2021 (acessado em outubro de 2023): <https://storage.googleapis.com/mapbiomas-public/initiatives/brasil/collection_8/lclu/coverage/brasil_coverage_2022.tif>
 
 ### Largura dos corpos d'água
 
-<!-- 2024-03-04 remover
-As informações sobre largura dos rios foram derivadas a partir das camadas de águas abertas do MapBiomas [@mapbiomas_project_collection_2020], a camada de bacias hidrográficas no nível 8 [Lehner &Grill (2013)] e a camada de largura efetiva dos corpos d'água [Yamashida et al. 2014]. -->
++ Projeto MapBiomas Coleção 8 - Ano 2021 (usando apenas a máscara de águas abertas): <https://storage.googleapis.com/mapbiomas-public/initiatives/brasil/collection_8/lclu/coverage/brasil_coverage_2022.tif>
 
-+ MapBiomas Água: [INSERIR LINK BASE DE DADOS - PARA DOWNLOAD]
++ Bacias hidrográficas nível 8 (Lehner & Grill 2013): <https://www.hydrosheds.org/products/hydrobasins>
 
-+ Bacias hidrográficas nível 8 (Lehner &Grill 2013): [INSERIR LINK BASE DE DADOS - PARA DOWNLOAD]
-
-+ Largura efetiva dos corpos d'água (Yamashida et al. 2014): [INSERIR LINK BASE DE DADOS - PARA DOWNLOAD]
-
-<!-- acho importante colocar também o link para o download, não somente a citação. No caso das bacias foi o HydroSHEDS? -->
++ Largura efetiva dos corpos d'água (Yamazaki et al. 2014): <https://hydro.iis.u-tokyo.ac.jp/~yamadai/MERIT_Hydro/>
 
 ### Infraestrutura de transporte e de energia
-
-<!-- 2024-03-04 remover
-As informações sobre infraestrutura de transporte foram originadas a partir das camadas de estradas pavimentadas, estradas não-pavimentadas e ferrovias fornecidas pelo Instituto Brasileiro de Geografia e Estatística (IBGE) (\[BCIM250, 2021\]) (<https://www.ibge.gov.br/geociencias/cartas-e-mapas/bases-cartograficas-continuas/15759-brasil.html?=&t=downloads>).
-As bases de infraestrutura de energia correspondem às camadas de aerogeradores, centrais geradoras de energia fotovoltaicas, linhas de transmissão de energia eólica e usinas termelétricas fornecidas pela Agência Nacional de Energia Elétrica (ANEEL) (<https://gisepeprd2.epe.gov.br/WebMapEPE/>) e a camada de linhas de transmissão de energia fornecida pelo IBGE (\[BCIM250, 2021\]).
--->
 
 + Estradas pavimentadas, estradas não-pavimentadas, ferrovias e linhas de transmissão de energia (IBGE - BCIM250, 2021):
 <https://www.ibge.gov.br/geociencias/cartas-e-mapas/bases-cartograficas-continuas/15759-brasil.html?=&t=downloads>
@@ -32,8 +22,9 @@ As bases de infraestrutura de energia correspondem às camadas de aerogeradores,
 + Aerogeradores, centrais geradoras de energia fotovoltaicas, linhas de transmissão de energia eólica e usinas termelétricas (ANEEL):
 <https://gisepeprd2.epe.gov.br/WebMapEPE/>
 
-<!-- houve a necessidade de filtrar algum dados antes para fazer as análises, por exemplo na parte de energia, algum filtro foi aplicado para retirar informações que não eram necessárias? -->
-
 ### Filtro *kernel*
 
-+ Filtro *kernel*: [ADICIONAR ARQUIVO TXT COM O FILTRO] 
++ Filtro *kernel*: 
+
+<!-- 2024-03-13 Adicionar figura kernel aqui 
+LEGENDA: Ilustração do arquivo Kernel, de raio de 23 x 23 pixels e decaimento linear, utilizado nas análises .-->
