@@ -1,6 +1,6 @@
 ## Aplicação de filtro e camada final
 
-A aplicação do filtro kernel para gerar o resultado de conectividade local corresponde à **Etapa 5** da análise (@fig-fluxo5).
+A aplicação do filtro *kernel* para gerar o resultado de conectividade local corresponde à **Etapa 5** da análise (@fig-fluxo5).
 
 ![Fluxograma com a indicação da Etapa 5 da análise de conectividade local: aplicação de filtros e camada final.](figs/Fluxograma_etapa5.png){width=100% #fig-fluxo5} 
 
