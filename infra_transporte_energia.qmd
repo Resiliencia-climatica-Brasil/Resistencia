@@ -12,5 +12,5 @@ Das bases de dados do IBGE e da ANEEL foram utilizados apenas os vetores corresp
 
 As camadas de infraestrutura de transporte e de energia foram inicialmente convertidas de formatos vetoriais para *raster*, com pixels de tamanho aproximado de 90 m (@fig-2). Essa conversão foi realizada para cada arquivo usando a ferramenta `Polyline to Raster`, onde o arquivo de entrada `Input Features` corresponde à camada de infraestrutura original e o arquivo de saída `Value field` é a camada *raster* que será criada. A definição da resolução espacial `Output Raster Dataset` corresponde a 0.00083333333 (ou seja 90 m de resolução).
 
-![Método de conversão de arquivos vetoriais para arquivos matriciais (*raster*) já definindo os pixels com tamanho aproximado de 90 m, no ArcGis 10.5.](figs/fig2.png){width=100% #fig-2}
+![Método de conversão de arquivos vetoriais para arquivos matriciais (*raster*) já definindo os pixels com tamanho aproximado de 90 m, no ArcGis 10.5.](figs/Figura_5.2.jpg ){width=100% #fig-2}
 

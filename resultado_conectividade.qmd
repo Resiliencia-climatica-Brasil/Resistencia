@@ -4,51 +4,42 @@ A aplicação do filtro *kernel* para gerar o resultado de conectividade local c
 
 ![Fluxograma com a indicação da Etapa 5 da análise de conectividade local: aplicação de filtro e camada final.](figs/Fluxograma_etapa5.png){width=100% #fig-fluxo5} 
 
-<!--
-**07/03/2024 - adicionei as chamadas das figuras, precisamos escrever as legendas e adicionar o nome de cada figura em "figs/NOME.png"  **
--->
 
 ### Passo 1
 
 Esse passo pode ser subdividido em duas ações: 
 
-+ A. Usando a ferramenta `Focal Statistics`, aplicamos a função *kernel* à superfície de resistência gerada para todo o Brasil (Figura 7.1). Esta análise considerou uma função de decaimento linear em uma janela móvel definida por um raio de 23 pixels (~2.070 m).
++ A. Usando a ferramenta `Focal Statistics`, aplicamos a função *kernel* à superfície de resistência gerada para todo o Brasil (@fig-6). Esta análise considerou uma função de decaimento linear em uma janela móvel definida por um raio de 23 pixels (~2.070 m).
 
-+ B. Usando a ferramenta `Reclassify` do *Spatial Analyst*, construímos, a partir da superfície de resistência original (sem o *kernel*), uma máscara de águas abertas, onde as classes de largura dos rios receberam o valor de 1 e as demais classes foram consideradas como *NoData* (Figura 7.2).
+!['Uso da ferramenta `Focal Statistics` para aplicar o *kernel* com função de decaimento linear na superficie de resistência de todo Brasil.'](figs/Figura_7.1.jpg){width=100% #fig-6}
 
-<!-- texto anterior; mantive para ter a referência da figura; PODE SER REMOVIDO DEPOIS DE INCLUIR AS CHAMADAS DAS FIGURAS:
-Usando a ferramenta `Reclassify` do Spatial Analyst ( @fig-6) construímos máscaras a partir da superfície de resistência, gerando duas superfícies:
-![](figs/NOME.png){width=100% #fig6}
++ B. Usando a ferramenta `Reclassify` do *Spatial Analyst*, construímos, a partir da superfície de resistência original (sem o *kernel*), uma máscara de águas abertas, onde as classes de largura dos rios receberam o valor de 1 e as demais classes foram consideradas como *NoData* (@fig-7).
 
-+ *a*.	Superfície de águas abertas, na qual as classes de largura dos rios receberam o valor de 1 e as demais classes foram consideradas como "NoData" (@fig-7);
-+ *b*.	Superfície terrestre, na qual as classes de água foram reclassificadas para "NoData" e as demais receberam o valor igual a 1 (@fig-7).
--->
-
-![](figs/NOME.png){width=100% #fig-7}
-<!--
-ADICIONAR FIGURA 6 MOSTRANDO COMO FAZER O RECLASSIFY
-ADICIONAR COMO FICAM AS IMAGENS DAS SUPERFICIES A E B??
--->
+!['Uso da ferramenta `Reclassify` para construir a máscara de águas abertas para separar a influência dos corpos d'agua na conectividade de ambientes terrestres.'](figs/Figura_7.2.jpg){width=100% #fig-7}
 
 ### Passo 2
 
-Multiplicamos a superfície de resistência completa (gerada para todo Brasil) com o filtro *kernel* (Passo 1A) pela superfície de águas abertas (Passo 1B). Essa multiplicação foi realizada com o uso da ferramenta `Raster Calculator` (Figura 7.3; @fig-9) e gerou uma nova superfície com os valores de conectividade local apenas para os corpos d’água.
+Multiplicamos a superfície de resistência completa (gerada para todo Brasil) com o filtro *kernel* (Passo 1A) pela superfície de águas abertas (Passo 1B). Essa multiplicação foi realizada com o uso da ferramenta `Raster Calculator` (F@fig-8) e gerou uma nova superfície com os valores de conectividade local apenas para os corpos d’água.
 
-![](figs/NOME.png){width=100% #fig-9}
+!['Definição dos valores de conectividade local somente para os corpos d'água, com o uso da ferramenta `Raster Calculator` aplicando o filtro *kernel* de decaimento linear.'](figs/Figura_7.3.jpg){width=100% #fig-8}
 
 ### Passo 3
 
-Usando a ferramenta `Reclassify` do *Spatial Analyst* construímos, a partir da superfície de resistência original (sem o *kernel*), uma máscara apenas das áreas terrestres, onde as classes de largura dos rios foram consideradas como *NoData* (Figura 7.4).
+Usando a ferramenta `Reclassify` do *Spatial Analyst* construímos, a partir da superfície de resistência original (sem o *kernel*), uma máscara apenas das áreas terrestres, onde as classes de largura dos rios foram consideradas como *NoData* (@fig-9).
+
+!['Classificação das classes de largura de rio como *NoData*, com a ferramenta `Reclassify` para remover a influencia dos corpos'dágua na conectividade de ambientes terrestres.'](figs/Figura_7.4.jpg){width=100% #fig-9}
 
 ### Passo 4
 
-Utilizando a ferramenta `Focal Statistic`, aplicamos o filtro *kernel* à superfície terrestre gerada no Passo 3. Essa operação originou uma camada de conectividade local onde as áreas terrestres não são influenciadas pelas águas abertas (Figura 7.5).
+Utilizando a ferramenta `Focal Statistic`, aplicamos o filtro *kernel* à superfície terrestre gerada no Passo 3. Essa operação originou uma camada de conectividade local onde as áreas terrestres não são influenciadas pelas águas abertas (@fig-10).
+
+!['Definição dos valores de conectividade local para superfície terrestere, sem as classes de largura de rios, com o uso da ferramenta `Raster Calculator` aplicando o filtro *kernel* de decaimento linear.'](figs/Figura_7.5.jpg){width=100% #fig-10}
 
 ### Passo 5
 
-Usando a ferramenta `Mosaic to new Raster` (Figura 7.6; @fig-10), realizamos a mosaicagem das superfícies geradas nos Passos 2 e 4. E, por fim, para calcularmos os valores finais de conectividade local, multiplicamos os valores de resistência por -1, por considerarmos que a conectividade é o inverso dos valores de resistência suavizados pelo filtro *kernel* (Figura 7.8; @fig-11).
+Usando a ferramenta `Mosaic to new Raster` (@fig-11), realizamos a mosaicagem das superfícies geradas nos Passos 2 e 4. E, por fim, para calcularmos os valores finais de conectividade local, multiplicamos os valores de resistência por -1, por considerarmos que a conectividade é o inverso dos valores de resistência suavizados pelo filtro *kernel* (@fig-12).
 
-![](figs/NOME.png){width=100% #fig-10}
+!['Junção das superfícies de conectividade dos corpos d'água e superfície terrestre, com a ferramenta `Mosaic to new Raster` para gerar a camada final de resistência da paisagem'](figs/Figura_7.6.jpg){width=100% #fig-11}
 
-![Conectividade local, definida como o inverso da resistência à movimentação de organismos das diferentes classes de uso e coberturas do solo.](figs/fig7.png){width=100% #fig-11} 
+![Conectividade local, definida como o inverso da resistência à movimentação de organismos das diferentes classes de uso e coberturas do solo.](figs/fig7.png){width=100% #fig-12} 
 

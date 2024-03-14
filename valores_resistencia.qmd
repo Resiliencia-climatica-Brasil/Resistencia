@@ -63,12 +63,12 @@ As camadas *raster* geradas para as bases de dados de infraestrutura de transpor
 
 Em seguida, todas as camadas de infraestrutura foram agrupadas em um único arquivo matricial. Para realizar esse agrupamento, usamos a ferramenta `Cell Statistics`, informando, no campo `Overlay statistic (optional)`, que o resultado do agrupamento deve considerar o valor máximo do pixel (MAXIMUM; @fig-3). Essa indicação é importante para que, na sobreposição das várias camadas de infraestrutura, prevaleça sempre o valor de pixel com resistência mais alta.
 
-![Uso da ferramenta “`Cell Statistics`” para agrupar as bases de infraestrutura em uma única superfície, onde prevalecem os valores máximos de resistência atribuídos a cada classe.](figs/fig3.png){width=100% #fig-3}
+![Uso da ferramenta “`Cell Statistics`” para agrupar as bases de infraestrutura em uma única superfície, onde prevalecem os valores máximos de resistência atribuídos a cada classe.](figs/Figura_6.2.jpg){width=100% #fig-3}
 
 ### Passo 3
-Por fim, usando novamente a ferramenta `Cell Statistics`, a camada consolidada de infraestrutura de transporte e de energia, já com os valores de resistência, foi combinada com a camada do MapBiomas, já acrescida das classes de águas abertas com diferentes larguras, . No agrupamento destas camadas, nos casos em que havia sobreposições de classes com valores de resistência distintos, sempre prevalecia o valor de resistência mais alto. Essa orientação é dada no campo overlay statistic, com a indicação de “Maximum” (Figura 6.3). 
+Por fim, usando novamente a ferramenta `Cell Statistics`, a camada consolidada de infraestrutura de transporte e de energia, já com os valores de resistência, foi combinada com a camada do MapBiomas, já acrescida das classes de águas abertas com diferentes larguras, . No agrupamento destas camadas, nos casos em que havia sobreposições de classes com valores de resistência distintos, sempre prevalecia o valor de resistência mais alto. Essa orientação é dada no campo overlay statistic, com a indicação de “Maximum” (@fig-4). 
 
-![Uso da ferramenta “Cel Statistics” para agrupar a camada de infraestrutura de transporte e de energia com a camada de uso e cobertura (já acrescida das classes de largura das águas abertas), em uma única superfície, onde prevalecem os valores máximos de resistência atribuídos a cada classe.](figs/fig4.png){width=100% #fig-4}
+![Uso da ferramenta “Cel Statistics” para agrupar a camada de infraestrutura de transporte e de energia com a camada de uso e cobertura (já acrescida das classes de largura das águas abertas), em uma única superfície, onde prevalecem os valores máximos de resistência atribuídos a cada classe.](figs/Figura_6.3.jpg){width=100% #fig-4}
 
 Feita esta operação, obtivemos uma nova superfície matricial (*raster*), combinando todas as classes listadas aqui. O mapa consolidado dos valores de resistência para cada uso e cobertura do solo (@fig-5), combinando as classes de largura dos corpos d'água e as classes de infraestrutura de transporte e de energia, totalizou 39 classes (@tbl-4).
 
