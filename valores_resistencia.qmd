@@ -44,7 +44,7 @@ Os valores de resistência foram atribuídos, por bioma, à camada de uso e cobe
 |30|Corpos d’águas abertas de 250 a 1.000 m|5|5|5|5|5|5|
 |31|Corpos d’águas abertas de 1.000 a 4.000 m|10|10|10|10|10|10|
 |32|Corpos d’águas abertas acima de 4.000 m|12|12|12|12|12|12|
-: Valores de resistência, por bioma, para as 28 classes de uso e cobertura do solo, obtidas da base de dados de uso e cobertura do solo do MapBiomas, mais as 4 classes de largura dos corpos d'água, totalizando 32 classes. {#tbl-1}
+: Valores de resistência, por bioma, para as 28 classes de uso e cobertura do solo, obtidas da base de dados de uso e cobertura do solo do MapBiomas (N: 1 - 28), mais as 4 classes de largura dos corpos d'água (N: 29 - 32), totalizando 32 classes. {#tbl-1}
 
 ### Passo 2
 
@@ -61,18 +61,20 @@ As camadas *raster* geradas para as bases de dados de infraestrutura de transpor
 |39|Termelétricas|20|20|20|20|20|20|
 : Valores de resistência, por bioma, para as camada de infraestrutura de transporte e de energia (N: 33 - 39). {#tbl-3}
 
-Em seguida, todas as camadas de infraestrutura foram agrupadas em um único arquivo matricial. Para realizar esse agrupamento, usamos a ferramenta `Cell Statistics`, informando, no campo `Overlay statistic (optional)`, que o resultado do agrupamento deve considerar o valor máximo do pixel (MAXIMUM; @fig-3). Essa indicação é importante para que, na sobreposição das várias camadas de infraestrutura, prevaleça sempre o valor de pixel com resistência mais alta.
+Em seguida, todas as camadas de infraestrutura foram agrupadas em um único arquivo matricial. Para realizar esse agrupamento, usamos a ferramenta `Cell Statistics`, informando, no campo `Overlay statistic (optional)`, que o resultado do agrupamento deve considerar o valor máximo do pixel (`MAXIMUM`; @fig-3). Essa indicação é importante para que, na sobreposição das várias camadas de infraestrutura, prevaleça sempre o valor de pixel com resistência mais alta.
 
-![Uso da ferramenta “`Cell Statistics`” para agrupar as bases de infraestrutura em uma única superfície, onde prevalecem os valores máximos de resistência atribuídos a cada classe.](figs/Figura_6.2.jpg){width=100% #fig-3}
+![Uso da ferramenta “Cell Statistics” para agrupar as bases de infraestrutura em uma única superfície, onde prevalecem os valores máximos de resistência atribuídos a cada classe.](figs/Figura_6.2.jpg){width=100% #fig-3}
 
 ### Passo 3
-Por fim, usando novamente a ferramenta `Cell Statistics`, a camada consolidada de infraestrutura de transporte e de energia, já com os valores de resistência, foi combinada com a camada do MapBiomas, já acrescida das classes de águas abertas com diferentes larguras, . No agrupamento destas camadas, nos casos em que havia sobreposições de classes com valores de resistência distintos, sempre prevalecia o valor de resistência mais alto. Essa orientação é dada no campo overlay statistic, com a indicação de “Maximum” (@fig-4). 
+Por fim, usando novamente a ferramenta `Cell Statistics`, a camada consolidada de infraestrutura de transporte e de energia, já com os valores de resistência, foi combinada com a camada do MapBiomas, já acrescida das classes de águas abertas com diferentes larguras. No agrupamento destas camadas, nos casos em que havia sobreposições de classes com valores de resistência distintos, sempre prevalecia o valor de resistência mais alto. Essa orientação é dada no campo `Overlay statistic (optional)`, com a indicação de `MAXIMUM` (@fig-4). 
 
-![Uso da ferramenta “Cel Statistics” para agrupar a camada de infraestrutura de transporte e de energia com a camada de uso e cobertura (já acrescida das classes de largura das águas abertas), em uma única superfície, onde prevalecem os valores máximos de resistência atribuídos a cada classe.](figs/Figura_6.3.jpg){width=100% #fig-4}
+![Uso da ferramenta “Cell Statistics” para agrupar a camada de infraestrutura de transporte e de energia com a camada de uso e cobertura (já acrescida das classes de largura das águas abertas), em uma única superfície, onde prevalecem os valores máximos de resistência atribuídos a cada classe.](figs/Figura_6.3.jpg){width=100% #fig-4}
 
-Feita esta operação, obtivemos uma nova superfície matricial (*raster*), combinando todas as classes listadas aqui. O mapa consolidado dos valores de resistência para cada uso e cobertura do solo (@fig-5), combinando as classes de largura dos corpos d'água e as classes de infraestrutura de transporte e de energia, totalizou 39 classes (@tbl-4).
+Feita esta operação, obtivemos uma nova superfície matricial (*raster*), combinando todas as classes listadas aqui. O mapa consolidado dos valores de resistência para cada uso e cobertura do solo, combinando as classes de largura dos corpos d'água e as classes de infraestrutura de transporte e de energia (@fig-5), totalizou 39 classes (@tbl-4).
 
-![Superfície de resistência gerada a partir do mapa com 39 classes de uso e cobertura do solo, resultado da combinação das superfícies de uso e cobertura do solo do MapBiomas e de infraestrutura. Nesta superfície a resistência das águas abertas (rios, lagos e oceanos) não foi diferenciada em função da largura dos corpos d’água.](figs/fig6.png){width=100% #fig-5}
+![Superfície de resistência gerada a partir do mapa com 39 classes de uso e cobertura do solo, resultado da combinação das superfícies de uso e cobertura do solo do MapBiomas e de infraestrutura de transporte e de energia. Nesta superfície a resistência das águas abertas (rios, lagos e oceanos) não foi diferenciada em função da largura dos corpos d’água.](figs/fig6.png){width=100% #fig-5}
+
+<!-- Não entendi essa frase final da legenda: "Nesta superfície a resistência das águas abertas (rios, lagos e oceanos) não foi diferenciada em função da largura dos corpos d’água" >> por que não? -->
 
 |N|Classe de cobertura do solo|Amazônia|Caatinga|Cerrado|Mata Atlântica|Pampa|Pantanal|
 |--:|--:|--:|--:|--:|--:|--:|--:|
@@ -115,6 +117,6 @@ Feita esta operação, obtivemos uma nova superfície matricial (*raster*), comb
 |37|Ferrovias|10|10|10|10|10|10|
 |38|Linhas de transmissão (tradicionais e anexas ao sistema eólico)|10|7|7|7|7|7|
 |39|Termelétricas|20|20|20|20|20|20|
-: Valores de resistência, por bioma, para as 39 classes de uso e cobertura do solo, resultado da combinação das superfícies de uso e cobertura do solo do MapBiomas (N: 1 - 28), as classes de tamanho dos rios (N: 29 - 32) e da camada de infraestrutura de transporte e de energia (N: 33 - 39). {#tbl-4}
+: Valores de resistência, por bioma, para as 39 classes de uso e cobertura do solo, resultado da combinação das superfícies de uso e cobertura do solo do MapBiomas (N: 1 - 28), das classes de tamanho dos rios (N: 29 - 32) e da camada de infraestrutura de transporte e de energia (N: 33 - 39). {#tbl-4}
 
 
