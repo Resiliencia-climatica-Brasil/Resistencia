@@ -24,6 +24,6 @@ As bases de dados e arquivos utilizados em cada etapa da análise são apresenta
 
 ### Filtro *kernel*
 
-+ Filtro *kernel*: 
++ Filtro *kernel* utilizado nas análises: 
 
-![Ilustração do arquivo Kernel, de raio de 23 x 23 pixels e decaimento linear, utilizado nas análises.](figs/Figura_2.1_Kernel_23x23.jpg){#fig-kernel width=100%  fig-align="center"}
+![Ilustração do arquivo para o filtro *kernel*, de raio de 23 x 23 pixels e decaimento linear, utilizado nas análises.](figs/Figura_2.1_Kernel_23x23.jpg){#fig-kernel width=100%  fig-align="center"}
