@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt-br" xml:lang="pt-br"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.340">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -58,7 +58,8 @@ ul.task-list li input[type="checkbox"] {
     "search-more-matches-text": "mais correspondências neste documento",
     "search-clear-button-title": "Limpar",
     "search-detached-cancel-button-title": "Cancelar",
-    "search-submit-button-title": "Enviar"
+    "search-submit-button-title": "Enviar",
+    "search-label": "Procurar"
   }
 }</script>
 
@@ -116,7 +117,7 @@ ul.task-list li input[type="checkbox"] {
       <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./largura_corpos_dagua.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Largura dos corpos d'água</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Procurar" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -147,7 +148,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./bases_dados.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Bases de dados e arquivos utilizados na análise</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Bases de dados e arquivos utilizados nas análises</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -177,7 +178,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./resultado_conectividade.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Aplicação de filtros e camada final</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Aplicação de filtro e camada final</span></span></a>
   </div>
 </li>
     </ul>
@@ -220,46 +221,52 @@ ul.task-list li input[type="checkbox"] {
 <p>A análise para categorizar os corpos d’água em classes de largura corresponde à <strong>Etapa 2</strong> da análise de conectividade local (<a href="#fig-flux2">Figura&nbsp;<span>4.1</span></a>).</p>
 <div id="fig-flux2" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="figs/Fluxograma_etapa2.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<p><img src="figs/fluxograma_etapa2.png" class="img-fluid figure-img" style="width:100.0%"></p>
 <figcaption class="figure-caption">Figura&nbsp;4.1: Fluxograma com a indicação da Etapa 2 da análise de conectividade local: largura dos corpos d’água.</figcaption>
 </figure>
 </div>
 <section id="passo-1" class="level3" data-number="4.0.1">
 <h3 data-number="4.0.1" class="anchored" data-anchor-id="passo-1"><span class="header-section-number">4.0.1</span> Passo 1</h3>
-<p>No Passo 1 dessa etapa, inicialmente extraímos a máscara de corpos de águas abertas (rios, lagos e oceanos) da camada de uso e cobertura do solo (na escala de 90 m; <a href="#fig-map-2">Figura&nbsp;<span>4.2</span></a>) e dividimos essa classe única em pedaços menores, regionalizando suas larguras por trechos.</p>
+<p>No Passo 1 desta etapa, utilizamos a máscara de corpos de águas abertas (rios, lagos e oceanos) da camada de uso e cobertura do solo (na escala de 90 m; <a href="#fig-map-2">Figura&nbsp;<span>4.2</span></a>). Para fazer a máscara, usamos a ferramenta <code>Reclassify</code> e recodificamos todas as classes do MapBiomas para <em>NoData</em> - com exceção das águas abertas que receberam o valor de 1 (<a href="#fig-reclassify">Figura&nbsp;<span>4.3</span></a>).</p>
 <div id="fig-map-2" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="figs/map2_aguas.png" class="img-fluid figure-img" style="width:100.0%"></p>
 <figcaption class="figure-caption">Figura&nbsp;4.2: Camada de águas abertas do MapBiomas, usada como base para classificação dos tamanhos dos rios.</figcaption>
 </figure>
 </div>
-<p>A divisão em trechos ocorreu com o uso da ferramenta “Raster Calculator” (<a href="infra_transporte_energia.html#fig-2">Figura&nbsp;<span>5.2</span></a>), por meio da intersecção entre as camadas matriciais de águas abertas e de bacias hidrográficas no nível 8, produzidas por Lehner &amp;Grill (2013) (<a href="#fig-map-3">Figura&nbsp;<span>4.4</span></a>).</p>
+<div id="fig-reclassify" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="figs/Figura_4.3.jpg" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption class="figure-caption">Figura&nbsp;4.3: Uso da ferramenta “Reclassify” para recodificar as classes do MapBiomas e extrair apenas a máscara de águas abertas.</figcaption>
+</figure>
+</div>
+<p>Usando a ferramenta <code>Raster Calculator</code> (<a href="infra_transporte_energia.html#fig-2">Figura&nbsp;<span>5.2</span></a>) dividimos a classe de águas abertas em pedaços, regionalizados pela intersecção com os trechos das bacias hidrográficas, no nível 8, produzidas por Lehner &amp; Grill (2013) (<a href="#fig-map-3">Figura&nbsp;<span>4.5</span></a>).</p>
 <div id="fig-2" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="figs/fig_2.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Figura&nbsp;4.3: Ferramenta “Raster Calculator”, do programa ArcGis 10.5, utilizada para a intersecção entre as camadas de águas abertas e bacias hidrográficas, gerando trechos de corpos d’água utilizados para consulta da largura dos mesmos.</figcaption>
+<p><img src="figs/Figura_4.4.jpg" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption class="figure-caption">Figura&nbsp;4.4: Ferramenta “Raster Calculator” utilizada para dividir as águas abertas em trechos menores - segmentados por bacias hidrográficas - utilizados como área de consulta da largura dos corpos d’água</figcaption>
 </figure>
 </div>
 <div id="fig-map-3" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="figs/map3_bacias.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Figura&nbsp;4.4: Bacias hidrográficas de nivel 8 (Lehner &amp;Grill 2013).</figcaption>
+<figcaption class="figure-caption">Figura&nbsp;4.5: Bacias hidrográficas de nivel 8 (Lehner &amp; Grill 2013).</figcaption>
 </figure>
 </div>
 </section>
 <section id="passo-2" class="level3" data-number="4.0.2">
 <h3 data-number="4.0.2" class="anchored" data-anchor-id="passo-2"><span class="header-section-number">4.0.2</span> Passo 2</h3>
-<p>No Passo 2, para cada um dos trechos gerados no passo anterior, foi calculado o valor máximo de largura de cada trecho de águas abertas, por meio meio da estatística zonal (<a href="valores_resistencia.html#fig-3">Figura&nbsp;<span>6.2</span></a>). A largura efetiva máxima dos corpos d’água, de margem a margem, foi obtida através da base GWD – LR de Yamashida et al.&nbsp;2014 (<a href="#fig-map-4">Figura&nbsp;<span>4.6</span></a>).</p>
+<p>No Passo 2, para cada um dos trechos gerados no passo anterior foi calculado o valor máximo de largura de cada trecho de águas abertas, por meio da estatística zonal (<a href="valores_resistencia.html#fig-3">Figura&nbsp;<span>6.2</span></a>). A largura efetiva máxima dos corpos d’água, de margem a margem, foi obtida através da base GWD – LR de Yamazaki et al.&nbsp;2014 (<a href="#fig-map-4">Figura&nbsp;<span>4.7</span></a>).</p>
 <div id="fig-3" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="figs/fig_3.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Figura&nbsp;4.5: Uso da ferramenta “Zonal Statistics”, do programa ArcGis 10.5, para calcular a largura máxima de cada trecho de corpos d’água por unidade de consulta.</figcaption>
+<p><img src="figs/Figura_4.5.jpg" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption class="figure-caption">Figura&nbsp;4.6: Uso da ferramenta “Zonal Statistics”, do programa ArcGis 10.5, para calcular a largura máxima de cada trecho de corpos d’água.</figcaption>
 </figure>
 </div>
 <div id="fig-map-4" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="figs/map4_aguasPORbacias.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Figura&nbsp;4.6: Divisão da camada de águas abertas do MapBiomas recortada pelas bacias hidrográficas de nivel 8.</figcaption>
+<figcaption class="figure-caption">Figura&nbsp;4.7: Divisão da camada de águas abertas do MapBiomas recortada pelas bacias hidrográficas de nivel 8.</figcaption>
 </figure>
 </div>
 </section>
@@ -283,11 +290,11 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="passo-4" class="level3" data-number="4.0.4">
 <h3 data-number="4.0.4" class="anchored" data-anchor-id="passo-4"><span class="header-section-number">4.0.4</span> Passo 4</h3>
-<p>Por fim, utilizando a ferramenta “Mosaic to New Raster” (<a href="valores_resistencia.html#fig-4">Figura&nbsp;<span>6.3</span></a>), realizamos uma mosaicagem entre a camada contendo essas quatro classes e a camada do MapBiomas (já subtraída da classe de águas abertas), elevando de 29 para 32 o número de classes de uso e cobertura do solo.</p>
+<p>Por fim, utilizando a ferramenta <code>Mosaic To New Raster</code> (<a href="valores_resistencia.html#fig-4">Figura&nbsp;<span>6.3</span></a>), realizamos uma mosaicagem entre a camada contendo essas quatro classes e a camada do MapBiomas (já subtraída da classe de águas abertas), elevando de 29 para 32 o número de classes de uso e cobertura do solo.</p>
 <div id="fig-4" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="figs/fig_4.png" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption class="figure-caption">Figura&nbsp;4.7: Ferramenta “Mosaic to New Raster”, do programa ArcGis 10.5, utilizada para fazer a mosaicagem entre a superfície contendo as quatro classes de corpos d’água com larguras distintas e a superfície do MapBiomas 2021 na escala de 90 m sem a classe de águas abertas (a ser substituída pelas quatro novas classes de corpos d’água).</figcaption>
+<p><img src="figs/Figura_4.8.jpg" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption class="figure-caption">Figura&nbsp;4.8: Ferramenta “Mosaic to New Raster” utilizada para fazer a mosaicagem entre a superfície contendo as quatro classes de corpos d’água com larguras distintas e a superfície do MapBiomas 2021 na escala de 90 m sem a classe de águas abertas (a ser substituída pelas quatro novas classes de corpos d’água).</figcaption>
 </figure>
 </div>
 
