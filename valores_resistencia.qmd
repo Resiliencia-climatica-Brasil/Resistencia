@@ -61,7 +61,7 @@ As camadas *raster* geradas para as bases de dados de infraestrutura de transpor
 |39|Termelétricas|20|20|20|20|20|20|
 : Valores de resistência, por bioma, para as camada de infraestrutura de transporte e de energia (N: 33 - 39). {#tbl-3}
 
-Em seguida, todas as camadas de infraestrutura foram agrupadas em um único arquivo matricial. Para realizar esse agrupamento, usamos a ferramenta `Cell Statistics`, informando, no campo `overlay statistic`, que o resultado do agrupamento deve considerar o valor máximo do pixel (@fig-3). Essa indicação é importante para que, na sobreposição das várias camadas de infraestrutura, prevaleça sempre o valor de pixel com resistência mais alta.
+Em seguida, todas as camadas de infraestrutura foram agrupadas em um único arquivo matricial. Para realizar esse agrupamento, usamos a ferramenta `Cell Statistics`, informando, no campo `Overlay statistic (optional)`, que o resultado do agrupamento deve considerar o valor máximo do pixel (MAXIMUM; @fig-3). Essa indicação é importante para que, na sobreposição das várias camadas de infraestrutura, prevaleça sempre o valor de pixel com resistência mais alta.
 
 ![Uso da ferramenta “`Cell Statistics`” para agrupar as bases de infraestrutura em uma única superfície, onde prevalecem os valores máximos de resistência atribuídos a cada classe.](figs/fig3.png){width=100% #fig-3}
 
